@@ -1,3 +1,3 @@
 Title: Test Post
-Lead: A personal look back (and an important announcement).
+Lead: Test Post.
 Published: 02/08/2020

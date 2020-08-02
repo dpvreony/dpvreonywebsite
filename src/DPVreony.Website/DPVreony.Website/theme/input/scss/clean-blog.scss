@@ -11,3 +11,32 @@
 @import "bootstrap-overrides.scss";
 @import "extras.scss";
 @import "overrides.scss";
+
+@font-face {
+    font-family: 'logobloqo2regular';
+    src: url('/fonts/logobloqo2-webfont.eot');
+    src: url('/fonts/logobloqo2-webfont.eot?#iefix') format('embedded-opentype'), url('/fonts/logobloqo2-webfont.woff') format('woff'), url('/fonts/logobloqo2-webfont.ttf') format('truetype'), url('/fonts/logobloqo2-webfont.svg#logobloqo2regular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+main {
+    padding-top: 1em;
+}
+
+h1 {
+    font-family: logobloqo2regular;
+    font-size: 4em;
+}
+
+h1 span.headerInitialD, div.disclaimer {
+    color: #c52a2a;
+}
+
+h1 span.headerInitialP {
+    color: #9BBB59;
+}
+
+h1 span.headerInitialV {
+    color: #4BACC6;
+}

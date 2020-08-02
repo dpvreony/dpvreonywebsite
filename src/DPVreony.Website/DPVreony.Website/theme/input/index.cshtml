@@ -7,7 +7,25 @@ ArchiveOrderKey: Published
 ArchiveOrderDescending: true
 ArchiveTitle: => GetString("Title")
 ---
-<div class="container-sm-height">
+@{
+    var whenStarted = new NodaTime.LocalDate(2001, 03,01);
+    var yearsExperience = NodaTime.Period.Between(whenStarted, NodaTime.LocalDate.FromDateTime(DateTime.Today)).Years;
+}
+<div id="about">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3">
+                <h2 class="heading">About Me</h2>
+            </div>
+            <div class="col-md-9">
+                <p>I'm the Lead Software Developer and Systems Analyst working for the UK Urgent Care Provider <a href="https://www.ic24.org.uk">Integrated Care 24</a>. I've @yearsExperience years of professional experience in Microsoft based technologies having produced full stack applications for desktop, mobile and web. I have a passion for developing solutions, enjoying the challenges they can offer. I have experience in requirements gathering, feasibility studies, development and risk assessments having worked on internal projects and alongside 3rd parties to integrate and leverage their solutions.</p>
+                <p>Outside of my main work I also spend time researching and playing with open source projects to help challenge and grow my understanding and ideas on how to solve problems in a professional environment. With computer science being a relatively immature discipline, finding ideas that challenge the status quo in progressing the practice are absolutely vital.</p>
+                <p>You can find some of my concept work on my <a href="https://www.github.com/dpvreony">Github profile</a> as well as in the <a href="https://www.github.com/reactiveui">ReactiveUI Github organisation</a>.</p>
+            </div>
+        </div>
+    </div>
+</div>
+@*<div class="container-sm-height">
     <div class="row row-sm-height">
         <div class="col-6 right-border col-sm-height">
             @Html.Partial("/_posts.cshtml", Document)
@@ -33,8 +51,8 @@ ArchiveTitle: => GetString("Title")
                     </div>
                 }
             }
-            
+
             @Html.Partial("/_sidebar.cshtml")
         </div>
     </div>
-</div>
+</div>*@

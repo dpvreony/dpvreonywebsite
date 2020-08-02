@@ -1,4 +1,4 @@
-header {
+/*header {
     &.masthead {
         background-color: darken($primary, 25%);
         background: linear-gradient(180deg, lighten($primary, 25%) 0%, darken($primary, 25%) 100%);
@@ -95,14 +95,14 @@ hr.background--light { border-color: #000 !important; }
     border-top-left-radius: 0px;
     border-top-right-radius: 0px;
 }
-.badge {    
+.badge {
   font-family: $font-family-sans-serif;
-}
+}*/
 /* Awsome same-height Bootstrap columns from http://www.minimit.com/articles/solutions-tutorials/bootstrap-3-responsive-columns-of-same-height */
 
 /* vertical alignment styles */
 
-.col-top {
+/*.col-top {
     vertical-align: top;
 }
 .col-middle {
@@ -110,11 +110,11 @@ hr.background--light { border-color: #000 !important; }
 }
 .col-bottom {
     vertical-align: bottom;
-}
+}*/
 
 /* columns of same height styles */
 
-.container-xs-height {
+/*.container-xs-height {
     display: table;
     padding-left: 0px;
     padding-right: 0px;
@@ -168,5 +168,4 @@ hr.background--light { border-color: #000 !important; }
         display: table-cell;
         float: none;
     }
-}
-  
+}*/
