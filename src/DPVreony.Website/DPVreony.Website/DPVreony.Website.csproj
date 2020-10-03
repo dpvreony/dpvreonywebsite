@@ -6,8 +6,16 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Remove="package.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="package.json" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="NodaTime" Version="3.0.0" />
-    <PackageReference Include="Statiq.Web" Version="1.0.0-beta.3" />
+    <PackageReference Include="Statiq.Web" Version="1.0.0-beta.6" />
   </ItemGroup>
 
 </Project>

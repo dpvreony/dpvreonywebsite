@@ -1,12 +1,3 @@
-Order: 0
-ArchiveSources: => GetString("PostSources")
-ArchiveDestination: >
-  => GetInt("Index") <= 1 ? $"index.html" : $"page/{GetInt("Index")}.html"
-ArchivePageSize: 3
-ArchiveOrderKey: Published
-ArchiveOrderDescending: true
-ArchiveTitle: => GetString("Title")
----
 @{
     var whenStarted = new NodaTime.LocalDate(2001, 03,01);
     var yearsExperience = NodaTime.Period.Between(whenStarted, NodaTime.LocalDate.FromDateTime(DateTime.Today)).Years;
