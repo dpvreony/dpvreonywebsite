@@ -25,7 +25,7 @@ jobs:
     - name: Checkout 
       uses: actions/checkout@v2
 
-    - run: dotnet run -- deploy
+    - run: dotnet run src\dpvreony.website.sln -- deploy
       name: Deploy Netlify
       env:
         NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
