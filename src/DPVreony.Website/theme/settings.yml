@@ -4,6 +4,12 @@ PageTitle: |
   {
     string siteTitle = Context.GetString("SiteTitle");
     string title = GetString("Title");
+
+    if (string.IsNullOrWhiteSpace(title) || title.Equals("Input"))
+    {
+        title = "Welcome";
+    }
+
     return string.IsNullOrWhiteSpace(siteTitle) ? title : (string.IsNullOrWhiteSpace(title) ? siteTitle : $"{siteTitle} - {title}");
   }
 Layout: /_layout.cshtml
