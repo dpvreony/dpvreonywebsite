@@ -25,6 +25,13 @@ jobs:
     - name: Checkout 
       uses: actions/checkout@v2
 
+    - name: NPM package restore
+      run: |
+        pushd src\dpvreony.website\
+        npm install
+        popd
+      
+
     - run: dotnet run --project src\dpvreony.website\dpvreony.website.csproj -- deploy
       name: Deploy Netlify
       env:
