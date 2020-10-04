@@ -30,7 +30,6 @@ jobs:
         pushd src\dpvreony.website\
         npm install
         popd
-      
 
     - run: dotnet run --project src\dpvreony.website\dpvreony.website.csproj -- deploy
       name: Deploy Netlify
