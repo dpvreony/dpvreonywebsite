@@ -2,7 +2,7 @@
   "name": "myproject",
   "version": "1.0.0",
   "devDependencies": {
-    "bootstrap": "4.5.2",
+    "bootstrap": "4.5.3",
     "cookieconsent": "3.1.1",
 	"jquery": "3.5.1",
 	"popper.js": "1.16.1"
