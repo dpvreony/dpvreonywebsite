@@ -1,14 +1,19 @@
 # Getting involved as an Open Source maintainer
 
-New Project or Contribute elsewhere
-* What's your motivation?
-STOP: If your motivation is money be aware it's very difficult to make a living from open source software.
+## New Project or Contribute elsewhere
+### What's your motivation?
+
+**TAKE NOTE:** If your motivation is money be aware it's very difficult to make a living from open source software.
 If you're lucky you may get a job where you're paid to do open source software, or you may occasionally be offered money to support changes \ usages of your project.
 It's also possible your open source may land you a job.
-* What's your limitations?
+
+### What are your limitations?
+
 Everyone has limitations. Time is finite and people have different strengths and weaknesses. Be honest with yourself and others. Look after your physical and mental health and avoid burnout.
 
-Managing your process and project via a maturity model
+## Managing your process and project via a maturity model
+
+Your aim should be to have a project that is sustainable. The documentation below will detail a lot of things to consider and the more you can structure and automate the more you help yourself and other contributors not get bogged down in manual housekeeping. However taking the time to put processes in place also requires time and there are tradeoffs in up front time and the long term returns. The key is to understand the different considerations and keep a note of the decisions you make on them. This will help drive your understanding and plan your way through a sustainability and maturity model as you progress through the life of the project.
 
 Source Code Storage
 Personal Repo vs Organisation
@@ -16,26 +21,53 @@ Open Source Repository Management
 Readme
 * Give credit to others
 
-License
+## License
 
-Choose a license
+A license is an absolute must. Businesses and developers will not use projects where the legal protections are unclear.
+[Choose a license](https://choosealicense.com/) is a great resource for understanding your choices on licenses.
+It's also worth time to look and understand the views held for and against GPL and Microsoft originating licenses.
 
-Code Of Conduct
+## Code Of Conduct
 
-Contributing Guidelines
+TODO
 
-Security Disclosures
+Be aware of the toxicity, allow yourself to disconnect from it. You can't please everyone.
+Very few people engage with projects. A number will feel self entitlement to tell you what to do. It's rare for people to positively engage with a project to say thank you and\or help it expand.
+Keep this in mind when you engage as well, be gracious and keep things civil and simple.
 
-Support Policy \ Lifespan
+## Contributing Guidelines
 
+TODO
+
+## Security Disclosures
+
+TODO
+
+## Support Policy \ Lifespan
+
+### In your readme establish a support policy.
+* Will you offer support, or is the software "as is"?
+* Will you offer paid support?
+Having an open source license and paid support are not mutually exclusive, despite what you may be told by some consumers of your project.
+* Will you accept requests for help via Github Issues?
+* Will you suggest using an alternative site\platform for support?
+* If you have dependencies on other packages, operating systems what is your lifetime support policy?
+
+Things to consider here are operating systems have 10 year lifecycles. Some people will expect you to continue supporting old operating systems or frameworks. One strategy to this is "we work with the latest long term support version and offer no gurantees on old versions" and leave it up to consumers to contribute to help ensure things don't break on older versions. However it can be unreasonable for someone to expect an old out of support framework to be maintained. They have the option to fork the repository if they so desire, be aware of ther overhead of taking on a contribution if it's going to cause you excess overhead on the sustainability model of the project.
+
+### Dealing with Issues \ Tickets
+* Consider templates for the different types of tickets
+* Enforcement of tickets not following the templates
 * Auto lock old closed items.
 
-Sponsorship
+## Covering costs \ Monetization
+### Sponsorship
 
 Github run a sponsorship program and there are also options such as Open Collab. As previously mentioned the amount of money these tend to generate is not a lot to make a living off. It may cover costs.
 
 Be aware of sponsorship abuse if you list sponsors on your site and\or project. There are some organizations such as Casinos that place sponsorship as a form of advertisement and Page Rank boosting for links into their own domains.
 
+### Licensing for open source projects
 Another possibility is the coverage of costs of licenses and\or hosting. There are suppliers of development tools and hosting that offer incentives to open source projects. These may be free in return for a logo or mention on your site.
 
 Conformance \ Branch Policies
@@ -66,8 +98,8 @@ Project succession
 ### External Management
 
 #### Stack overflow
-Stack overflow is a community site that can self driving for knowledge can be a good is a good way of having a community help each other and articles are archived by a search engine. Unlike IM platforms they don't require additional tools. When starting out it can be important to keep an eye, as your userbase grows you mya find you gain a critical mass and others will keep the knowledge flowing.
-Stack overflow can be a toxic environment with over zealous, opaque and unaccountable moderation combined with "newbie" intolerant contributors it can be an offputting experience. Stack Overflow has introduced a code of contact but as of May 2020 it has no visible benefit. I would recommend using an integration with a messaging tool such as Slack to monitor keywords relating to your project. But I would NOT use it as the primary driver of support and knowledge.
+Stack overflow is a community site that can self driving for knowledge can be a good way of having a community help each other and articles are archived by a search engine. Unlike IM platforms they don't require additional tools. When starting out it can be important to keep an eye, as your userbase grows you may find you gain a critical mass and others will keep the knowledge flowing.
+Stack overflow can be a toxic and intimidating environment with over zealous, opaque and unaccountable moderation combined with "newbie" intolerant contributors it can be an offputting experience. Stack Overflow has introduced a code of contact but as of May 2020 it has no visible benefit. I would recommend using an integration with a messaging tool such as Slack to monitor keywords relating to your project. But I would NOT use it as the primary driver of support and knowledge.
 
 One of the uses to consider using Stack Overflow for is to track requests for the problem your product \ project is aiming to solve. Be careful not to have your answer look like advertisements but show how it solves the problem of the question being asked.
 
@@ -82,7 +114,7 @@ Capture accepted and rejected reasons.
 ** UML
 ** Iteration
 
-Tooling
+## Tooling
 
 Solution Structure
 Unit Tests
@@ -95,9 +127,14 @@ Strong Name Signing
 * Give instructions to Claire Ovotony's self sign tool
 Authenticode Signing
 
-Getting a developer started locally.
+Getting a developer started.
 
-Automated Build Script.
+### Codespaces
+### Gitpod
+### Local development environment
+
+Automated Builds.
+
 * Script Bootstrapping
   * Cake
   * Nuke
@@ -118,7 +155,7 @@ Automated Build Script.
   * Use a separate branch or repo for documentation?
     * Ship a nuget package
     * make the recipient docfx repository depend on the package
-    * Use a depedency update tool
+    * Use a dependency update tool
     * run a package restore task
     * run a pre build task to extract the nuget package contents
   * DocFx
@@ -144,11 +181,14 @@ Automated Build Script.
   * Sonarqube
 * Technical Debt Monitoring
   * Sonarqube
-* Benchmarking
   * Jetbrains duplicate code scanner
+* Benchmarking
 
 ## Continous Integration
 * Choosing a build host
+  AppVeyor
+  Github Actions
+  Azure Devops Pipelines
 * Upload coverage
 * Deploy documentation
 
