@@ -15,7 +15,11 @@ jobs:
   build:
     # The type of runner that the job will run on
     runs-on: windows-latest
-    
+    env:
+      DOTNET_CLI_TELEMETRY_OPTOUT: 1
+      DOTNET_SKIP_FIRST_TIME_EXPERIENCE: 1
+      DOTNET_NOLOGO: true
+      DOTNET_GENERATE_ASPNET_CERTIFICATE: false
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
     - uses: actions/setup-dotnet@v1
