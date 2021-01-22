@@ -14,12 +14,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="NodaTime" Version="3.0.3" />
-    <PackageReference Include="Statiq.Web" Version="1.0.0-beta.17" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="input\articles\" />
+    <PackageReference Include="NodaTime" Version="3.0.4" />
+    <PackageReference Include="Statiq.Web" Version="1.0.0-beta.18" />
   </ItemGroup>
 
 </Project>
