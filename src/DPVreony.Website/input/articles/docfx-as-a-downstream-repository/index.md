@@ -1,4 +1,4 @@
-# Using DocFx as the Document Generation Toolset in a downstream repository.
+Using DocFx as the Document Generation Toolset in a downstream repository.
 
 | | |
 | - | - |
