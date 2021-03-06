@@ -9,6 +9,10 @@
 | License | MIT |
 
 | - | - |
+| ?.Client | Strongly Typed Client Logic. i.e. Http clients
+| ?.DotNetTool | Dot Net Core Command Line Tool
+| ?.Server | Shared Server Logic
+| ?.Shared | Shared Client \ Server Logic
 | ?.WebSocketApp | Web Socket Application (If using one and splitting from WebApp \ WebApi app)
 | ?.WebApp | Web Application (If using one)
 | ?.WinformsApp | Winforms Application (If using one)
