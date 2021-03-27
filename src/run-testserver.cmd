@@ -1,1 +1,1 @@
-dotnet run --project DPVreony.Website -- preview
+dotnet run --project DPVreony.Website -- preview --port 30080

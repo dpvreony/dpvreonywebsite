@@ -34,6 +34,7 @@ This is not meant to be definitive, it's an example pattern. You may be using a 
 | ?.IntegrationTests | Integration Tests for the whole solution
 | ?.Benchmarks | Benchmarks for the whole solution
 | ?.MsiInstaller | Windows MSI installer
+| ?.ForAndroid | Reusable logic for use in a platform such as Android whilst avoiding toolchain issues.<a href="#1">[1]</a>
 
 
 ## How do you check the naming convention automatically?
@@ -42,4 +43,4 @@ TODO.
 
 ## References
 
-Montemagno, James (2020) Don't Put Android in Your Namespace in Xamarin Projects https://montemagno.com/dont-put-android-in-your-namespace-in-xamarin-apps/ (Accessed 2020-03-26)
+<href id="#1"></a>Montemagno, James (2020) Don't Put Android in Your Namespace in Xamarin Projects https://montemagno.com/dont-put-android-in-your-namespace-in-xamarin-apps/ (Accessed 2020-03-26)

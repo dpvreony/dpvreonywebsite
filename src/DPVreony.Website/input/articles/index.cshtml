@@ -1,0 +1,28 @@
+﻿<h1>Articles</h1>
+
+@{
+    var articles = new Dictionary<string, string>
+    {
+        {"Crawling a website as an integration test", "crawling-a-website-as-integration-test"},
+        {"Designing Nucleotide", "designing-nucleotide"},
+        {"Designing Whipstaff", "designing-whipstaff"},
+        {"Using DocFx as a downstream repository to your application code", "docfx-as-a-downstream-repository"},
+        {"Utilising Feature Usage Tracking", "feature-usage-tracking"},
+        {"Knowledge Management with a Skills Matrix", "knowledge-management-skills-matrix"},
+        {"Devising a naming convention for .NET projects", "naming-convention-net-projects"},
+        {"Getting involved as an Open Source maintainer", "opensource"},
+        {"Satisfactory Example - Source Generation Model from JSON", "satisfactory-source-generation-model-from-json"},
+        {"Satisfactory Example - Spreadsheet Generator", "satisfactory-spreadsheet-generator"},
+        {"Using your own Modem and Router with a Sky internet connection", "sky-using-own-modem-and-router"},
+        {"Source Generator using JSON", "sourcegenerator-using-json"},
+        //{"", ""},
+    };
+
+    <ul>
+        @foreach (var article in articles)
+        {
+        <li><a href="@article.Value">@article.Key</a></li>
+        }
+    </ul>
+}
+
