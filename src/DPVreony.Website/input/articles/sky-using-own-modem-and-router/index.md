@@ -1,6 +1,5 @@
 # Using your own Modem and Router with a Sky internet connection
 
-
 | | |
 | - | - |
 | Article Status | Released |
