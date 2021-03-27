@@ -77,4 +77,29 @@
         </div>
     </div>
 </div>
+<!--
+Requirements
+Develop
+* Nucleotide
+* Whipstaff
+* ReactiveUI
+* Splat
+Analyze
+* Gripe with Roslyn
+* Quality Assurance Pack
+Build
+Test
+* Net Test Regimentation
+Document
+* Architecture Design Reasoning (ADR)
+Build Verification
+Package Artifacts
+Deploy
+Deployment Verification
+
+Tools
+* WSUS Smart Approve
+Education\Research Tools
+* Echo Web Service
+-->
 </main>
