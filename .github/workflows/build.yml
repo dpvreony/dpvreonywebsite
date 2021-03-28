@@ -41,7 +41,9 @@ jobs:
         popd
 
     - name: Deploy Netlify
-      run: dotnet run --project src\dpvreony.website\dpvreony.website.csproj -- deploy
+      run: |
+        pushd src\dpvreony.website\
+        dotnet run -c Release dpvreony.website.csproj -- deploy
       env:
         NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
         NETLIFY_DEPLOY_KEY: ${{ secrets.NETLIFY_DEPLOY_KEY }}      
