@@ -18,4 +18,8 @@
     <PackageReference Include="Statiq.Web" Version="1.0.0-beta.24" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Features\Resume\" />
+  </ItemGroup>
+
 </Project>

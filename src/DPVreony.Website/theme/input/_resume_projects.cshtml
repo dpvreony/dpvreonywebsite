@@ -1,0 +1,32 @@
+﻿@using Dhgms.DPVreony.Website.Queries
+@{
+    var projects = await new ProjectQueries().GetProjectsListAsync();
+}
+<div id="projects">
+    <h2 class="heading">Projects</h2>
+
+    @foreach(var project in projects)
+    {
+<div class="education-block">
+    <h3>@project.Name</h3>
+    <span class="education-date" data-bind="text: getEducationDate($data)"></span>
+    <h4></h4>
+
+    @foreach (var description in project.Description)
+    {
+        <p>@description</p>
+    }
+
+    @if (project.GithubRepository != null && project.GithubRepository.IsAbsoluteUri)
+    {
+        <a href="@project.GithubRepository">View Github Repository</a>
+    }
+
+    @if (project.WebSite != null && project.WebSite.IsAbsoluteUri)
+    {
+        <a href="@project.WebSite">View Website</a>
+    }
+</div>
+    }
+</div>
+<!-- End #projects -->
