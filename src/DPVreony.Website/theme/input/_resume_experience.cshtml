@@ -1,4 +1,5 @@
 ﻿@using Dhgms.DPVreony.Website.Queries
+@using DPVreony.Website.Helpers
 <div id="experience" class="background-alt">
     <div class="container body-content">
         <h2 class="heading">Experience</h2>
@@ -9,7 +10,9 @@
     {
         <div class="row">
             <div class="col-md-3">
-                <span data-bind="text: getEducationDate($data)"></span>
+                <span>@DateStringHelpers.GetFormattedDateDuration(
+                                                                    experienceModel.StartDate,
+                                                                    experienceModel.EndDate)</span>
             </div>
             <div class="col-md-9">
                 <h3>@experienceModel.EmployerName</h3>
