@@ -13,23 +13,27 @@ namespace DPVreony.Website.Features.MermaidDiagram
         /// <inheritdoc />
         protected override async Task<IEnumerable<IDocument>> ExecuteInputAsync(IDocument input, IExecutionContext context)
         {
-            context.LogInformation(input, "Starting ShellExecute Module");
+            context.LogInformation(input, "Starting Mermaid Diagram CLI Module");
 
             var inputFilename = Path.GetFullPath(input.Source.FullPath);
 
             var rootPath = Path.GetFullPath(context.FileSystem.RootPath.FullPath);
 
             var destination = input.Destination.FullPath;
-            //var destinationAsPath = Path.GetPathRoot(destination);
 
-
+            // this is taking the input folder, the output folder
             var outputFilename = Path.Combine(
                 rootPath,
                 "output",
                 destination);
-
+                
+            // and reversing the path separator on the output
             outputFilename = Path.GetFullPath(outputFilename);
 
+            // finally replace the file extension
+            // could be a setting for now assume svg
+            // might be a better way of doing all the output steps
+            // within the Statiq Context would need to dig.
             outputFilename = Path.ChangeExtension(
                 outputFilename,
                 ".svg");
@@ -69,6 +73,11 @@ namespace DPVreony.Website.Features.MermaidDiagram
                 throw new InvalidOperationException($"Process exit code is: {exitCode}");
             }
 
+            // CLI does all the output, we don't return anything ourself
+            // could use console in \ out piping of CLI in future.
+            // but could replace the NodeJS dependency with an inhouse generator
+            // this is quick and leaves us without having to manage a mermaid dependency
+            // (unless the CLI breaks)
             return Array.Empty<IDocument>();
         }
     }
