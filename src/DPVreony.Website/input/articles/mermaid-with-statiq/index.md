@@ -135,7 +135,8 @@ Now you have the basic flow you can consider:
 
 <ul>
 <li><a id="#1"></a>Github mermaid-cli https://github.com/mermaid-js/mermaid-cli</li>
-<li><a id="#3"></a>Mermaid Flowchart Sameple https://mermaid-js.github.io/mermaid/#/flowchart?id=flowcharts-basic-syntax</li>
+<li><a id="#2"></a>Mermaid Flowchart Sameple https://mermaid-js.github.io/mermaid/#/flowchart?id=flowcharts-basic-syntax</li>
+<li><a id="#3"></a>MARTIN BJÖRKSTRÖM: I ported my blog to Statiq https://martinbjorkstrom.com/posts/2020-04-20-i-ported-my-blog-to-statiq
 </ul>
 
 
