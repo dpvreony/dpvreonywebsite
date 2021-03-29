@@ -1,0 +1,17 @@
+﻿@using Dhgms.DPVreony.Website.Queries
+@using Dhgms.DPVreony.Website.ViewModels
+
+@{
+    var skills = await new SkillQueries().GetSkillSectionListAsync();
+    var partialViewName = "_resume_SkillSection";
+}
+
+<div id="skills" class="background-alt">
+    <h2 class="heading">Skills</h2>
+    @await Html.PartialAsync(partialViewName, new SkillLevelViewModel { Level = "Expert", Skills = skills.Expert })
+    @await Html.PartialAsync(partialViewName, new SkillLevelViewModel { Level = "Advanced", Skills = skills.Advanced })
+    @await Html.PartialAsync(partialViewName, new SkillLevelViewModel { Level = "Intermediate", Skills = skills.Intermediate })
+    @await Html.PartialAsync(partialViewName, new SkillLevelViewModel { Level = "Basic", Skills = skills.Basic })
+    @await Html.PartialAsync(partialViewName, new SkillLevelViewModel { Level = "Awareness", Skills = skills.Awareness })
+</div>
+<!-- End #skills -->

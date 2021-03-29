@@ -1,0 +1,42 @@
+﻿@using Dhgms.DPVreony.Website.Queries
+@using DPVreony.Website.Helpers
+<div id="experience" class="background-alt">
+    <div class="container body-content">
+        <h2 class="heading">Experience</h2>
+@{
+    var experience = await new ExperienceQueries().GetExperienceListAsync();
+
+    foreach (var experienceModel in experience)
+    {
+        <div class="row">
+            <div class="col-md-3">
+                <span>@DateStringHelpers.GetFormattedDateDuration(
+                                                                    experienceModel.StartDate,
+                                                                    experienceModel.EndDate)</span>
+            </div>
+            <div class="col-md-9">
+                <h3>@experienceModel.EmployerName</h3>
+                <h4>@experienceModel.JobTitle</h4>
+
+                @foreach (var description in experienceModel.Description)
+                {
+                    <p>@description</p>
+                }
+
+                @if (experienceModel.Accomplishments != null && experienceModel.Accomplishments.Length > 0)
+                {
+                    <h5>Accomplishments</h5>
+                    <ul>
+                    @foreach (var accomplishment in experienceModel.Accomplishments)
+                    {
+                        <li>@accomplishment</li>
+                    }
+                    </ul>
+                }
+            </div>
+        </div>
+    }
+}
+    </div>
+</div>
+<!-- End #experience -->

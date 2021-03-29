@@ -1,0 +1,22 @@
+﻿@using Dhgms.DPVreony.Website.Queries
+@using DPVreony.Website.Helpers
+@{
+    var education = await new EducationQueries().GetEducationListAsync();
+
+    <div id="education">
+        <h2 class="heading">Education</h2>
+    @foreach (var item in education)
+    {
+        <div class="education-block">
+            <h3>@item.Faculty</h3>
+            <span class="education-date">@DateStringHelpers.GetFormattedDateDuration(
+                                                                                       item.StartDate,
+                                                                                       item.EndDate)</span>
+            <h4>@item.Qualification</h4>
+            <p>@item.Description</p>
+        </div>
+        <!-- End .education-block -->
+    }
+    </div>
+    <!-- End #education -->
+}
