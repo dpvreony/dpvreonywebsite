@@ -1,6 +1,12 @@
-﻿@using Dhgms.DPVreony.Website.Queries
+﻿Title: My Résumé
+---
+@using Dhgms.DPVreony.Website.Queries
+@using Statiq.Common
+@{
+    const string title = "My Résumé";
+}
 <main>
-    <h1>My Résumé</h1>
+    <h1>@title</h1>
     @Html.Partial("_resume_experience")
     @Html.Partial("_resume_education")
     @Html.Partial("_resume_skills")
