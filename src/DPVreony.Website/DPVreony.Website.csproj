@@ -15,7 +15,8 @@
 
   <ItemGroup>
     <PackageReference Include="NodaTime" Version="3.0.5" />
-    <PackageReference Include="Statiq.Web" Version="1.0.0-beta.24" />
+    <PackageReference Include="Statiq.Highlight" Version="1.0.0-beta.40" />
+    <PackageReference Include="Statiq.Web" Version="1.0.0-beta.26" />
   </ItemGroup>
 
   <ItemGroup>

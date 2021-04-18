@@ -1,0 +1,27 @@
+﻿@inherits StatiqRazorPage<DPVreony.Website.Features.Articles.ArticleMetadataModel>
+<table>
+    <tr>
+        <th>Article Status</th>
+        <td>@Model.Status.ToString()</td>
+    </tr>
+    <tr>
+        <th>Article Version</th>
+        <td>@Model.Version.ToString()</td>
+    </tr>
+    <tr>
+        <th>First Written</th>
+        <td>@Model.FirstRevision.ToString()</td>
+    </tr>
+    <tr>
+        <th>Last Revision</th>
+        <td>@Model.LastRevision.ToString()</td>
+    </tr>
+    <tr>
+        <th>Next Review</th>
+        <td>@Model.NextReview.ToString()</td>
+    </tr>
+    <tr>
+        <th>License</th>
+        <td>MIT</td>
+    </tr>
+</table>

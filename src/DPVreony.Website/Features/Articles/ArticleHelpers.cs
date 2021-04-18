@@ -4,7 +4,8 @@ using System.Text;
 
 namespace DPVreony.Website.Features.Articles
 {
-    class ArticleHelpers
+    public static class ArticleHelpers
     {
+
     }
 }
