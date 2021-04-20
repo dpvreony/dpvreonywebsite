@@ -7,7 +7,7 @@ namespace DPVreony.Website.Features.Articles
     {
         public static string ToYearMonthDayString(this LocalDate instance)
         {
-            return instance.ToString("yyyy-MM-DD", DateTimeFormatInfo.InvariantInfo);
+            return instance.ToString("yyyy-MM-dd", DateTimeFormatInfo.InvariantInfo);
         }
     }
 }
