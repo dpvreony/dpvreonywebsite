@@ -20,6 +20,7 @@ jobs:
       DOTNET_SKIP_FIRST_TIME_EXPERIENCE: 1
       DOTNET_NOLOGO: true
       DOTNET_GENERATE_ASPNET_CERTIFICATE: false
+      solutionpath: src\DPVreony.Website.sln
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
     - uses: actions/setup-dotnet@v1
@@ -40,6 +41,10 @@ jobs:
         npm outdated
         popd
 
+    - name: Run Build
+      run: |
+        dotnet build ${{ env.solutionpath }} --configuration Release --no-restore /bl:artifacts\\binlog\\build.binlog /p:ContinuousIntegrationBuild=true 
+        
     - name: Deploy Netlify
       if: contains(github.event.pull_request.labels.*.name, 'release') && github.event_name == 'pull_request' && github.event.action == 'closed' && github.event.pull_request.merged == true
       run: |
