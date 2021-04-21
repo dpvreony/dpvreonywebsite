@@ -41,6 +41,10 @@ jobs:
         npm outdated
         popd
 
+    - name: Restore Packages
+      run: |
+        dotnet restore ${{ env.solutionpath }} /bl:artifacts\\binlog\\restore.binlog
+        
     - name: Run Build
       run: |
         dotnet build ${{ env.solutionpath }} --configuration Release --no-restore /bl:artifacts\\binlog\\build.binlog /p:ContinuousIntegrationBuild=true 
