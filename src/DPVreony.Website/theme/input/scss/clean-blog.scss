@@ -51,3 +51,12 @@ p.card-text {
 }
 
 @import "resume.scss";
+
+div.code {
+    background-color: #404040;
+    padding-left: 1em;
+}
+
+code {
+    white-space: pre;
+}
