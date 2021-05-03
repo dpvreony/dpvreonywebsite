@@ -22,8 +22,27 @@ jobs:
       DOTNET_NOLOGO: true
       DOTNET_GENERATE_ASPNET_CERTIFICATE: false
       solutionpath: src\DPVreony.Website.sln
+      
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
+    - name: Verify the ref context
+      run: echo 'Ref Context is ${{ github.ref }}'
+
+    - name: Verify the head ref context
+      run: echo 'Head Ref Context is ${{ github.head_ref }}'
+
+    - name: Verify if release label exists
+      run: echo 'Contains Release label ${{ contains(github.event.pull_request.labels.*.name, 'release') }}'
+
+    - name: Verify the event name
+      run: echo 'Event Name is ${{ github.event_name }}'
+
+    - name: Verify the event action
+      run: echo 'Head Event Action is ${{ github.event.action }}'
+
+    - name: Verify if Pull Request merge
+      run: echo 'Pull Request Merged is ${{ github.event.pull_request.merged }}'
+      
     - uses: actions/setup-dotnet@v1
       name: Setup Dot Net 
       
