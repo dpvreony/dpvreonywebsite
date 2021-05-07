@@ -11,7 +11,12 @@ namespace DPVreony.Website.Features.MermaidDiagram
     public sealed class MermaidDiagramModule : Module
     {
         /// <inheritdoc />
-        protected override async Task<IEnumerable<IDocument>> ExecuteInputAsync(IDocument input, IExecutionContext context)
+        protected override Task<IEnumerable<IDocument>> ExecuteInputAsync(IDocument input, IExecutionContext context)
+        {
+            return Task.Run(() => ExecuteInput(input, context));
+        }
+
+        private IEnumerable<IDocument> ExecuteInput(IDocument input, IExecutionContext context)
         {
             context.LogInformation(input, "Starting Mermaid Diagram CLI Module");
 
@@ -26,7 +31,7 @@ namespace DPVreony.Website.Features.MermaidDiagram
                 rootPath,
                 "output",
                 destination);
-                
+
             // and reversing the path separator on the output
             outputFilename = Path.GetFullPath(outputFilename);
 
