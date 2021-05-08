@@ -1,8 +1,7 @@
-﻿using DPVreony.Website.Features.MermaidDiagram;
-using Statiq.Common;
+﻿using Statiq.Common;
 using Statiq.Core;
 
-namespace DPVreony.Website.Pipelines
+namespace DPVreony.Website.Features.MermaidDiagram
 {
     public sealed class MermaidDiagramPipeline : Pipeline
     {
