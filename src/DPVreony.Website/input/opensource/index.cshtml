@@ -1,4 +1,56 @@
-﻿<main>
+﻿@using DPVreony.Website.Features.OpenSource
+@{
+    var partialViewName = "_opensource_item";
+
+    var designingApmInSplatArticle = new InvolvementModel(
+"Article: Designing APM in Splat",
+"Details on the design reasoning and motivations behind adding Application Performance Monitoring capabilities into Splat.",
+null,
+null);
+
+    var designingNucleotideArticle = new InvolvementModel(
+        "Article: Designing Nucleotide",
+        "Details on the objectives, motivation and design reasoning on producing Nucleotide for Source Code Generation.",
+        null,
+        null);
+
+    var designingVetuviemArticle = new InvolvementModel(
+        "Article: Designing Vetuviem",
+        "Information of the Source Code Generation project aimed at giving options for re-usuable View to ViewModel binding logic in ReactiveUI.",
+        null,
+        null);
+
+    var usingStatiqAndMermaidArticle = new InvolvementModel(
+        "Article: Using Statiq and Mermaid Diagrams",
+        "Details on how to set up a build pipeline to utilize Mermaid Diagrams inside a Statiq website.",
+        null,
+        null);
+
+    var nucleotideProject = new InvolvementModel(
+        "Nucleotide",
+        "A code generation toolkit aimed at reducing the amount of time developers spend involved in boiler plate code by generating the code from DSL models. This allows developers to spend their time on more useful contributions.",
+        null,
+        null);
+
+    var whipstaffProject = new InvolvementModel(
+        "Whipstaff",
+        "Whipstaff is a collection of utilities to reduce overhead on developing .NET solutions. It's acts as a middleware glue for combining other packages and frameworks. Some ideas incubate in here until they are fed back into the original project they relate to.",
+        null,
+        null);
+
+    var reactiveUiProject = new InvolvementModel(
+        "ReactiveUI",
+        "ReactiveUI is an MVVM framework for .NET powered by Reactive Extensions.",
+        null,
+        null);
+
+    var splatProject = new InvolvementModel(
+        "Splat",
+        "Splat is a helper library for assisting in cross platform UI development on .NET that sits underneath ReactiveUI.",
+        null,
+        null);
+}
+<main>
 <h1>Open Source</h1>
 <p>I'm the author of some small open source tools that are aimed at improving processes. I also contribute to the ReactiveUI project (primarily in Splat) to aid with the use of the MVVM pattern within the .NET ecosystem.</p>
 <div>
@@ -7,39 +59,15 @@
         <h3>Requirements</h3>
         <div class="row mt-2">
             <div class="col-sm-6">
-                <div class="card">
-                    <div class="card-header">
-                        <h3>Article: Designing APM in Splat</h3>
-                    </div>
-                    <div class="card-body">
-                        <p class="card-text">Details on the design reasoning and motivations behind adding Application Performance Monitoring capabilities into Splat.</p>
-                        <a href="#" class="btn btn-primary">Github</a>
-                    </div>
-                </div>
+                @await Html.PartialAsync(partialViewName, designingApmInSplatArticle)
             </div>
             <div class="col-sm-6">
-                <div class="card">
-                    <div class="card-header">
-                        <h3>Article: Designing Nucleotide</h3>
-                    </div>
-                    <div class="card-body">
-                        <p class="card-text">Details on the objectives, motivation and design reasoning on producing Nucleotide for Source Code Generation.</p>
-                        <a href="#" class="btn btn-primary">Github</a>
-                    </div>
-                </div>
+                @await Html.PartialAsync(partialViewName, designingNucleotideArticle)
             </div>
         </div>
         <div class="row mt-2">
             <div class="col-sm-6">
-                <div class="card">
-                    <div class="card-header">
-                        <h3>Article: Designing Vetuviem</h3>
-                    </div>
-                    <div class="card-body">
-                        <p class="card-text">Information of the Source Code Generation project aimed at giving options for re-usuable View to ViewModel binding logic in ReactiveUI.</p>
-                        <a href="#" class="btn btn-primary">Github</a>
-                    </div>
-                </div>
+                @await Html.PartialAsync(partialViewName, designingVetuviemArticle)
             </div>
         </div>
     </div>
@@ -47,26 +75,9 @@
         <h3>Documentation</h3>
         <div class="row mt-2">
             <div class="col-sm-6">
-                <div class="card">
-                    <div class="card-header">
-                        <h3>Article: Using Statiq and Mermaid Diagrams</h3>
-                    </div>
-                    <div class="card-body">
-                        <p class="card-text">Details on how to set up a build pipeline to utilize Mermaid Diagrams inside a Statiq website.</p>
-                        <a href="#" class="btn btn-primary">Github</a>
-                    </div>
-                </div>
+                @await Html.PartialAsync(partialViewName, usingStatiqAndMermaidArticle)
             </div>
             <div class="col-sm-6">
-                <div class="card">
-                    <div class="card-header">
-                        <h3>Article: Designing Nucleotide</h3>
-                    </div>
-                    <div class="card-body">
-                        <p class="card-text">Details on how to set up a build pipeline to utilize Mermaid Diagrams inside a Statiq website.</p>
-                        <a href="#" class="btn btn-primary">Github</a>
-                    </div>
-                </div>
             </div>
         </div>
 
@@ -75,68 +86,31 @@
         <h3>Develop</h3>
         <div class="row mt-2">
             <div class="col-sm-6">
-                <div class="card">
-                    <div class="card-header">
-                        <h3>Nucleotide</h3>
-                    </div>
-                    <div class="card-body">
-                        <p class="card-text">A code generation toolkit aimed at reducing the amount of time developers spend involved in boiler plate code by generating the code from DSL models. This allows developers to spend their time on more useful contributions.</p>
-                        <a href="#" class="btn btn-primary">Github</a>
-                    </div>
-                </div>
+                @await Html.PartialAsync(partialViewName, nucleotideProject)
             </div>
             <div class="col-sm-6">
-                <div class="card">
-                    <div class="card-header">
-                        <h3>Whipstaff</h3>
-                    </div>
-                    <div class="card-body">
-                        <p class="card-text">A series of Roslyn analyzers aimed at mitigating issues experienced during software development. Whilst its an oppionated project it is a good example of how you can use Roslyn Analysis to encourage conformance within development processes.</p>
-                        <a href="#" class="btn btn-primary">Github</a>
-                    </div>
-                </div>
+                @await Html.PartialAsync(partialViewName, whipstaffProject)
             </div>
         </div>
         <div class="row mt-2">
             <div class="col-sm-6">
-                <div class="card">
-                    <div class="card-header">
-                        <h3>ReactiveUI</h3>
-                    </div>
-                    <div class="card-body">
-                        <img alt="ReactiveUI Logo" src="reactiveui-logo.png" height="64px" />
-                        <p class="card-text">ReactiveUI is an MVVM framework for .NET powered by Reactive Extensions.</p>
-                        <a href="https://github.com/reactiveui/reactiveui" class="btn btn-primary">Github</a>
-                    </div>
-                </div>
+                @await Html.PartialAsync(partialViewName, reactiveUiProject)
             </div>
             <div class="col-sm-6">
-                <div class="card">
-                    <div class="card-header">
-                        <h3>Splat</h3>
-                    </div>
-                    <div class="card-body">
-                        <img alt="Splat Logo" src="splat-logo.png" height="64px" />
-                        <p class="card-text">Splat is a helper library for assisting in cross platform UI development on .NET that sits underneath ReactiveUI.</p>
-                        <a href="https://github.com/reactiveui/splat" class="btn btn-primary">Github</a>
-                    </div>
-                </div>
+                @await Html.PartialAsync(partialViewName, splatProject)
             </div>
         </div>
         <div class="row mt-2">
             <div class="col-sm-6">
-                <div class="card">
-                    <div class="card-header">
+                <div>
+                    <div>
                         <h3>Vetuviem</h3>
                     </div>
-                    <div class="card-body">
-                        <img alt="ReactiveUI Logo" src="reactiveui-logo.png" height="64px" />
-                        <p class="card-text">Vetuviem is an extension for ReactiveUI to aid in producing re-usable View to ViewModel binding logic.</p>
+                    <div>
+                        <p class="card-text">Vetuviem is an extension for ReactiveUI to aid in producing re-usable View to ViewModel binding logic. It generates source code around control libraries to provide a DSL model that can be combined with helper methods to allow teams to have a standard codebase of common binding behaviours.</p>
                         <a href="https://github.com/dpvreony/vetuviem" class="btn btn-primary">Github</a>
                     </div>
                 </div>
-            </div>
-            <div class="col-sm-6">
             </div>
         </div>
     </div>
@@ -148,7 +122,7 @@
                     <div class="card-header">
                         <h3>Gripe With Roslyn</h3>
                     </div>
-                    <div class="card-body">
+                    <div>
                         <p class="card-text">A series of Roslyn analyzers aimed at mitigating issues experienced during software development. Whilst its an oppionated project it is a good example of how you can use Roslyn Analysis to encourage conformance within development processes.</p>
                         <a href="#" class="btn btn-primary">Github</a>
                     </div>
@@ -250,5 +224,4 @@
         * Echo Web Service
         -->
     </div>
-</div>
 </main>
