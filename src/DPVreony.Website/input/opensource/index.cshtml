@@ -49,6 +49,30 @@ null);
         "Splat is a helper library for assisting in cross platform UI development on .NET that sits underneath ReactiveUI.",
         null,
         null);
+
+    var vetuviemProject = new InvolvementModel(
+        "Vetuviem",
+        "Vetuviem is an extension for ReactiveUI to aid in producing re-usable View to ViewModel binding logic. It generates source code around control libraries to provide a DSL model that can be combined with helper methods to allow teams to have a standard codebase of common binding behaviors.",
+        null,
+        null);
+
+    var gripeWithRoslynProject = new InvolvementModel(
+        "Gripe With Roslyn",
+        "A series of Roslyn analyzers aimed at mitigating issues experienced during software development. Whilst its an opinionated project it is a good example of how you can use Roslyn Analysis to encourage conformance within development processes.",
+        null,
+        null);
+
+    var qualityAssurancePackProject = new InvolvementModel(
+        "Quality Assurance Pack",
+        "A simple nuget package that references a series of nuget packages that can be used by a team to encourage conformance to development processes.",
+        null,
+        null);
+
+    var netTestRegimentationProject = new InvolvementModel(
+        "Net Test Regimentation",
+        "A library built on top of XUnit to help produce re-usable test logic and a defined structure for the type of tests carried out on classes and methods.",
+        null,
+        null);
 }
 <main>
 <h1>Open Source</h1>
@@ -102,15 +126,7 @@ null);
         </div>
         <div class="row mt-2">
             <div class="col-sm-6">
-                <div>
-                    <div>
-                        <h3>Vetuviem</h3>
-                    </div>
-                    <div>
-                        <p class="card-text">Vetuviem is an extension for ReactiveUI to aid in producing re-usable View to ViewModel binding logic. It generates source code around control libraries to provide a DSL model that can be combined with helper methods to allow teams to have a standard codebase of common binding behaviours.</p>
-                        <a href="https://github.com/dpvreony/vetuviem" class="btn btn-primary">Github</a>
-                    </div>
-                </div>
+                @await Html.PartialAsync(partialViewName, vetuviemProject)
             </div>
         </div>
     </div>
@@ -118,26 +134,10 @@ null);
         <h3>Analyze</h3>
         <div class="row mt-2">
             <div class="col-sm-6">
-                <div class="card">
-                    <div class="card-header">
-                        <h3>Gripe With Roslyn</h3>
-                    </div>
-                    <div>
-                        <p class="card-text">A series of Roslyn analyzers aimed at mitigating issues experienced during software development. Whilst its an oppionated project it is a good example of how you can use Roslyn Analysis to encourage conformance within development processes.</p>
-                        <a href="#" class="btn btn-primary">Github</a>
-                    </div>
-                </div>
+                @await Html.PartialAsync(partialViewName, gripeWithRoslynProject)
             </div>
             <div class="col-sm-6">
-                <div class="card">
-                    <div class="card-header">
-                        <h3>Quality Assurance Pack</h3>
-                    </div>
-                    <div class="card-body">
-                        <p class="card-text">A simple nuget package that references a series of nuget packages that can be used by a team to encourage conformance to development processes.</p>
-                        <a href="#" class="btn btn-primary">Github</a>
-                    </div>
-                </div>
+                @await Html.PartialAsync(partialViewName, qualityAssurancePackProject)
             </div>
         </div>
     </div>
@@ -148,15 +148,7 @@ null);
         <h3>Build Verification</h3>
         <div class="row mt-2">
             <div class="col-sm-6">
-                <div class="card">
-                    <div class="card-header">
-                        <h3>Net Test Regimentation</h3>
-                    </div>
-                    <div class="card-body">
-                        <p class="card-text">A library built on top of XUnit to help produce re-usable test logic and a defined structure for the type of tests carried out on classes and methods.</p>
-                        <a href="#" class="btn btn-primary">Github</a>
-                    </div>
-                </div>
+                @await Html.PartialAsync(partialViewName, netTestRegimentationProject)
             </div>
             <div class="col-sm-6">
             </div>
