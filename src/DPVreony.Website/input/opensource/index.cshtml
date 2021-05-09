@@ -29,49 +29,49 @@ null);
     var nucleotideProject = new InvolvementModel(
         "Nucleotide",
         "A code generation toolkit aimed at reducing the amount of time developers spend involved in boiler plate code by generating the code from DSL models. This allows developers to spend their time on more useful contributions.",
-        null,
+        GetDPVreonyOrgGithubProject("nucleotide"),
         null);
 
     var whipstaffProject = new InvolvementModel(
         "Whipstaff",
         "Whipstaff is a collection of utilities to reduce overhead on developing .NET solutions. It's acts as a middleware glue for combining other packages and frameworks. Some ideas incubate in here until they are fed back into the original project they relate to.",
-        null,
+        GetDPVreonyOrgGithubProject("whipstaff"),
         null);
 
     var reactiveUiProject = new InvolvementModel(
         "ReactiveUI",
         "ReactiveUI is an MVVM framework for .NET powered by Reactive Extensions.",
-        null,
+        GetReactiveUiOrgGithubProject("reactiveui"),
         null);
 
     var splatProject = new InvolvementModel(
         "Splat",
         "Splat is a helper library for assisting in cross platform UI development on .NET that sits underneath ReactiveUI.",
-        null,
+        GetReactiveUiOrgGithubProject("splat"),
         null);
 
     var vetuviemProject = new InvolvementModel(
         "Vetuviem",
         "Vetuviem is an extension for ReactiveUI to aid in producing re-usable View to ViewModel binding logic. It generates source code around control libraries to provide a DSL model that can be combined with helper methods to allow teams to have a standard codebase of common binding behaviors.",
-        null,
+        GetDPVreonyOrgGithubProject("vetuviem"),
         null);
 
     var gripeWithRoslynProject = new InvolvementModel(
         "Gripe With Roslyn",
         "A series of Roslyn analyzers aimed at mitigating issues experienced during software development. Whilst its an opinionated project it is a good example of how you can use Roslyn Analysis to encourage conformance within development processes.",
-        null,
+        GetDhgmsOrgGithubProject("gripewithroslyn"),
         null);
 
     var qualityAssurancePackProject = new InvolvementModel(
         "Quality Assurance Pack",
         "A simple nuget package that references a series of nuget packages that can be used by a team to encourage conformance to development processes.",
-        null,
+        GetDhgmsOrgGithubProject("qualityassurancepack"),
         null);
 
     var netTestRegimentationProject = new InvolvementModel(
         "Net Test Regimentation",
         "A library built on top of XUnit to help produce re-usable test logic and a defined structure for the type of tests carried out on classes and methods.",
-        null,
+        GetDPVreonyOrgGithubProject("nettestregimentation"),
         null);
 }
 <main>
@@ -95,16 +95,16 @@ null);
             </div>
         </div>
     </div>
-    <div class="row" style="background-color: #D5ECC2">
-        <h3>Documentation</h3>
-        <div class="row mt-2">
-            <div class="col-sm-6">
+    <div style="background-color: #D5ECC2">
+        <h3 style="display: block">Documentation</h3>
+        <div style="display: block">
+            <div style="display: inline-block; width: 20%">
+                ?
+            </div>
+            <div style="display: inline-block; width: 75%">
                 @await Html.PartialAsync(partialViewName, usingStatiqAndMermaidArticle)
             </div>
-            <div class="col-sm-6">
-            </div>
         </div>
-
     </div>
     <div class="row" style="background-color: #FFD3B4">
         <h3>Develop</h3>
@@ -165,55 +165,78 @@ null);
     </div>
 
 
-        <div class="row mt-2">
-            <div class="col-sm-6">
-                <div class="card">
-                    <div class="card-header">
-                        <h3>Quality Assurance Pack</h3>
-                    </div>
-                    <div class="card-body">
-                        <p class="card-text">A simple nuget package that references a series of nuget packages that can be used by a team to encourage conformance to development processes.</p>
-                        <a href="#" class="btn btn-primary">Github</a>
-                    </div>
+    <div class="row mt-2">
+        <div class="col-sm-6">
+            <div class="card">
+                <div class="card-header">
+                    <h3>Quality Assurance Pack</h3>
                 </div>
-            </div>
-            <div class="col-sm-6">
-                <div class="card">
-                    <div class="card-header">
-                        <h3>WSUS Smart Approve</h3>
-                    </div>
-                    <div class="card-body">
-                        <p class="card-text">A tool for automating approvals of Windows Updates. It's aimed at avoiding unecessary downloads and the ability to automate when approvals take place for different target groups.</p>
-                        <a href="#" class="btn btn-primary">Github</a>
-                    </div>
+                <div class="card-body">
+                    <p class="card-text">A simple nuget package that references a series of nuget packages that can be used by a team to encourage conformance to development processes.</p>
+                    <a href="#" class="btn btn-primary">Github</a>
                 </div>
             </div>
         </div>
-
-        <!--
-        Requirements
-        Develop
-        * Nucleotide
-        * Whipstaff
-        * ReactiveUI
-        * Splat
-        Analyze
-        * Gripe with Roslyn
-        * Quality Assurance Pack
-        Build
-        Test
-        * Net Test Regimentation
-        Document
-        * Architecture Design Reasoning (ADR)
-        Build Verification
-        Package Artifacts
-        Deploy
-        Deployment Verification
-
-        Tools
-        * WSUS Smart Approve
-        Education\Research Tools
-        * Echo Web Service
-        -->
+        <div class="col-sm-6">
+            <div class="card">
+                <div class="card-header">
+                    <h3>WSUS Smart Approve</h3>
+                </div>
+                <div class="card-body">
+                    <p class="card-text">A tool for automating approvals of Windows Updates. It's aimed at avoiding unecessary downloads and the ability to automate when approvals take place for different target groups.</p>
+                    <a href="#" class="btn btn-primary">Github</a>
+                </div>
+            </div>
+        </div>
     </div>
+
+    <!--
+    Requirements
+    Develop
+    * Nucleotide
+    * Whipstaff
+    * ReactiveUI
+    * Splat
+    Analyze
+    * Gripe with Roslyn
+    * Quality Assurance Pack
+    Build
+    Test
+    * Net Test Regimentation
+    Document
+    * Architecture Design Reasoning (ADR)
+    Build Verification
+    Package Artifacts
+    Deploy
+    Deployment Verification
+
+    Tools
+    * WSUS Smart Approve
+    Education\Research Tools
+    * Echo Web Service
+    -->
+</div>
 </main>
+@functions
+{
+    public Uri GetDhgmsOrgGithubProject(string projectName)
+    {
+        return GetGithubProject("dhgms-solutions", projectName);
+    }
+
+    public Uri GetDPVreonyOrgGithubProject(string projectName)
+    {
+        return GetGithubProject("dpvreony", projectName);
+    }
+
+    public Uri GetReactiveUiOrgGithubProject(string projectName)
+    {
+        return GetGithubProject("reactiveui", projectName);
+    }
+
+    public Uri GetGithubProject(string organisationName, string projectName)
+    {
+        return new Uri($"https://www.github.com/{organisationName}/{projectName}");
+    }
+}
+
