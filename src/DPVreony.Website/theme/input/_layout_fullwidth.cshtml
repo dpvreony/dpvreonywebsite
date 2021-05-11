@@ -1,0 +1,26 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+@Html.Partial("_head")
+<body>
+    <!-- Navigation -->
+    @RenderSectionOrPartial("Navigation", "_navigation")
+    <!-- Page Header -->
+    @RenderSectionOrPartial("Header", "_header")
+    <!-- Main Content -->
+    <div class="container-fluid">
+        <div class="row">
+            <div id="content" class="col-md-12">
+                @RenderBody()
+            </div>
+        </div>
+    </div>
+    <hr>
+    <!-- Footer -->
+    @RenderSectionOrPartial("Footer", "_footer")
+    @Html.Partial("_scripts")
+    @RenderSection("Scripts", false)
+    <!-- Bootstrap core JavaScript -->
+    <script src="@Context.GetLink("/vendor/jquery/jquery.min.js")"></script>
+    <script src="@Context.GetLink("/vendor/bootstrap/js/bootstrap.bundle.min.js")"></script>
+</body>
+</html>
