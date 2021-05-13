@@ -77,135 +77,102 @@ null);
         null);
 }
 <main>
-<h1>Open Source</h1>
-<p>I'm the author of some small open source tools that are aimed at improving processes. I also contribute to the ReactiveUI project (primarily in Splat) to aid with the use of the MVVM pattern within the .NET ecosystem.</p>
-<div style="background-color: burlywood">
-    <div class="container-fluid">
-        <h2>ALM Projects, Research and Articles</h2>
-        <div class="row" style="background-color: #98DDCA; margin-left: 10em; margin-right: 10em;">
-            <h3>Requirements</h3>
-            <div class="row mt-2">
-                <div class="col-sm-3">
-                </div>
-                <div class="col-sm-8">
-                    @await Html.PartialAsync(partialViewName, designingApmInSplatArticle)
-                    @await Html.PartialAsync(partialViewName, designingNucleotideArticle)
-                    @await Html.PartialAsync(partialViewName, designingVetuviemArticle)
-                </div>
-            </div>
-        </div>
-        <div class="row" style="background-color: #D5ECC2; margin-left: 10em; margin-right: 10em;">
-            <h3 style="display: block">Design Reasoning and Documentation</h3>
-            <div class="row mt-2">
-                <div class="col-sm-3">
-                </div>
-                <div class="col-sm-8">
-                    @await Html.PartialAsync(partialViewName, usingStatiqAndMermaidArticle)
-                    @await Html.PartialAsync(partialViewName, usingStatiqAndMermaidArticle)
-                </div>
-            </div>
-        </div>
-        <div class="row" style="background-color: #FFD3B4; margin-left: 10em; margin-right: 10em;">
-            <h3>Develop</h3>
-            <div class="row mt-2">
-                <div class="col-sm-3">
-                </div>
-                <div class="col-sm-8">
-                    @await Html.PartialAsync(partialViewName, nucleotideProject)
-                    @await Html.PartialAsync(partialViewName, whipstaffProject)
-                    @await Html.PartialAsync(partialViewName, reactiveUiProject)
-                    @await Html.PartialAsync(partialViewName, splatProject)
-                    @await Html.PartialAsync(partialViewName, vetuviemProject)
-                </div>
-            </div>
-        </div>
-        <div class="row" style="background-color: #FFAAA7; margin-left: 10em; margin-right: 10em;">
-            <h3>Analyze</h3>
-            <div class="row mt-2">
-                <div class="col-sm-3">
-                </div>
-                <div class="col-sm-8">
-                    @await Html.PartialAsync(partialViewName, gripeWithRoslynProject)
-                    @await Html.PartialAsync(partialViewName, qualityAssurancePackProject)
-                </div>
-            </div>
-        </div>
-        <div class="row" style="background-color: #beebe9; margin-left: 10em; margin-right: 10em;">
-            <h3>Build</h3>
-        </div>
-        <div class="row" style="background-color: #f4dada; margin-left: 10em; margin-right: 10em;">
-            <h3>Build Verification</h3>
-            <div class="row mt-2">
-                <div class="col-sm-3">
-                </div>
-                <div class="col-sm-8">
-                    @await Html.PartialAsync(partialViewName, netTestRegimentationProject)
-                </div>
-            </div>
-        </div>
-        <div class="row" style="background-color: #bdd2b6; margin-left: 10em; margin-right: 10em;">
-            <h3>Package Artifacts</h3>
-        </div>
-        <div class="row" style="background-color: #a58faa; margin-left: 10em; margin-right: 10em;">
-            <h3>Deploy</h3>
-        </div>
-        <div class="row" style="background-color: #f6eec7; margin-left: 10em; margin-right: 10em;">
-            <h3>Deployment Verification</h3>
-        </div>
-
-
-        <div class="row mt-2">
-            <div class="col-sm-6">
-                <div class="card">
-                    <div class="card-header">
-                        <h3>Quality Assurance Pack</h3>
+    <h1>Open Source</h1>
+    <p>I'm the author of some small open source tools that are aimed at improving processes. I also contribute to the ReactiveUI project (primarily in Splat) to aid with the use of the MVVM pattern within the .NET ecosystem.</p>
+    <div style="background-color: burlywood">
+        <div class="container-fluid">
+            <h2>ALM Projects, Research and Articles</h2>
+            <div style="background-color: #98DDCA; margin-left: 10em; margin-right: 10em;">
+                <h3>Requirements</h3>
+                <div style="display: block">
+                    <div style="display: inline-block; width: 20%; vertical-align: top; text-align: center">
+                        ?
                     </div>
-                    <div class="card-body">
-                        <p class="card-text">A simple nuget package that references a series of nuget packages that can be used by a team to encourage conformance to development processes.</p>
-                        <a href="#" class="btn btn-primary">Github</a>
+                    <div style="display: inline-block; width: 75%">
+                        @await Html.PartialAsync(partialViewName, designingApmInSplatArticle)
+                        @await Html.PartialAsync(partialViewName, designingNucleotideArticle)
+                        @await Html.PartialAsync(partialViewName, designingVetuviemArticle)
                     </div>
                 </div>
             </div>
-            <div class="col-sm-6">
-                <div class="card">
-                    <div class="card-header">
-                        <h3>WSUS Smart Approve</h3>
+            <div style="background-color: #D5ECC2; margin-left: 10em; margin-right: 10em;">
+                <h3 style="display: block">Design Reasoning and Documentation</h3>
+                <div style="display: block">
+                    <div style="display: inline-block; width: 20%; vertical-align: top; text-align: center">
+                        ?
                     </div>
-                    <div class="card-body">
-                        <p class="card-text">A tool for automating approvals of Windows Updates. It's aimed at avoiding unecessary downloads and the ability to automate when approvals take place for different target groups.</p>
-                        <a href="#" class="btn btn-primary">Github</a>
+                    <div style="display: inline-block; width: 75%">
+                        @await Html.PartialAsync(partialViewName, usingStatiqAndMermaidArticle)
+                        @await Html.PartialAsync(partialViewName, usingStatiqAndMermaidArticle)
                     </div>
                 </div>
             </div>
+            <div class="row" style="background-color: #FFD3B4; margin-left: 10em; margin-right: 10em;">
+                <h3>Develop</h3>
+                <div style="display: block">
+                    <div style="display: inline-block; width: 20%; vertical-align: top; text-align: center">
+                        ?
+                    </div>
+                    <div style="display: inline-block; width: 75%">
+                        @await Html.PartialAsync(partialViewName, nucleotideProject)
+                        @await Html.PartialAsync(partialViewName, whipstaffProject)
+                        @await Html.PartialAsync(partialViewName, reactiveUiProject)
+                        @await Html.PartialAsync(partialViewName, splatProject)
+                        @await Html.PartialAsync(partialViewName, vetuviemProject)
+                    </div>
+                </div>
+            </div>
+            <div class="row" style="background-color: #FFAAA7; margin-left: 10em; margin-right: 10em;">
+                <h3>Analyze</h3>
+                <div style="display: block">
+                    <div style="display: inline-block; width: 20%; vertical-align: top; text-align: center">
+                        ?
+                    </div>
+                    <div style="display: inline-block; width: 75%">
+                        @await Html.PartialAsync(partialViewName, gripeWithRoslynProject)
+                        @await Html.PartialAsync(partialViewName, qualityAssurancePackProject)
+                    </div>
+                </div>
+            </div>
+            <div class="row" style="background-color: #beebe9; margin-left: 10em; margin-right: 10em;">
+                <h3>Build</h3>
+            </div>
+            <div class="row" style="background-color: #f4dada; margin-left: 10em; margin-right: 10em;">
+                <h3>Build Verification</h3>
+                <div style="display: block">
+                    <div style="display: inline-block; width: 20%; vertical-align: top; text-align: center">
+                        ?
+                    </div>
+                    <div style="display: inline-block; width: 75%">
+                        @await Html.PartialAsync(partialViewName, netTestRegimentationProject)
+                    </div>
+                </div>
+            </div>
+            <div class="row" style="background-color: #bdd2b6; margin-left: 10em; margin-right: 10em;">
+                <h3>Package Artifacts</h3>
+            </div>
+            <div class="row" style="background-color: #a58faa; margin-left: 10em; margin-right: 10em;">
+                <h3>Deploy</h3>
+            </div>
+            <div class="row" style="background-color: #f6eec7; margin-left: 10em; margin-right: 10em;">
+                <h3>Deployment Verification</h3>
+            </div>
         </div>
-
-        <!--
-        Requirements
-        Develop
-        * Nucleotide
-        * Whipstaff
-        * ReactiveUI
-        * Splat
-        Analyze
-        * Gripe with Roslyn
-        * Quality Assurance Pack
-        Build
-        Test
-        * Net Test Regimentation
-        Document
-        * Architecture Design Reasoning (ADR)
-        Build Verification
-        Package Artifacts
-        Deploy
-        Deployment Verification
-
-        Tools
-        * WSUS Smart Approve
-        Education\Research Tools
-        * Echo Web Service
-        -->
     </div>
-</div>
+    <h2>Other tools</h2>
+    <div class="row mt-2">
+        <div class="col-sm-6">
+            <div class="card">
+                <div class="card-header">
+                    <h3>WSUS Smart Approve</h3>
+                </div>
+                <div class="card-body">
+                    <p class="card-text">A tool for automating approvals of Windows Updates. It's aimed at avoiding unnecessary downloads and the ability to automate when approvals take place for different target groups.</p>
+                    <a href="#" class="btn btn-primary">Github</a>
+                </div>
+            </div>
+        </div>
+    </div>
 
 </main>
 @functions
