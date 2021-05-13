@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <TargetFramework>net5.0</TargetFramework>
   </PropertyGroup>
 
   <ItemGroup>
@@ -15,8 +15,8 @@
 
   <ItemGroup>
     <PackageReference Include="NodaTime" Version="3.0.5" />
-    <PackageReference Include="Statiq.Highlight" Version="1.0.0-beta.40" />
-    <PackageReference Include="Statiq.Web" Version="1.0.0-beta.26" />
+    <PackageReference Include="Statiq.Highlight" Version="1.0.0-beta.41" />
+    <PackageReference Include="Statiq.Web" Version="1.0.0-beta.27" />
   </ItemGroup>
 
   <ItemGroup>

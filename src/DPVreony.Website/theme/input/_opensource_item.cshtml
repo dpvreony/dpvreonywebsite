@@ -1,0 +1,20 @@
+﻿@inherits StatiqRazorPage<DPVreony.Website.Features.OpenSource.InvolvementModel>
+
+<div style="background-color: rgba(255, 255, 255, 0.4)">
+    <div>
+        <h4>@Model.Title</h4>
+    </div>
+    <div style="margin-bottom: 2em;">
+        <p>@Model.Description</p>
+        @if (@Model.GithubUri != null)
+        {
+            <a href="@Model.GithubUri" class="btn btn-primary">Github</a>
+        }
+
+        @if (@Model.ArticleUri != null)
+        {
+            <a href="@Model.ArticleUri" class="btn btn-primary">Article</a>
+        }
+    </div>
+</div>
+
