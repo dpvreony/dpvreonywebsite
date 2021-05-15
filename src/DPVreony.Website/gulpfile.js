@@ -12,8 +12,9 @@ var deps = {
     "bootstrap": {
         "dist/**/*": ""
     },
-    "@fortawesome\fontawesome-free": {
-        "**/*": ""
+    // this is a workaround for @fortawesome, we put the target name then navigate out the target folder and into the source. we could adjust this by having an output folder name property on the poco
+    "fontawesome-free": {
+        "../@fortawesome/fontawesome-free/**/*": ""
     }
     //,
     //"cookieconsent": {
