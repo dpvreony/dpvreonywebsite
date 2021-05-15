@@ -65,9 +65,18 @@ jobs:
       run: |
         dotnet restore ${{ env.solutionpath }} /bl:artifacts\\binlog\\restore.binlog
         
-    - name: Run Build
+    - name: Build Statiq
       run: |
-        dotnet build ${{ env.solutionpath }} --configuration Release --no-restore /bl:artifacts\\binlog\\build.binlog /p:ContinuousIntegrationBuild=true 
+        dotnet build ${{ env.solutionpath }} --configuration Release --no-restore /bl:artifacts\\binlog\\build.binlog /p:ContinuousIntegrationBuild=true
+        
+    - name: Run Gulp
+      run: |
+        pushd src\dpvreony.website\
+        gulp
+        popd
+    - name: Build Website
+      run: |
+        dotnet run -c Release
         
     - name: Deploy Netlify
       if: contains(github.event.pull_request.labels.*.name, 'release') && github.event_name == 'pull_request' && github.event.action == 'closed' && github.event.pull_request.merged == true
