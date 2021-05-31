@@ -8,25 +8,25 @@
 "Article: Designing APM in Splat",
 "Details on the design reasoning and motivations behind adding Application Performance Monitoring capabilities into Splat.",
 null,
-null);
+GetArticle("designing-apm-splat"));
 
     var designingNucleotideArticle = new InvolvementModel(
         "Article: Designing Nucleotide",
         "Details on the objectives, motivation and design reasoning on producing Nucleotide for Source Code Generation.",
         null,
-        null);
+        GetArticle("designing-nucleotide"));
 
     var designingVetuviemArticle = new InvolvementModel(
         "Article: Designing Vetuviem",
         "Information of the Source Code Generation project aimed at giving options for re-usuable View to ViewModel binding logic in ReactiveUI.",
         null,
-        null);
+        GetArticle("designing-veutviem"));
 
     var usingStatiqAndMermaidArticle = new InvolvementModel(
         "Article: Using Statiq and Mermaid Diagrams",
         "Details on how to set up a build pipeline to utilize Mermaid Diagrams inside a Statiq website.",
         null,
-        null);
+        GetArticle("mermaid-with-statiq"));
 
     var nucleotideProject = new InvolvementModel(
         "Nucleotide",
@@ -80,13 +80,13 @@ null);
         "Article: Using Technical Steering",
         "How to get the best out of technical steering and knowledge sharing when investigation options for delivering a requirement.",
         null,
-        null);
+        GetArticle("using-technical-steering"));
 
     var usingArchitectureDecisionRecords = new InvolvementModel(
         "Article: Using Architecture Decision Records",
         "How to record and get the best out of architecture decision records.",
         null,
-        null);
+        GetArticle("designing-architecture-decision-records"));
 
     var comingSoon = new InvolvementModel(
 "Coming Soon",
@@ -246,6 +246,11 @@ null);
     public Uri GetGithubProject(string organisationName, string projectName)
     {
         return new Uri($"https://www.github.com/{organisationName}/{projectName}");
+    }
+
+    public Uri GetArticle(string articleNameSegment)
+    {
+        return new Uri($"/articles/{articleNameSegment}/", UriKind.Relative);
     }
 }
 
