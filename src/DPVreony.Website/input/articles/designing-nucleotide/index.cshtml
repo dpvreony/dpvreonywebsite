@@ -1,1 +1,51 @@
-﻿
+﻿@using DPVreony.Website.Features.Articles
+@using NodaTime
+@{
+    var articleMetadata = new ArticleMetadataModel(
+        ArticleStatus.Draft,
+        new Version(0, 1),
+        new LocalDate(2021, 05, 31),
+        new LocalDate(2021, 05, 31),
+        new LocalDate(2021, 05, 31),
+        new LocalDate(2021, 07, 01));
+}
+<div class="row">
+    <div class="col-md-8">
+        <h1>Designing Nucleotide.</h1>
+        <div class="alert alert-info">
+            <strong>TLDR:</strong> Nucleotide is available at <a href="https://github.com/dpvreony/nucleotide/">the github project page</a>.
+        </div>
+
+        <h2>Introduction</h2>
+
+        <p>
+            Nucleotide is a code generation toolset aimed at reducing developer burden on producing POCO objects for various parts of a .NET application structure. It started life as a series of C++ templates and macros, spent a few years as a concept utilising T4 (Text Transforms Transforming Toolkit) before the current toolchain that leverages Roslyn.
+        </p>
+        <p>Nucleotide sits on top of Whipstaff which contains some lower level abstractions and helpers for .NET related projects and patterns such as CQRS and REST.</p>
+
+        <h2>Benefits of Source Generation</h2>
+        <p>TODO</p>
+
+        <h2>Aims of Nucleotide</h2>
+        <p>TODO</p>
+
+        <h2>Benefits of Nucleotide</h2>
+        <p>TODO</p>
+
+        <h2>Challenges of Nucleotide</h2>
+        <p>Nucleotide and Whipstaff are personal side projects and at this point not much better than proof of concepts. A key issue here is sustainability and usability outside my own personal work. Concepts from them have been taken and leveraged elsewhere but have not fed back into the project itself or even open source. With the time demands of COVID-19 on my own time my focus on open source has been ad-hoc and primarily in supporting Splat.</p>
+
+        <h2>Maturing Nucleotide and Whipstaff</h2>
+        <p></p>
+        <p>As an educational tool I believe Nucleotide has a lot to offer on Roslyn Source Generation and also on sustainable practices for the .NET eco-sphere. As with a lot of the work I do on Splat and ReactiveUI, Nucleotide and Whipstaff are aimed at leveraging other libraries to make development easier by reducing overhead. Something to look at is fit with another project within the .NET foundation, or continue to invest my time in the projects to gain them some traction and get them to a quality and stage where they make sense as a toolkit. Previously logic from Whipstaff was migrated to Splat (Functional logging overloads and Application Performance Monitoring) so one route is to continue the proof of concept helper route with nuget packages that increment to a major version if something reaches fruition of being capable of adopted by another upstream project.</p>
+
+        <h2>Future options for Nucleotide</h2>
+        <p>Some features within Nucleotide relate directly to other projects (i.e. MediatR, ReactiveUI, or even ASP .Net Core itself). That could be stripped from Nucleotide and fed into other projects. Vetuviem is an example of a source generation concept that belongs closer to the upstream project of ReactiveUI.</p>
+
+        <h2>References</h2>
+        <a href="https://github.com/dotnet/roslyn/blob/main/docs/features/source-generators.cookbook.md">Roslyn Source Generators Cookbook</a> Accessed: 2021-05-31.
+    </div>
+    <div class="col-md-4">
+        @await Html.PartialAsync("_article_metadatasummary", articleMetadata)
+    </div>
+</div>
