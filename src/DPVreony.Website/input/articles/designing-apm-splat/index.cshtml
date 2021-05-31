@@ -1,1 +1,91 @@
-﻿
+﻿@using DPVreony.Website.Features.Articles
+@using NodaTime
+@{
+    var articleMetadata = new ArticleMetadataModel(
+        ArticleStatus.Draft,
+        new Version(0, 1),
+        new LocalDate(2021, 05, 31),
+        new LocalDate(2021, 05, 31),
+        new LocalDate(2021, 05, 31),
+        new LocalDate(2021, 07, 01));
+}
+<div class="row">
+    <div class="col-md-8">
+        <h1>Designing APM in Splat.</h1>
+        <div class="alert alert-info">
+            <strong>TLDR:</strong> Splat is available at <a href="https://github.com/reactiveui/splat/">the github project page</a>, with specific details on APM available in <a href="https://github.com/reactiveui/splat/#application-performance-monitoring">the readme file</a>.
+        </div>
+
+        <h2>Introduction</h2>
+
+        <p>
+            Splat is library that sits underneath (but not exclusively for) ReactiveUI aimed at providing cross platform support for frequently used features such as image loading\saving, logging, service location and testing. Back in 2018 I set about trying to produce a reusable abstraction for Application Performance Monitoring (APM). Here I detail some of the design and through processes on placing APM in the library and options for getting the best out of it, and future options.
+        </p>
+
+        <h2>Benefits of APM</h2>
+        <p>A good APM toolset allows for proactive monitoring of applications and services, a spike in errors or durations can be reported in near realtime. Some tools also support direct integration into Application Lifecycle Management (ALM) toolsets to file fault reports for investigation. APM can also allow tracking across a session and\or transaction to give insight in what a user was doing during their journey in a level of detail that you would not get if you were waiting for a fault and\or feedback to be reported.</p>
+        <p>They can help focus fault fixing tasks by quantifying impact of a fault, narrow down the root cause and area of responsibility to get a resolution.</p>
+        <p>They can also help with feature\ change requests for helping quantify which features are frequently used. For example a change request for a feature that is seldom used, or not used in the way a change requestor believes can be backed up with evidence.</p>
+        <p>It can show version uptake, usage patterns and performance\ reliability patterns for forecasting future changes.</p>
+
+        <h2>Why place the feature in Splat?</h2>
+        <p>One of my key motivations for placing it in Splat was that I had already reviewed APM functionality for an enterprise CRM application that utilised ReactiveUI in a previous role so I had already produced an Open Source proof of concept that was sat outside of Splat at the time. I saw value and fit with Splat and when it came to sustainability I didn't want to produce a project abstracting APM providers that would place me as the single point of failure. In terms of timing I'd just started putting other smaller pieces of Splat contrib into the main repository. Prior to starting to look to produce a larger integration than the proof of concept I raised a <a href="https://github.com/reactiveui/rfcs/issues/23">Request For Comment in the ReactiveUI organization</a>.</p>
+        <p>Code architecture wise the proof of concept had a good fit with Splat.</p>
+        <ul>
+            <li>The proof of concept was already based upon Anaïs Betts' original Splat logging interface.</li>
+            <li>The abstraction layer had no external dependencies like Reactive Extensions so could sit inside that project rather than ReactiveUI, or be spun off.</li>
+            <li>The abstraction layer had to APM provider specific logic so could support multiple platforms such as Xamarin, UWP, WPF or Web depending on how the individual platforms were supported by the different APM providers.</li>
+        </ul>
+
+        <!--<h2>Features of APM toolsets</h2>
+    <p></p>-->
+
+        <h2>Designing the Splat APM implementation</h2>
+        <p>As found in the ReactiveUI RFC i produced a simple abstracted interface</p>
+        <code>
+public interface IFeatureUsageTrackingSession&lt;out TReferenceType&gt; : IFeatureUsageTrackingSession
+{
+    TReferenceType FeatureReference { get; }
+
+    TReferenceType ParentReference { get; }
+
+    string FeatureName { get; }
+}
+        </code>
+        <p>I also showed an interface that allowed for consumers such as ReactiveUI to remain agnostic without worrying about the generic interface.</p>
+        <code>
+public interface IFeatureUsageTrackingSession : IDisposable
+{
+    IFeatureUsageTrackingSession SubFeature(string description);
+
+    void OnException(Exception exception);
+}
+
+public interface IEnableFeatureUsageTracking
+{
+}
+        </code>
+        <p>I also looked at how you teach the usage to developers, part of this question set helps you focus on how you can keep abstractions simple and easy to follow. But also think about samples and documentation for those who are going to consume the feature.</p>
+        <p>I was also honest about the drawbacks being that it was an extra layer of integration to support, that users would still need some knowledge of the specific APM platform they were trying to utilise and also gave an example of limitations in the specific providers that could impact usage where something may be supported natively in 1 provider, it might need to be done via convention in another which would need detailing to that effect.</p>
+
+        <h2>Future options for Splat Functionality</h2>
+        <p>There are 3 key pieces that needs to be addressed across the APM function in Splat:</p>
+        <ul>
+            <li>Documentation</li>
+            <li>Integration into ReactiveUI</li>
+            <li>Feature parity across APM providers</li>
+        </ul>
+        <p>While the Splat APM implementation is intended to be as simple as possible and give an abstraction for feature and sub-feature tracking the documentation and ReactiveUI samples need to be improved. There are also options to provide helper methods in ReactiveUI so the APM can hook directly into Views and Commands thus making it easier for developers to leverage the functionality.</p>
+        <p>One of the key headaches at the time the APM feature was being put together was the gaps in the feature sets and platform coverage for the different vendors. Open Telemetry has now taken shape and we're 2 years down the road since the original attempt so .NET core has had more adoption time. Blazor has also taken shape so some of the more web centric APM tools such as Application Insights now look like a better fit in Splat where ReactiveUI and Blazor can make use of them.</p>
+        <p>There are still gaps in desktop\device functions for enterprise when compared to web hosted applications. Some of these are edge cases such as devices that can sit offline for periods. But others come under the lack of platform support for different libraries, or prohibitive per-node costings.</p>
+
+        <h2>Future options for APM</h2>
+        <p>In terms of sustainability it would be nice to engage with the different APM providers either direct, via the <a href="https://dotnetfoundation.org/">.NET Foundation</a> or via <a href="https://opentelemetry.io/">Open Telemetry</a> to see better platform and feature parity across providers and allow .NET developers to get better leverage out of the box to reduce development overhead.</p>
+
+        <h2>References</h2>
+        <a href="https://github.com/reactiveui/rfcs/issues/23">ReactiveUI RFC: Application Performance Monitoring Integration</a> Accessed: 2021-05-31.
+    </div>
+    <div class="col-md-4">
+        @await Html.PartialAsync("_article_metadatasummary", articleMetadata)
+    </div>
+</div>
