@@ -24,12 +24,21 @@ namespace Dhgms.DPVreony.Website.Queries
                     StartDate = new DateTime(2017, 10, 30),
                     Description = new []
                     {
-                        "Manager of development team responsible for the systems used in the provision of 111 and Out of Hours healthcare. The role requires development in C# along with understanding the implementation of existing systems that are written in Java and Lotus Script.",
-                    }/*,
+                        "Technical lead for organization, managing the development team responsible for the systems used in the provision of Urgent and Out of Hours healthcare. The role requires development in C# along with understanding the implementation of existing systems that are written in Java and Lotus Script.",
+                        "My role is predominantly non coding (60-70%) for steering projects and meeting with stakeholders at regional and national level. Any coding I do is typically to flesh out a proof of concept or investigating\\supporting legacy systems to allow others to focus on their project work.",
+                        "My involvement with national stakeholders can involve shaping technical and operational flows for integrations between different service providers where I have the technical knowledge combined with how things operate in Urgent care settings. The feedback can help inform and shape their road maps, especially where healthcare is moving from the XML based HL7 CDA messaging to the more agnostic (but primarily JSON) FHIR standard."
+                    },
                     Accomplishments = new []
                     {
+                        "Steering migration of some older platforms including IBM Domino to a more sustainable\\scalable .NET core model using SignalR, EFCore, CQRS and MassTransit with RabbitMQ that allows the core to remain platform agnostic and suitable for cloud hosting. System was set a target benchmark of sub 200ms yet achieves sub 100ms.",
+                        "Analyzed and resolved issues with bottlenecks in batch auditing system that reduced it taking 30-45s to accept notifications during heavy load at weekends to all webservice calls being consistently under 3s. Identified design issue and recommended approach that will allow this to be reduced further to “normal” web service levels of approximately 200ms.",
+                        "Driven stability improvements across the platform to reduce call outs to the point they are no longer weekly but can go months without escalation.",
+                        "Delivered migration of web hosting to Microsoft Azure to offer better resilience than previous host and to enable future projects that can use cloud hosting and message bus systems in a cost-effective way.",
+                        "Oversight of team members working on integrations with 3rd parties for providing Care Record Management and Direct Appointment Booking. Fed into national specification to close gaps and clinical\\ patient experience risks.",
+                        "Mentoring team to give guidance and feedback to ideas and solutions. Try to empower them to own the development process as a team and guide them in direction of Pluralsight training or other resources that can help them better understand technologies/ patterns or problems.",
+                        "Oversaw delivery of Electronic Prescribing in Urgent Care setting. Involved working with National Stakeholders on expansion of technical\\operational specifications for urgent care and hospital outpatient settings.",
+                        "Introduced Technical steering group to allow Senior developers to share knowledge and design reasoning, not just with the developers involved in the projects but with other stakeholders. Forum is not limited to development projects but for any technical projects."
                     }
-                    */
                 },
 
                 new ExperienceModel
