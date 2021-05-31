@@ -75,6 +75,24 @@ null);
         "A library built on top of XUnit to help produce re-usable test logic and a defined structure for the type of tests carried out on classes and methods.",
         GetDPVreonyOrgGithubProject("nettestregimentation"),
         null);
+
+    var usingTechnicalSteering = new InvolvementModel(
+        "Article: Using Technical Steering",
+        "How to get the best out of technical steering and knowledge sharing when investigation options for delivering a requirement.",
+        null,
+        null);
+
+    var usingArchitectureDecisionRecords = new InvolvementModel(
+        "Article: Using Architecture Decision Records",
+        "How to record and get the best out of architecture decision records.",
+        null,
+        null);
+
+    var comingSoon = new InvolvementModel(
+"Coming Soon",
+string.Empty,
+null,
+null);
 }
 <main>
     <h1>Open Source</h1>
@@ -86,7 +104,7 @@ null);
                 <h3>Requirements</h3>
                 <div style="display: block">
                     <div style="display: inline-block; width: 20%; vertical-align: top; text-align: center">
-                        ?
+                        <i class="fas fa-drafting-compass fa-7x"></i>
                     </div>
                     <div style="display: inline-block; width: 75%">
                         @await Html.PartialAsync(partialViewName, designingApmInSplatArticle)
@@ -99,11 +117,12 @@ null);
                 <h3 style="display: block">Design Reasoning and Documentation</h3>
                 <div style="display: block">
                     <div style="display: inline-block; width: 20%; vertical-align: top; text-align: center">
-                        ?
+                        <i class="fas fa-pencil-ruler fa-7x"></i>
                     </div>
                     <div style="display: inline-block; width: 75%">
                         @await Html.PartialAsync(partialViewName, usingStatiqAndMermaidArticle)
-                        @await Html.PartialAsync(partialViewName, usingStatiqAndMermaidArticle)
+                        @await Html.PartialAsync(partialViewName, usingTechnicalSteering)
+                        @await Html.PartialAsync(partialViewName, usingArchitectureDecisionRecords)
                     </div>
                 </div>
             </div>
@@ -111,7 +130,7 @@ null);
                 <h3>Develop</h3>
                 <div style="display: block">
                     <div style="display: inline-block; width: 20%; vertical-align: top; text-align: center">
-                        ?
+                        <i class="fas fa-file-code fa-7x"></i>
                     </div>
                     <div style="display: inline-block; width: 75%">
                         @await Html.PartialAsync(partialViewName, nucleotideProject)
@@ -126,7 +145,7 @@ null);
                 <h3>Analyze</h3>
                 <div style="display: block">
                     <div style="display: inline-block; width: 20%; vertical-align: top; text-align: center">
-                        ?
+                        <i class="fas fa-chart-area fa-7x"></i>
                     </div>
                     <div style="display: inline-block; width: 75%">
                         @await Html.PartialAsync(partialViewName, gripeWithRoslynProject)
@@ -136,12 +155,20 @@ null);
             </div>
             <div class="row" style="background-color: #beebe9; margin-left: 10em; margin-right: 10em;">
                 <h3>Build</h3>
+                <div style="display: block">
+                    <div style="display: inline-block; width: 20%; vertical-align: top; text-align: center">
+                        <i class="fas fa-tools fa-7x"></i>
+                    </div>
+                    <div style="display: inline-block; width: 75%">
+                        @await Html.PartialAsync(partialViewName, comingSoon)
+                    </div>
+                </div>
             </div>
             <div class="row" style="background-color: #f4dada; margin-left: 10em; margin-right: 10em;">
                 <h3>Build Verification</h3>
                 <div style="display: block">
                     <div style="display: inline-block; width: 20%; vertical-align: top; text-align: center">
-                        ?
+                        <i class="fas fa-vial fa-7x"></i>
                     </div>
                     <div style="display: inline-block; width: 75%">
                         @await Html.PartialAsync(partialViewName, netTestRegimentationProject)
@@ -150,12 +177,36 @@ null);
             </div>
             <div class="row" style="background-color: #bdd2b6; margin-left: 10em; margin-right: 10em;">
                 <h3>Package Artifacts</h3>
+                <div style="display: block">
+                    <div style="display: inline-block; width: 20%; vertical-align: top; text-align: center">
+                        <i class="fas fa-archive fa-7x"></i>
+                    </div>
+                    <div style="display: inline-block; width: 75%">
+                        @await Html.PartialAsync(partialViewName, comingSoon)
+                    </div>
+                </div>
             </div>
             <div class="row" style="background-color: #a58faa; margin-left: 10em; margin-right: 10em;">
                 <h3>Deploy</h3>
+                <div style="display: block">
+                    <div style="display: inline-block; width: 20%; vertical-align: top; text-align: center">
+                        <i class="fas fa-dolly-flatbed fa-7x"></i>
+                    </div>
+                    <div style="display: inline-block; width: 75%">
+                        @await Html.PartialAsync(partialViewName, comingSoon)
+                    </div>
+                </div>
             </div>
             <div class="row" style="background-color: #f6eec7; margin-left: 10em; margin-right: 10em;">
                 <h3>Deployment Verification</h3>
+                <div style="display: block">
+                    <div style="display: inline-block; width: 20%; vertical-align: top; text-align: center">
+                        <i class="fas fa-clipboard-check fa-7x"></i>
+                    </div>
+                    <div style="display: inline-block; width: 75%">
+                        @await Html.PartialAsync(partialViewName, comingSoon)
+                    </div>
+                </div>
             </div>
         </div>
     </div>
