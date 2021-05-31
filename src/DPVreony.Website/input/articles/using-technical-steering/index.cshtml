@@ -1,1 +1,25 @@
-﻿
+﻿@using DPVreony.Website.Features.Articles
+@using NodaTime
+@{
+    var articleMetadata = new ArticleMetadataModel(
+        ArticleStatus.Draft,
+        new Version(0, 1),
+        new LocalDate(2021, 05, 31),
+        new LocalDate(2021, 05, 31),
+        new LocalDate(2021, 05, 31),
+        new LocalDate(2021, 07, 01));
+}
+<div class="row">
+    <div class="col-md-8">
+        <h1>Utilizing Technical Steering for Knowledge Management.</h1>
+
+        <h2>Introduction</h2>
+        <p>TODO</p>
+
+        <h2>References</h2>
+        <p>TODO</p>
+    </div>
+    <div class="col-md-4">
+        @await Html.PartialAsync("_article_metadatasummary", articleMetadata)
+    </div>
+</div>
