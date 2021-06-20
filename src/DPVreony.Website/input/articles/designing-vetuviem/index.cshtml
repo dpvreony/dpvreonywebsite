@@ -6,12 +6,12 @@
         new Version(1, 0),
         new LocalDate(2021, 05, 31),
         new LocalDate(2021, 06, 18),
-        new LocalDate(2021, 06, 18),
-        new LocalDate(2021, 07, 18));
+        new LocalDate(2021, 06, 20),
+        new LocalDate(2021, 07, 20));
 }
 <div class="row">
     <div class="col-md-8">
-        <h1>Designing Vetuviem.</h1>
+        <h1>Designing Vetuviem</h1>
 
         <h2>Introduction</h2>
         <p>Vetuviem is a Roslyn Source Generation toolkit on top of ReactiveUI aimed at empowering development teams by:</p>
@@ -78,14 +78,20 @@
         </ul>
 
         <h3>Making Vetuviem usable with other libraries.</h3>
-        <p></p>
-
+        <p>The libraries Vetuviem has for ReactiveUI are based on generating the View Binding Model logic for the target platform (WinUI, Xamarin, WPF, etc.) and the ReactiveUI specific controls for that platform. It doesn't generate the code for other contro libraries, but it has been produced with those in mind because otherwise it would defeat the purpose of trying to make view specific development easier with ReactiveUI.</p>
+        <p>There is always balance in open source development, we could add support for different control libraries into ReactiveUI, but it adds a lot of maintenance overhead to the ReactiveUI project and you end up with support headaches where people need to keep their versions aligned. The 2 alternatives are for users to generate their own relevant logic alongside the control libraries they consume, or for the producers of control libraries to facilitate the support themselves. This requires engagement with the producers of the libraries and for them to maintain alongside versions of the control libraries and absorb any future changes to ReactiveUI and/or Vetuviem. They should already be absorbing some level of change for the raw platform changes such as Xamarin updates. At this point Vetuviem is still very much a proof of concept so I'm going to take the middle ground and leave it with consuming developers. Down the road if it's felt value is proven there can be conversations.</p>
+        <p>There are 2 classes that drive the source generation:</p>
+        <ol>
+            <li>Binding Model Generator</li>
+            <li>Platform Resolver</li>
+        </ol>
+        <p>The platform resolver is the piece that needs altering for control libraries. It contains a list of assemblies that need to be scanned. These same assembles need to be included in the C# project system as NuGet package references. In most scenarios the Binding Model Generator doesn't need any significant change as the base control and command for a platform should remain consistent.</p>
         <h3>Future options for Vetuviem and source generation</h3>
         <p>Currently Vetuviem is a one step process where it generates binding logic for every property on a control. The apply binding logic does a null check on every property in the View Binding Model to then drive the actual binding. We could add a second step process that recognizes these bindings are fixed at compile time and removes the "not null then bind" check for properties that will never bind. In theory there is already enough knowledge from what exists in Vetuviem for the compiler \ IL merge tools to perform this on a build, but the source generator could also do this as a second step to make it completely clear during a build and the code would be visible. At this point this is an option but Vetuviem needs to prove its value first.</p>
         <p>Another piece is co-existing with the event binding that is offered by Pharmacist. There is currently having other work done on a source generator level to make the event logic not be tied to specific ReactiveUI (and specific UI platform) versions. This interaction with Vetuviem was left out of scope to allow focused proof of value.</p>
 
         <h2>References</h2>
-        <p>TODO</p>
+        <p><a href="https://github.com/dotnet/roslyn/blob/main/docs/features/source-generators.cookbook.md">GitHub Roslyn Project: Source Generators Cookbook</a>. Accessed 2021-05-20.</p>
     </div>
     <div class="col-md-4">
         @await Html.PartialAsync("_article_metadatasummary", articleMetadata)
