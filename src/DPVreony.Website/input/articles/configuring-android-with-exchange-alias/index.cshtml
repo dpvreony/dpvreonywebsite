@@ -1,0 +1,34 @@
+﻿@using DPVreony.Website.Features.Articles
+@using NodaTime
+@{
+    var articleMetadata = new ArticleMetadataModel(
+        ArticleStatus.Draft,
+        new Version(0, 1),
+        new LocalDate(2018, 09, 18),
+        new LocalDate(2021, 06, 21),
+        new LocalDate(2021, 06, 21),
+        new LocalDate(2022, 06, 21));
+}
+<div class="row">
+    <div class="col-md-8">
+        <h1>Work around for Android email client when Exchange 365 login does not match the primary email address</h1>
+        <p>There is an issue (as of 2018-09-18) where if you have the primary email address on your office 365 account different to your login for the account you end up with one of two scenarios:</p>
+        <ul>
+            <li>You use the login as the email address, which works straight off. But when you reply to emails, the email client doesn't recognise your email address as being your own, so you reply to yourself</li>.
+            <li>You try to use the primary email as your email address (instead of the login) with your password, but the lookup fails.</li>
+
+        </ul>
+        <p>Below are steps to resolve the second issue above.</p>
+        <ul>
+            <li>Put the <b>primary email address</b> as the email address</li>
+            <li>Put the account password</li>
+            <li>On the next screen after the lookup fails put <b>\user@domain.tld</b> as the login name (including the leading backslash)</li>
+            <li>For the server put <b>outlook.office365.com</b></li>
+            <li>Save and everything should work</li>
+        </ul>
+        <p>This still won't cater for having multiple aliases, this will need the android email client adjusting to download a list of aliases.</p>
+    </div>
+    <div class="col-md-4">
+        @await Html.PartialAsync("_article_metadatasummary", articleMetadata)
+    </div>
+</div>
