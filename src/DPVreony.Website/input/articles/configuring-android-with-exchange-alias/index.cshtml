@@ -2,7 +2,7 @@
 @using NodaTime
 @{
     var articleMetadata = new ArticleMetadataModel(
-        ArticleStatus.Draft,
+        ArticleStatus.Released,
         new Version(0, 1),
         new LocalDate(2018, 09, 18),
         new LocalDate(2021, 06, 21),
@@ -14,9 +14,8 @@
         <h1>Work around for Android email client when Exchange 365 login does not match the primary email address</h1>
         <p>There is an issue (as of 2018-09-18) where if you have the primary email address on your office 365 account different to your login for the account you end up with one of two scenarios:</p>
         <ul>
-            <li>You use the login as the email address, which works straight off. But when you reply to emails, the email client doesn't recognise your email address as being your own, so you reply to yourself</li>.
+            <li>You use the login as the email address, which works straight off. But when you reply to emails, the email client doesn't recognise your email address as being your own, so you reply to yourself.</li>
             <li>You try to use the primary email as your email address (instead of the login) with your password, but the lookup fails.</li>
-
         </ul>
         <p>Below are steps to resolve the second issue above.</p>
         <ul>
