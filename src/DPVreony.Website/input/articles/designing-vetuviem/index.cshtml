@@ -3,7 +3,7 @@
 @{
     var articleMetadata = new ArticleMetadataModel(
         ArticleStatus.Released,
-        new Version(1, 0),
+        new Version(1, 1),
         new LocalDate(2021, 05, 31),
         new LocalDate(2021, 06, 18),
         new LocalDate(2021, 06, 20),
@@ -59,7 +59,7 @@
             </li>
         </ol>
 
-        <p>Roslyn source generators are a powerful addition to NET5. While previous concepts have existed for years, this is the first iteration to over natural support in the IDE and build chain for .NET. There are still some parts in the IDE support that need to mature but it will only be a matter of time with use and engagement of the community. The one snag is the lack of detailed documentation around Roslyn, luckily the Syntax Visualizer within Visual Studio is a handy tool to aid in making sense of the method calls you need to use, but it can be a bit of trial and error where progress goes through peaks and troughs.</p>
+        <p>Roslyn source generators are a powerful addition to NET5. While previous concepts have existed for years, this is the first iteration to offer natural support in the IDE and build chain for .NET. There are still some parts in the IDE support that need to mature but it will only be a matter of time with use and engagement of the community. The one snag is the lack of detailed documentation around Roslyn, luckily the Syntax Visualizer within Visual Studio is a handy tool to aid in making sense of the method calls you need to use, but it can be a bit of trial and error where progress goes through peaks and troughs.</p>
 
         <p>The process put together for this library uses the following concepts</p>
         <ul>
@@ -78,7 +78,7 @@
         </ul>
 
         <h3>Making Vetuviem usable with other libraries.</h3>
-        <p>The libraries Vetuviem has for ReactiveUI are based on generating the View Binding Model logic for the target platform (WinUI, Xamarin, WPF, etc.) and the ReactiveUI specific controls for that platform. It doesn't generate the code for other contro libraries, but it has been produced with those in mind because otherwise it would defeat the purpose of trying to make view specific development easier with ReactiveUI.</p>
+        <p>The libraries Vetuviem has for ReactiveUI are based on generating the View Binding Model logic for the target platform (WinUI, Xamarin, WPF, etc.) and the ReactiveUI specific controls for that platform. It doesn't generate the code for other control libraries, but it has been produced with those in mind because otherwise it would defeat the purpose of trying to make view binding specific development easier with ReactiveUI.</p>
         <p>There is always balance in open source development, we could add support for different control libraries into ReactiveUI, but it adds a lot of maintenance overhead to the ReactiveUI project and you end up with support headaches where people need to keep their versions aligned. The 2 alternatives are for users to generate their own relevant logic alongside the control libraries they consume, or for the producers of control libraries to facilitate the support themselves. This requires engagement with the producers of the libraries and for them to maintain alongside versions of the control libraries and absorb any future changes to ReactiveUI and/or Vetuviem. They should already be absorbing some level of change for the raw platform changes such as Xamarin updates. At this point Vetuviem is still very much a proof of concept so I'm going to take the middle ground and leave it with consuming developers. Down the road if it's felt value is proven there can be conversations.</p>
         <p>There are 2 classes that drive the source generation:</p>
         <ol>
