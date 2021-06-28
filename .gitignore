@@ -351,3 +351,4 @@ MigrationBackup/
 
 output/
 lib/
+**/cache/
