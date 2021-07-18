@@ -11,7 +11,7 @@
                 <div class="font-weight-bold small">
                     Commit:
                     @{
-    if (longSha is { Length: > 7 })
+    if (longSha != null && longSha.Length > 7)
     {
         var shortSha = longSha.Substring(0, 7);
         <a href="https://github.com/dpvreony/dpvreonywebsite/commit/@longSha">@shortSha</a>
