@@ -23,4 +23,16 @@
     <Folder Include="Features\Resume\" />
   </ItemGroup>
 
+  <!-- these tasks remove the need for gulp, grunt, npm, etc. to be used for file copying -->
+  <ItemGroup>
+    <NpmBootStrapFilesToCopy Include="$(ProjectDir)node_modules\bootstrap\dist\**\*.*"/>
+    <NpmJQueryFilesToCopy Include="$(ProjectDir)node_modules\jquery\dist\**\*.*"/>
+    <NpmFontAwesomeFreeFilesToCopy Include="$(ProjectDir)node_modules\@fortawesome\fontawesome-free\**\*.*"/>
+  </ItemGroup>
+  <Target Name="CopyNpmTasks" BeforeTargets="BeforeBuild">
+    <Message Text="Starting NPM Package Copy Task" />
+    <Copy SkipUnchangedFiles="True" SourceFiles="@(NpmBootStrapFilesToCopy)" DestinationFiles="@(NpmBootStrapFilesToCopy->'$(ProjectDir)theme\input\lib\bootstrap\%(RecursiveDir)%(Filename)%(Extension)')" />
+    <Copy SkipUnchangedFiles="True" SourceFiles="@(NpmJQueryFilesToCopy)" DestinationFiles="@(NpmJQueryFilesToCopy->'$(ProjectDir)theme\input\lib\jquery\%(RecursiveDir)%(Filename)%(Extension)')" />
+    <Copy SkipUnchangedFiles="True" SourceFiles="@(NpmFontAwesomeFreeFilesToCopy)" DestinationFiles="@(NpmFontAwesomeFreeFilesToCopy->'$(ProjectDir)theme\input\lib\font-awesome\%(RecursiveDir)%(Filename)%(Extension)')" />
+  </Target>
 </Project>
