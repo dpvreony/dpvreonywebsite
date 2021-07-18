@@ -69,11 +69,6 @@ jobs:
       run: |
         dotnet build ${{ env.solutionpath }} --configuration Release --no-restore /bl:artifacts\\binlog\\build.binlog /p:ContinuousIntegrationBuild=true
         
-    - name: Run Gulp
-      run: |
-        pushd src\dpvreony.website\
-        gulp
-        popd
 
     - name: Build Website
       run: |
