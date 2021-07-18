@@ -2,29 +2,47 @@
 <html lang="en">
 @Html.Partial("_head")
 <body>
-<!-- Navigation -->
-@RenderSectionOrPartial("Navigation", "_navigation")
-<!-- Page Header -->
-@RenderSectionOrPartial("Header", "_header")
-<!-- Main Content -->
-<div class="container">
-    <div class="row">
-        <div id="content" class="col-md-12">
-            @RenderBody()
-            @*@if (Document.GetBool("IsPost"))
-            {
-                @Html.Partial("_post-footer")
-            }*@
+    <!-- Navigation -->
+    @RenderSectionOrPartial("Navigation", "_navigation")
+    <!-- Page Header -->
+    @RenderSectionOrPartial("Header", "_header")
+    <!-- Main Content -->
+    <div class="container">
+        <div class="row">
+            <div id="content" class="col-md-12">
+                @RenderBody()
+                @*@if (Document.GetBool("IsPost"))
+                    {
+                        @Html.Partial("_post-footer")
+                    }*@
+            </div>
         </div>
     </div>
-</div>
-<hr>
-<!-- Footer -->
-@RenderSectionOrPartial("Footer", "_footer")
-@Html.Partial("_scripts")
-@RenderSection("Scripts", false)
-<!-- Bootstrap core JavaScript -->
-<script src="@Context.GetLink("/lib/jquery/jquery.min.js")"></script>
-<script src="@Context.GetLink("/lib/bootstrap/js/bootstrap.bundle.min.js")"></script>
+    <hr>
+    <!-- Footer -->
+    @RenderSectionOrPartial("Footer", "_footer")
+    @Html.Partial("_scripts")
+    @RenderSection("Scripts", false)
+    <!-- Bootstrap core JavaScript -->
+    <script src="@Context.GetLink("/lib/jquery/jquery.min.js")"></script>
+    <script src="@Context.GetLink("/lib/bootstrap/js/bootstrap.bundle.min.js")"></script>
+    <script src="/lib/cookieconsent/cookieconsent.min.js" data-cfasync="false"></script>
+    <script>
+        window.cookieconsent.initialise({
+            "palette": {
+                "popup": {
+                    "background": "#eb6c44",
+                    "text": "#ffffff"
+                },
+                "button": {
+                    "background": "#f5d948"
+                }
+            },
+            "position": "bottom-right",
+            "content": {
+                "href": "/cookiepolicy/"
+            }
+        });
+    </script>
 </body>
 </html>
