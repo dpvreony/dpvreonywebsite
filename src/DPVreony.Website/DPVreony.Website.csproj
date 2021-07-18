@@ -27,7 +27,7 @@
   <ItemGroup>
     <NpmBootStrapFilesToCopy Include="$(ProjectDir)node_modules\bootstrap\dist\**\*.*"/>
     <NpmCookieConsentFilesToCopy Include="$(ProjectDir)node_modules\cookieconsent\build\*.*"/>
-    <NpmHighlightJsFilesToCopy Include="$(ProjectDir)node_modules\highlight.js\**\*.*"/>
+    <NpmHighlightJsFilesToCopy Include="$(ProjectDir)node_modules\highlight.js\lib\*.*"/>
     <NpmJQueryFilesToCopy Include="$(ProjectDir)node_modules\jquery\dist\**\*.*"/>
     <NpmFontAwesomeFreeFilesToCopy Include="$(ProjectDir)node_modules\@fortawesome\fontawesome-free\**\*.*"/>
   </ItemGroup>
