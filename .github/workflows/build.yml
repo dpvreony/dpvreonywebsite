@@ -55,11 +55,11 @@ jobs:
         npm install
         popd
 
-    - name: NPM outdated check
-      run: |
-        pushd src\dpvreony.website\
-        npm outdated
-        popd
+#    - name: NPM outdated check
+#      run: |
+#        pushd src\dpvreony.website\
+#        npm outdated
+#        popd
 
     - name: Restore Packages
       run: |
