@@ -6,8 +6,8 @@
         new Version(1, 1),
         new LocalDate(2021, 05, 31),
         new LocalDate(2021, 06, 18),
-        new LocalDate(2021, 06, 20),
-        new LocalDate(2021, 07, 20));
+        new LocalDate(2021, 10, 15),
+        new LocalDate(2021, 11, 15));
 }
 <div class="row">
     <div class="col-md-8">
@@ -19,7 +19,8 @@
             <li>Giving a mechanism to reduce the amount of boiler plate code being produced, by allowing some of the ReactiveUI specific logic to be hidden away.</li>
             <li>Allow the developer to think along the lines of standard behavior for controls by offering a way to produce re-usable binding logic through a class and\or function design pattern.</li>
             <li>Allow the developer to focus on what matters on the ViewModel</li>
-            <li>Reduce the cognitive load by:
+            <li>
+                Reduce the cognitive load by:
                 <ul>
                     <li>Removing the risk of misusing 1 way or 2 way binding</li>
                     <li>Remove the need for the user to think about having to cater for Bind vs BindCommand</li>
@@ -37,20 +38,33 @@
         </ul>
         <p>One of the quick time savers \ code reductions it allows is to write the control binding expression (i.e. vw => vw.TextBoxName) once, instead of for every binding line, as the library handles the individual control property expressions (vw => vw.TextBoxName.Text, vw.TextBoxName.Foreground, etc.) in the background.</p>
 
+        <h2>Code Structure Concept</h2>
+        <p>For each view:</p>
+        <ul>
+            <li>There is a view markup</li>
+            <li>There is a view code behind</li>
+            <li>There is one equivalent view model</li>
+            <li>There is one view binding model</li>
+            <li>A View Binding Model contains 1 or more Control Binding Models</li>
+        </ul>
+
+        <img src="diagram-class-viewtoviewmodel-relationship.svg" />
+
         <h2>Project phases</h2>
         <ol>
-            <li>Producing a library that generates ViewBindingModels for each control in a standard library for a platform.</li>
+            <li>Producing a library that generates Control Binding Models for each control in a standard library for a platform.</li>
             <li>Detailing how to use the generation with other control libraries.</li>
             <li>Detail further potential improvements for source generation.</li>
         </ol>
 
-        <h2>Producing the ViewBindingModels</h2>
+        <h2>Producing the Control Binding Models</h2>
         <p>This first phase is the crux of the library. There are certain facts that underpin ReactiveUI binding.</p>
         <ol>
             <li>Each UI platform that is supported has a base class and\or interface for controls.</li>
             <li>If a UI platform supports Commands, that platform has a base class or interface.</li>
             <li>The core of ReactiveUI is agnostic as much as possible from these platform specific parts.</li>
-            <li>There are essentially 3 types of bindings.
+            <li>
+                There are essentially 3 types of bindings.
                 <ol>
                     <li>Command Bindings</li>
                     <li>One-way Property Bindings (where one side of the relationship only supports reading - the read only part is typically a property on the control such as a "HasItems" indicator on a control that represents a collection of items)</li>
@@ -63,7 +77,8 @@
 
         <p>The process put together for this library uses the following concepts</p>
         <ul>
-            <li>A UI platform (or subsequent libraries) will have libraries that are available via one of the following sources:
+            <li>
+                A UI platform (or subsequent libraries) will have libraries that are available via one of the following sources:
                 <ol>
                     <li>Native platform support via the SDK target.</li>
                     <li>Package(s) available from NuGet</li>
@@ -77,6 +92,8 @@
             <li>We will generate a "bound" and "unbound" ViewBindingModel for each class. The unbound is to allow the flexibility in the generic inheritance design. The bound model is type specific model that removes one of the generic arguments to ensure that developers can utilize the control specific ViewBindingModel without having to deal with generic argument for the control.</li>
         </ul>
 
+        <img src="diagram-controlbindingmodel-hierachy.svg" />
+
         <h3>Making Vetuviem usable with other libraries.</h3>
         <p>The libraries Vetuviem has for ReactiveUI are based on generating the View Binding Model logic for the target platform (WinUI, Xamarin, WPF, etc.) and the ReactiveUI specific controls for that platform. It doesn't generate the code for other control libraries, but it has been produced with those in mind because otherwise it would defeat the purpose of trying to make view binding specific development easier with ReactiveUI.</p>
         <p>There is always balance in open source development, we could add support for different control libraries into ReactiveUI, but it adds a lot of maintenance overhead to the ReactiveUI project and you end up with support headaches where people need to keep their versions aligned. The 2 alternatives are for users to generate their own relevant logic alongside the control libraries they consume, or for the producers of control libraries to facilitate the support themselves. This requires engagement with the producers of the libraries and for them to maintain alongside versions of the control libraries and absorb any future changes to ReactiveUI and/or Vetuviem. They should already be absorbing some level of change for the raw platform changes such as Xamarin updates. At this point Vetuviem is still very much a proof of concept so I'm going to take the middle ground and leave it with consuming developers. Down the road if it's felt value is proven there can be conversations.</p>
@@ -88,7 +105,7 @@
         <p>The platform resolver is the piece that needs altering for control libraries. It contains a list of assemblies that need to be scanned. These same assembles need to be included in the C# project system as NuGet package references. In most scenarios the Binding Model Generator doesn't need any significant change as the base control and command for a platform should remain consistent.</p>
         <h3>Future options for Vetuviem and source generation</h3>
         <p>Currently Vetuviem is a one step process where it generates binding logic for every property on a control. The apply binding logic does a null check on every property in the View Binding Model to then drive the actual binding. We could add a second step process that recognizes these bindings are fixed at compile time and removes the "not null then bind" check for properties that will never bind. In theory there is already enough knowledge from what exists in Vetuviem for the compiler \ IL merge tools to perform this on a build, but the source generator could also do this as a second step to make it completely clear during a build and the code would be visible. At this point this is an option but Vetuviem needs to prove its value first.</p>
-        <p>Another piece is co-existing with the event binding that is offered by Pharmacist. There is currently having other work done on a source generator level to make the event logic not be tied to specific ReactiveUI (and specific UI platform) versions. This interaction with Vetuviem was left out of scope to allow focused proof of value.</p>
+        <p>Another piece for consideration is the ability to co-exist with the ReactiveUI event binding that is offered by Pharmacist. Pharmacist is currently having other work done on a source generator level to make the event logic not be tied to specific ReactiveUI (and specific UI platform) versions. This interaction with Vetuviem was left out of scope to allow focused proof of value.</p>
 
         <h2>References</h2>
         <p><a href="https://github.com/dotnet/roslyn/blob/main/docs/features/source-generators.cookbook.md">GitHub Roslyn Project: Source Generators Cookbook</a>. Accessed 2021-05-20.</p>
