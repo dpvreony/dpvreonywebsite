@@ -1,0 +1,8 @@
+graph TD;
+    "MyView"-->"ReactiveUI.ReactiveUserControl<TViewModel>";
+    "ReactiveUI.ReactiveUserControl<TViewModel>"-->"ReactiveUI.ReactiveObject";
+    "MyView"-->"MyViewViewBindingModel<MyView, MyViewModel>";
+	"MyViewViewBindingModel"-->"IControlBindingModel";
+	"IControlBindingModel"-->"IOneWayBinding";
+	"IControlBindingModel"-->"IOneOrTwoWayBinding";
+	"MyViewViewBindingModel"-->"MyViewModel";
