@@ -19,7 +19,8 @@
             <li>Giving a mechanism to reduce the amount of boiler plate code being produced, by allowing some of the ReactiveUI specific logic to be hidden away.</li>
             <li>Allow the developer to think along the lines of standard behavior for controls by offering a way to produce re-usable binding logic through a class and\or function design pattern.</li>
             <li>Allow the developer to focus on what matters on the ViewModel</li>
-            <li>Reduce the cognitive load by:
+            <li>
+                Reduce the cognitive load by:
                 <ul>
                     <li>Removing the risk of misusing 1 way or 2 way binding</li>
                     <li>Remove the need for the user to think about having to cater for Bind vs BindCommand</li>
@@ -41,13 +42,13 @@
         <p>For each view:</p>
         <ul>
             <li>There is a view markup</li>
-            <li>There is a view code behind<li>
-            <li>There is one equivalent view model<li>
-            <li>There is one view binding model<li>
+            <li>There is a view code behind</li>
+            <li>There is one equivalent view model</li>
+            <li>There is one view binding model</li>
             <li>A View Binding Model contains 1 or more Control Binding Models</li>
         </ul>
 
-        <img src="diagram-controlbindingmodel-hierachy.svg"/>
+        <img src="diagram-class-viewtoviewmodel-relationship.svg" />
 
         <h2>Project phases</h2>
         <ol>
@@ -62,7 +63,8 @@
             <li>Each UI platform that is supported has a base class and\or interface for controls.</li>
             <li>If a UI platform supports Commands, that platform has a base class or interface.</li>
             <li>The core of ReactiveUI is agnostic as much as possible from these platform specific parts.</li>
-            <li>There are essentially 3 types of bindings.
+            <li>
+                There are essentially 3 types of bindings.
                 <ol>
                     <li>Command Bindings</li>
                     <li>One-way Property Bindings (where one side of the relationship only supports reading - the read only part is typically a property on the control such as a "HasItems" indicator on a control that represents a collection of items)</li>
@@ -71,13 +73,14 @@
             </li>
         </ol>
 
-        <img src="diagram-class-viewtoviewmodel-relationship.svg"/>
+        <img src="diagram-controlbindingmodel-hierachy.svg" />
 
         <p>Roslyn source generators are a powerful addition to NET5. While previous concepts have existed for years, this is the first iteration to offer natural support in the IDE and build chain for .NET. There are still some parts in the IDE support that need to mature but it will only be a matter of time with use and engagement of the community. The one snag is the lack of detailed documentation around Roslyn, luckily the Syntax Visualizer within Visual Studio is a handy tool to aid in making sense of the method calls you need to use, but it can be a bit of trial and error where progress goes through peaks and troughs.</p>
 
         <p>The process put together for this library uses the following concepts</p>
         <ul>
-            <li>A UI platform (or subsequent libraries) will have libraries that are available via one of the following sources:
+            <li>
+                A UI platform (or subsequent libraries) will have libraries that are available via one of the following sources:
                 <ol>
                     <li>Native platform support via the SDK target.</li>
                     <li>Package(s) available from NuGet</li>
