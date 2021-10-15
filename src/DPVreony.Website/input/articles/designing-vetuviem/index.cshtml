@@ -73,8 +73,6 @@
             </li>
         </ol>
 
-        <img src="diagram-controlbindingmodel-hierachy.svg" />
-
         <p>Roslyn source generators are a powerful addition to NET5. While previous concepts have existed for years, this is the first iteration to offer natural support in the IDE and build chain for .NET. There are still some parts in the IDE support that need to mature but it will only be a matter of time with use and engagement of the community. The one snag is the lack of detailed documentation around Roslyn, luckily the Syntax Visualizer within Visual Studio is a handy tool to aid in making sense of the method calls you need to use, but it can be a bit of trial and error where progress goes through peaks and troughs.</p>
 
         <p>The process put together for this library uses the following concepts</p>
@@ -93,6 +91,8 @@
             <li>We will build an inheritance model to reduce duplicate code.</li>
             <li>We will generate a "bound" and "unbound" ViewBindingModel for each class. The unbound is to allow the flexibility in the generic inheritance design. The bound model is type specific model that removes one of the generic arguments to ensure that developers can utilize the control specific ViewBindingModel without having to deal with generic argument for the control.</li>
         </ul>
+
+        <img src="diagram-controlbindingmodel-hierachy.svg" />
 
         <h3>Making Vetuviem usable with other libraries.</h3>
         <p>The libraries Vetuviem has for ReactiveUI are based on generating the View Binding Model logic for the target platform (WinUI, Xamarin, WPF, etc.) and the ReactiveUI specific controls for that platform. It doesn't generate the code for other control libraries, but it has been produced with those in mind because otherwise it would defeat the purpose of trying to make view binding specific development easier with ReactiveUI.</p>
