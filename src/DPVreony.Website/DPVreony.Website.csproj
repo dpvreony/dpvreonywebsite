@@ -2,8 +2,8 @@
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
-    <TargetFramework>net5.0</TargetFramework>
-    <LangVersion>9.0</LangVersion>
+    <TargetFramework>net6.0</TargetFramework>
+    <LangVersion>10.0</LangVersion>
   </PropertyGroup>
 
   <ItemGroup>
@@ -16,8 +16,8 @@
 
   <ItemGroup>
     <PackageReference Include="NodaTime" Version="3.0.10" />
-    <PackageReference Include="Statiq.Highlight" Version="1.0.0-beta.47" />
-    <PackageReference Include="Statiq.Web" Version="1.0.0-beta.32" />
+    <PackageReference Include="Statiq.Highlight" Version="1.0.0-beta.60" />
+    <PackageReference Include="Statiq.Web" Version="1.0.0-beta.47" />
   </ItemGroup>
 
   <ItemGroup>
