@@ -19,9 +19,22 @@ namespace Dhgms.DPVreony.Website.Queries
             {
                 new ExperienceModel
                 {
+                    EmployerName = "Expleo Group",
+                    JobTitle = @"Lead Developer",
+                    StartDate = new DateTime(2022, 06, 13),
+                    Description = new []
+                    {
+                        "Lead Developer in .NET technologies for software development consultancy.",
+                    },
+                    Accomplishments = Array.Empty<string>()
+                },
+
+                new ExperienceModel
+                {
                     EmployerName = "Integrated Care 24",
                     JobTitle = @"Senior Developer \ Analyst",
                     StartDate = new DateTime(2017, 10, 30),
+                    EndDate = new DateTime(2022, 06, 10),
                     Description = new []
                     {
                         "Technical lead for organization, managing the development team responsible for the systems used in the provision of Urgent and Out of Hours healthcare. The role requires development in C# along with understanding the implementation of existing systems that are written in Java and Lotus Script.",
