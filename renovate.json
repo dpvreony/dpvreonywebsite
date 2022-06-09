@@ -3,8 +3,26 @@
         "config:base"
     ],
     "assigneesFromCodeOwners": true,
-    "packageRules": [{
-            "matchPackagePatterns": ["Microsoft.*"],
+        "packageRules": [{
+            "matchPackagePatterns": ["Audit.*"],
+            "groupName": "all audit.net dependencies",
+            "groupSlug": "all-audit-net",
+            "labels": ["dependencies"]
+        },
+        {
+            "matchPackagePatterns": ["Exceptionless.*"],
+            "groupName": "all exceptionless dependencies",
+            "groupSlug": "all-exceptionless",
+            "labels": ["dependencies"]
+        },
+        {
+            "matchPackagePatterns": ["Foundatio.*"],
+            "groupName": "all foundatio dependencies",
+            "groupSlug": "all-foundatio",
+            "labels": ["dependencies"]
+        },
+        {
+            "matchPackagePatterns": ["Microsoft.*", "System.*"],
             "groupName": "all microsoft dependencies",
             "groupSlug": "all-microsoft",
             "labels": ["dependencies"]
@@ -19,6 +37,12 @@
             "matchPackagePatterns": ["Xamarin.*"],
             "groupName": "all xamarin dependencies",
             "groupSlug": "all-xamarin",
+            "labels": ["dependencies"]
+        },
+        {
+            "matchPackagePatterns": ["Xunit.*"],
+            "groupName": "all xunit dependencies",
+            "groupSlug": "all-xunit",
             "labels": ["dependencies"]
         }]
 }
