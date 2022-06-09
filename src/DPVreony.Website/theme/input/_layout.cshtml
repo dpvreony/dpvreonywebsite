@@ -1,6 +1,6 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
-@Html.Partial("_head")
+@await Html.PartialAsync("_head")
 <body>
     <!-- Navigation -->
     @RenderSectionOrPartial("Navigation", "_navigation")
@@ -21,9 +21,9 @@
     <hr>
     <!-- Footer -->
     @RenderSectionOrPartial("Footer", "_footer")
-    @Html.Partial("_scripts")
-    @RenderSection("Scripts", false)
-    <!-- Bootstrap core JavaScript -->
+@await Html.PartialAsync("_scripts")
+@await RenderSectionAsync("Scripts", false)
+<!-- Bootstrap core JavaScript -->
     <script src="@Context.GetLink("/lib/jquery/jquery.min.js")"></script>
     <script src="@Context.GetLink("/lib/bootstrap/js/bootstrap.bundle.min.js")"></script>
     <script src="/lib/cookieconsent/cookieconsent.min.js" data-cfasync="false"></script>
