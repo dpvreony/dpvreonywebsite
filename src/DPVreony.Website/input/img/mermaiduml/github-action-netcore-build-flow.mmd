@@ -1,10 +1,19 @@
 ﻿graph TD
-    [Nuget Package Restore]
-    [sonar scanner start]
-    [dotnet build]
-    [dotnet test]
-    [sonar scanner stop]
-    [check test coverage percentage]
-    [check for outdated packages]
-    [check for dependencies that can be simplified]
-    [check for unused dependencies]
+    nugetpkgrestore[Nuget Package Restore]
+    sonarscannerstart[sonar scanner start]
+    dotnetbuild[dotnet build]
+    dotnettest[dotnet test]
+    sonarscannerstop[sonar scanner stop]
+    checktestcoverage[check test coverage percentage]
+    checkforoutdatedpackages[check for outdated packages]
+    checkfordependencysimplification[check for dependencies that can be simplified]
+    checkforunuseddeps[check for unused dependencies]
+
+    nugetpkgrestore --> sonarscannerstart
+    sonarscannerstart --> dotnetbuild
+    dotnetbuild --> dotnettest
+    dotnettest --> sonarscannerstop
+    sonarscannerstop --> checktestcoverage
+    checktestcoverage --> checkforoutdatedpackages
+    checkforoutdatedpackages --> checkfordependencysimplification
+    checkfordependencysimplification --> checkforunuseddeps
