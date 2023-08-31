@@ -15,7 +15,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Whipstaff.NodaTime" Version="6.1.116" />
+    <PackageReference Include="Whipstaff.NodaTime" Version="6.1.120" />
     <PackageReference Include="Statiq.Highlight" Version="1.0.0-beta.70" />
     <PackageReference Include="Statiq.Web" Version="1.0.0-beta.58" />
   </ItemGroup>
