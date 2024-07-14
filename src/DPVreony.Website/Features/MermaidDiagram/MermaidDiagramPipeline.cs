@@ -11,7 +11,7 @@ namespace DPVreony.Website.Features.MermaidDiagram
             // we need to look for *.mmd files
             this.InputModules = new ModuleList(new ReadFiles("./**/*.mmd"));
 
-            this.ProcessModules = new ModuleList(new MermaidDiagramModule());
+            this.ProcessModules = new ModuleList(new MermaidDiagramModule(new System.IO.Abstractions.FileSystem()));
         }
     }
 }

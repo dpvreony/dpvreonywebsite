@@ -1,22 +1,30 @@
 ﻿
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.IO;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 using Statiq.Common;
+using Whipstaff.Mermaid.HttpServer;
+using Whipstaff.Mermaid.Playwright;
+using Whipstaff.Playwright;
 
 namespace DPVreony.Website.Features.MermaidDiagram
 {
     public sealed class MermaidDiagramModule : Module
     {
-        /// <inheritdoc />
-        protected override Task<IEnumerable<IDocument>> ExecuteInputAsync(IDocument input, IExecutionContext context)
+        private readonly System.IO.Abstractions.IFileSystem _fileSystem;
+
+        public MermaidDiagramModule(System.IO.Abstractions.IFileSystem fileSystem)
         {
-            return Task.Run(() => ExecuteInput(input, context));
+            ArgumentNullException.ThrowIfNull(fileSystem);
+            _fileSystem = fileSystem;
         }
 
-        private IEnumerable<IDocument> ExecuteInput(IDocument input, IExecutionContext context)
+        /// <inheritdoc />
+        protected override async Task<IEnumerable<IDocument>> ExecuteInputAsync(IDocument input, IExecutionContext context)
         {
             context.LogInformation(input, "Starting Mermaid Diagram CLI Module");
 
@@ -50,39 +58,36 @@ namespace DPVreony.Website.Features.MermaidDiagram
                 Directory.CreateDirectory(targetDir);
             }
 
-            var command = Path.Combine(
-                rootPath,
-                "node_modules\\.bin\\mmdc.cmd");
+            var logMessageActions = new PlaywrightRendererLogMessageActions();
+            var loggerFactory = context.GetRequiredService<ILoggerFactory>();
+            var logger = loggerFactory.CreateLogger<PlaywrightRenderer>();
+            var logMessageActionsWrapper = new PlaywrightRendererLogMessageActionsWrapper(logMessageActions, logger);
+            var mermaidHttpServer = MermaidHttpServerFactory.GetTestServer(loggerFactory);
 
-            var args = $"-i \"{inputFilename}\" -o \"{outputFilename}\"";
+            var playwrightRenderer = new Whipstaff.Mermaid.Playwright.PlaywrightRenderer(
+                mermaidHttpServer,
+                logMessageActionsWrapper);
 
-            context.LogInformation(input, $"Input Filename: {inputFilename}");
-            context.LogInformation(input, $"Output Filename: {outputFilename}");
-            context.LogInformation(input, $"Command: {command}");
-            context.LogInformation(input, $"Args: {args}");
+            var markdown = await _fileSystem.File.ReadAllTextAsync(inputFilename);
 
-            if (!File.Exists(command))
+            var diagramResponse = await playwrightRenderer.GetDiagram(
+                markdown,
+                PlaywrightBrowserType.Chromium,
+                null)
+                .ConfigureAwait(false);
+
+            if (diagramResponse == null)
             {
-                throw new FileNotFoundException(".mmd files require NPM and mermaid-cli", command);
+                throw new InvalidOperationException("Failed to generate diagram");
             }
 
-            var startInfo = new ProcessStartInfo(command, args);
-            startInfo.WorkingDirectory = rootPath;
+            await _fileSystem.File.WriteAllTextAsync(
+                outputFilename,
+                diagramResponse.Svg)
+                .ConfigureAwait(false);
 
-            var process = Process.Start(startInfo);
-            process.WaitForExit();
-
-            var exitCode = process.ExitCode;
-            if (exitCode != 0)
-            {
-                throw new InvalidOperationException($"Process exit code is: {exitCode}");
-            }
-
-            // CLI does all the output, we don't return anything ourself
-            // could use console in \ out piping of CLI in future.
-            // but could replace the NodeJS dependency with an inhouse generator
-            // this is quick and leaves us without having to manage a mermaid dependency
-            // (unless the CLI breaks)
+            // keeping the working the same as the previous cli version
+            // could return the response object in future.
             return Array.Empty<IDocument>();
         }
     }
