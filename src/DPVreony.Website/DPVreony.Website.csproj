@@ -2,8 +2,8 @@
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
-    <TargetFramework>net6.0</TargetFramework>
-    <LangVersion>10.0</LangVersion>
+    <TargetFramework>net8.0</TargetFramework>
+    <LangVersion>latest</LangVersion>
   </PropertyGroup>
 
   <ItemGroup>
@@ -15,9 +15,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Whipstaff.NodaTime" Version="8.0.91" />
     <PackageReference Include="Statiq.Highlight" Version="1.0.0-beta.72" />
     <PackageReference Include="Statiq.Web" Version="1.0.0-beta.60" />
+    <PackageReference Include="System.IO.Abstractions" Version="21.0.22" />
+    <PackageReference Include="Whipstaff.NodaTime" Version="8.0.91" />
+    <PackageReference Include="Whipstaff.Mermaid" Version="8.0.91" />
   </ItemGroup>
 
   <ItemGroup>
@@ -43,5 +45,10 @@
     <Copy SkipUnchangedFiles="True" SourceFiles="@(NpmHighlightJsFilesToCopy)" DestinationFiles="@(NpmHighlightJsFilesToCopy->'$(ProjectDir)theme\input\lib\highlightjs\%(RecursiveDir)%(Filename)%(Extension)')" />
     <Copy SkipUnchangedFiles="True" SourceFiles="@(NpmJQueryFilesToCopy)" DestinationFiles="@(NpmJQueryFilesToCopy->'$(ProjectDir)theme\input\lib\jquery\%(RecursiveDir)%(Filename)%(Extension)')" />
     <Copy SkipUnchangedFiles="True" SourceFiles="@(NpmFontAwesomeFreeFilesToCopy)" DestinationFiles="@(NpmFontAwesomeFreeFilesToCopy->'$(ProjectDir)theme\input\lib\fontawesome-free\%(RecursiveDir)%(Filename)%(Extension)')" />
+  </Target>
+
+  <Target Name="RunDocFxGeneration" AfterTargets="Build">
+    <Exec Command="pwsh $(OutDir)playwright.ps1 install" ConsoleToMSBuild="true" LogStandardErrorAsError="true" />
+    <Exec Command="$(OutDir)$(AssemblyName)" ConsoleToMSBuild="true" LogStandardErrorAsError="true" />
   </Target>
 </Project>
