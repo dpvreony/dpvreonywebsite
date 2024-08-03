@@ -72,8 +72,7 @@ namespace DPVreony.Website.Features.MermaidDiagram
 
             var diagramResponse = await playwrightRenderer.GetDiagram(
                 markdown,
-                PlaywrightBrowserType.Chromium,
-                null)
+                PlaywrightBrowserTypeAndChannel.ChromiumDefault())
                 .ConfigureAwait(false);
 
             if (diagramResponse == null)
