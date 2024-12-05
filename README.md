@@ -6,7 +6,7 @@ Public website for DPVreony
 You need
 
 * NodeJs 14.15.4 or later
-* Visual Studio 2019 (16.8.4) or later
+* Visual Studio 2022 (17.0.0) or later
 
 ## Credits
 

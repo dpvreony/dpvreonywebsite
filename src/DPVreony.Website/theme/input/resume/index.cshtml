@@ -7,8 +7,7 @@
 }
 <main>
     <h1>@title</h1>
-    @Html.Partial("_resume_experience")
-    @Html.Partial("_resume_education")
-    @Html.Partial("_resume_skills")
+    @await Html.PartialAsync("_resume_experience")
+    @await Html.PartialAsync("_resume_skills")
     @*@Html.Partial("_resume_projects")*@
 </main>
