@@ -69,7 +69,7 @@ jobs:
     - name: Build Website
       working-directory: src/dpvreony.website
       run: |
-        dotnet run -c Release -o ../../artifacts/website
+        dotnet run -c Release
 
     - name: store binlogs
       if: ${{ failure() }}
@@ -81,7 +81,7 @@ jobs:
     - name: store website
       uses: actions/upload-pages-artifact@v3
       with:
-        path: artifacts/website
+        path: src/dpvreony.website/output
 
   # Deployment job
   deploy:
