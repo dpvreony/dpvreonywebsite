@@ -61,6 +61,11 @@ jobs:
       run: |
         dotnet build ${{ env.solutionpath }} --configuration Release --no-restore /bl:artifacts\\binlog\\build.binlog /p:ContinuousIntegrationBuild=true
 
+    - name: Install Playwright
+      working-directory: src/dpvreony.website/bin/Release/net8.0
+      shell: pwsh
+      run: .\playwright.ps1 install
+
     - name: Build Website
       working-directory: src/dpvreony.website
       run: |
