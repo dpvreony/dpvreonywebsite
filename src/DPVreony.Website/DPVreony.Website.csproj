@@ -16,7 +16,7 @@
 
   <ItemGroup>
     <PackageReference Include="Statiq.Highlight" Version="1.0.0-beta.72" />
-    <PackageReference Include="System.IO.Abstractions" Version="22.0.10" />
+    <PackageReference Include="TestableIO.System.IO.Abstractions.Wrappers" Version="22.0.11" />
     <PackageReference Include="Whipstaff.NodaTime" Version="8.1.52" />
     <PackageReference Include="Whipstaff.Mermaid" Version="8.1.52" />
     <PackageReference Include="Whipstaff.Statiq" Version="8.0.212-beta" />
