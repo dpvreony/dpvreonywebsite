@@ -1,0 +1,29 @@
+{
+  "installChannelUri": ".\\ChannelManifest.json",
+  "channelUri": "https://aka.ms/vs/17/release/channel",
+  "installCatalogUri": ".\\Catalog.json",
+  "channelId": "VisualStudio.17.Release",
+  "productId": "Microsoft.VisualStudio.Product.Professional",
+
+  "quiet": true,
+  "passive": true,
+  "includeRecommended": true,
+  "norestart": false,
+  "useLatestInstaller": true,
+  "removeOos": true,
+
+  "addProductLang": [
+    "en-US"
+    ],
+
+  "components": [
+      "Microsoft.VisualStudio.Workload.Azure",
+      "Microsoft.VisualStudio.Workload.ManagedDesktop",
+      "Microsoft.VisualStudio.Workload.NetCrossPlat",
+      "Microsoft.VisualStudio.Workload.NetWeb",
+      "Microsoft.VisualStudio.Workload.Node",
+      "Microsoft.VisualStudio.Workload.Python",
+      "Microsoft.VisualStudio.Workload.Universal",
+      "Microsoft.VisualStudio.Workload.VisualStudioExtension"
+  ]
+}
