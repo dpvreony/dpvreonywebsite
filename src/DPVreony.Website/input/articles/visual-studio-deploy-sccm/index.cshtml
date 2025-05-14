@@ -1,0 +1,57 @@
+﻿@using DPVreony.Website.Features.Articles
+@using NodaTime
+@{
+    var articleMetadata = new ArticleMetadataModel(
+        ArticleStatus.Draft,
+        new Version(0, 1),
+        new LocalDate(2025, 05, 14),
+        new LocalDate(2025, 05, 14),
+        new LocalDate(2025, 05, 14),
+        new LocalDate(2025, 06, 14));
+}
+<div class="row">
+    <div class="col-md-8">
+        <h1>Managing the centralised deployment of Visual Studio using System Center while allowing flexible updates.</h1>
+
+        <h2>Introduction</h2>
+        <p>TODO</p>
+
+        This is for VS2022 professional, if anyone is using Enterprise you can do the same just replace the professional installer and update the deployment.vsconfig   "productId": "Microsoft.VisualStudio.Product.Professional",
+
+        Note: I’ve put –quiet on the cli as even though it’s in the config file, the initial installer bootstrap launcher doesn’t read the file, so it pops up an extra window.
+
+        For reference the list of components is available at: https://learn.microsoft.com/en-us/visualstudio/install/workload-component-id-vs-professional
+
+
+        First Run that pulls features based on a config
+        I've put "normal" .NET, Python and Mobile development workloads in. You're better running this directly on a server where the files will sit, if feasible. using a network path has file locking issues. Worst case would be the need to build + update locally then copy onto fileshare.
+
+        vs_professional.exe --layout e:\vs2022\pro --config deployment.vsconfig --quiet
+
+        To script an update on the server
+
+        vs_professional.exe --layout e:\vs2022\pro --quiet
+
+        To deploy via System Center
+
+        see https://www.prajwaldesai.com/deploy-visual-studio-2019-using-sccm/ the only difference will be it's version 17, if you do a version check. you might want to check how the vscode version check is done in case it's using another technique that might be better?
+
+        Registry keys
+
+        ADMX files are available from: https://learn.microsoft.com/en-us/visualstudio/install/administrative-templates?view=vs-2022
+
+        1.	HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\VisualStudio\Setup
+        2.	AllowStandardUserControl REG_DWORD 2
+
+        If this is set to 2, users will be able to update \ modify visual studio without the need for UAC elevation.
+        You might also want to look at the Administrator Update flags AdministratorUpdatesEnabled and AdministratorUpdatesNotifications
+
+
+
+        <h2>References</h2>
+        <p>TODO</p>
+    </div>
+    <div class="col-md-4">
+        @await Html.PartialAsync("_article_metadatasummary", articleMetadata)
+    </div>
+</div>
