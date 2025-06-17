@@ -19,7 +19,7 @@
     <PackageReference Include="TestableIO.System.IO.Abstractions.Wrappers" Version="22.0.14" />
     <PackageReference Include="Whipstaff.NodaTime" Version="8.2.105" />
     <PackageReference Include="Whipstaff.Mermaid" Version="8.2.105" />
-    <PackageReference Include="Whipstaff.Statiq" Version="8.2.65-beta" />
+    <PackageReference Include="Whipstaff.Statiq" Version="8.2.105-beta" />
   </ItemGroup>
 
   <ItemGroup>
