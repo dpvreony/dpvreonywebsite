@@ -39,6 +39,19 @@
         <p>This might seem counter-intuitive, but if the attacker can only enter the email and the site responses with a vague message that an email will be sent if the email address isn't already registered. You will end up sending an email, but the value to the attacker is reduced as they still can't work out if the email address was registered in the first place, they are back at needing to use the login page. If an attacker was to still use the page, you need to combine with other measures such as allowing the email to be reported via a link, along with other measures</p>
         <h3>Defer your registration to after a 3rd party authentication mechanism has taken place.</h3>
         <p>By getting the user to trigger a login flow from a popular authentication provider, you are removing a flow to generate emails from your site. You're also reducing the appeal of your sites login mechanism and taking advantage of security investments by the bigger 3rd parties. If you're offering a PAAS solution to corporate clients, this would be a stronger way to go anyway as you can offload all user enrollment to their IT department. If it's using SAML, Azure AAD, etc. the authentication mechanism is in their control and fall in line with any user offboarding, account locking, removal that they carry out.</p>
+        <h2>Common Pitfalls</h2>
+        <ul>
+            <li>Providing overly specific error messages (e.g., "Email already registered") that aid attackers.</li>
+            <li>Failing to monitor registration logs for suspicious activity.</li>
+            <li>Not testing registration flow against automated tools.</li>
+        </ul>
+        <h2>Conclusion</h2>
+        <p>
+            Securing your registration page is essential to protect user data and prevent abuse. Regularly review your security posture and stay informed about emerging threats.
+        </p>
+        <p>
+            For more information, see the <a href="https://owasp.org/www-community/attacks/Account_enumeration">OWASP Account Enumeration page</a>.
+        </p>
     </div>
 <div class="col-md-4">
     @await Html.PartialAsync("_article_metadatasummary", articleMetadata)
