@@ -1,0 +1,46 @@
+@using DPVreony.Website.Features.Articles
+@using NodaTime
+@{
+    var articleMetadata = new ArticleMetadataModel(
+        ArticleStatus.Draft,
+        new Version(0, 2),
+        new LocalDate(2024, 08, 16),
+        new LocalDate(2025, 06, 20),
+        new LocalDate(2025, 06, 20),
+        new LocalDate(2025, 09, 20));
+}
+<div class="row">
+    <div class="col-md-8">
+        <h1>Mitigating email address abuse in website registration pages.</h1>
+        <h2>Introduction</h2>
+        <p>Attackers are carrying out data mining exercises on websites using the registration page. Registration pages can allow the attackers to use an automated process to ascertain whether an email address exists on the system. Using the registration page can be quicker for initial activities.</p>
+        <ul>
+            <li>The attacker can enter the email address along with some other random name data.</li>
+            <li>The attacker can then submit the registration form.</li>
+            <li>The attacker can then check the response to see if the email address exists.</li>
+            <li>If the email address exists, the attacker can then add the email address to the list for a rainbow attack on the login page.</li>
+            <li>If the email address does not exist, some sites then end up emailing the unsuspecting user to confirm registration. But the attack doesn't care, they are finished with the email address at this point.</li>
+        </ul>
+        <p>The reason for using the registration page rather than the login page (or forgot password):</p>
+        <ul>
+            <li>A login page typically gives a vague error message that the "username or password" may not match. Where the registration page is more informative for the attackers needs.</li>
+            <li>A forgot password page is usually just as vague saying it will send an email if the email address exists.</li>
+            <li>Registration pages may not have the same intrusion detection methods, rate limiting etc.</li>
+        </ul>
+        <h2>Mitigation</h2>
+        <p>There are a number of ways to mitigate this issue:</p>
+        <h3>Use a web application firewall (WAF)</h3>
+        <p>A WAF can be configured to detect and block automated requests that are trying to abuse the registration page. This can include rate limiting, blocking known bad IP addresses, and more. Major providers have a source of known bad actors, and \ or patterns used by them so can apply a level of automation to the blocking.</p>
+        <h3>Make multifactor authentication mandatory</h3>
+        <p>By requiring multifactor authentication you reduce the value of attacking the site using just an email, then email + password rainbow attack. The attacker still won't be able to use the site without the MFA token.</p>
+        <h3>Use CAPTCHA on the registration page.</h3>
+        <p>Adding a CAPTCHA to the registration process can effectively prevent bots and scripts from automating registration attempts. While it may add a slight inconvenience for legitimate users, it significantly enhances security by ensuring that only humans can interact with the form.</p>
+        <h3>Change your registration flow to be multistep and email first.</h3>
+        <p>This might seem counter-intuitive, but if the attacker can only enter the email and the site responses with a vague message that an email will be sent if the email address isn't already registered. You will end up sending an email, but the value to the attacker is reduced as they still can't work out if the email address was registered in the first place, they are back at needing to use the login page. If an attacker was to still use the page, you need to combine with other measures such as allowing the email to be reported via a link, along with other measures</p>
+        <h3>Defer your registration to after a 3rd party authentication mechanism has taken place.</h3>
+        <p>By getting the user to trigger a login flow from a popular authentication provider, you are removing a flow to generate emails from your site. You're also reducing the appeal of your sites login mechanism and taking advantage of security investments by the bigger 3rd parties. If you're offering a PAAS solution to corporate clients, this would be a stronger way to go anyway as you can offload all user enrollment to their IT department. If it's using SAML, Azure AAD, etc. the authentication mechanism is in their control and fall in line with any user offboarding, account locking, removal that they carry out.</p>
+    </div>
+<div class="col-md-4">
+    @await Html.PartialAsync("_article_metadatasummary", articleMetadata)
+</div>
+</div>
