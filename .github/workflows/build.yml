@@ -73,7 +73,7 @@ jobs:
 
     - name: store binlogs
       if: ${{ failure() }}
-      uses: actions/upload-artifact@v4
+      uses: actions/upload-artifact@v5
       with:
         name: binlogs
         path: artifacts/binlog
