@@ -16,9 +16,6 @@ namespace DPVreony.Website
                 .Factory
                 .CreateWeb(args)
                 .AddPipeline<Whipstaff.Statiq.Mermaid.MermaidDiagramPipeline>()
-                .DeployToNetlify(
-                    Config.FromSetting<string>("NETLIFY_SITE_ID"),
-                    Config.FromSetting<string>("NETLIFY_DEPLOY_KEY"))
                 .RunAsync();
         }
     }
