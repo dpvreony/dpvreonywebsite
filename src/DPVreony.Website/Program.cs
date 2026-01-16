@@ -23,13 +23,18 @@ namespace DPVreony.Website
             // hot reload note - these will not be reflected until the application restarts
             builder.Services.AddContentEngineService(_ => new ContentEngineOptions
             {
-                SiteTitle = "My Little Content Engine",
-                SiteDescription = "An Inflexible Content Engine for .NET",
-                ContentRootPath = "Content",
+                SiteTitle = "DPVreony",
+                SiteDescription = "Website for DPVreony",
+                ContentRootPath = "Content/_trunk",
             }).WithMarkdownContentService(_ => new MarkdownContentOptions<BlogFrontMatter>
             {
                 ContentPath = "Content",
-                BasePageUrl = string.Empty
+                BasePageUrl = string.Empty,
+                ExcludeSubfolders = true
+            }).WithMarkdownContentService(_ => new MarkdownContentOptions<BlogFrontMatter>
+            {
+                ContentPath = "Content/Articles",
+                BasePageUrl = "/articles",
             });
 
             builder.Services.AddMonorailCss();
