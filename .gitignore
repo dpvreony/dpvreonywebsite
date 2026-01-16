@@ -389,4 +389,4 @@ FodyWeavers.xsd
 
 cache/
 output/
-**/theme/input/lib/
+**/Content/lib/
