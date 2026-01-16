@@ -1,0 +1,8 @@
+{
+    "Source": "Styles",
+    "Target": "Content/_trunk/css",
+    "Arguments": "--style=compressed",
+    "GenerateScopedCss": true,
+    "ScopedCssFolders": [ "Views", "Pages", "Shared", "Components" ],
+    "IncludePaths": []
+}

@@ -34,7 +34,7 @@ namespace DPVreony.Website
             }).WithMarkdownContentService(_ => new MarkdownContentOptions<BlogFrontMatter>
             {
                 ContentPath = "Content/Articles",
-                BasePageUrl = "/articles",
+                BasePageUrl = "/articles", 
             });
 
             builder.Services.AddMonorailCss();
