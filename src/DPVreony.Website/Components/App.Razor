@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@using DPVreony.Website.Components.Partials
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8"/>
@@ -26,7 +27,30 @@
 </head>
 
 <body>
-<Routes/>
+    <Routes/>
+    <hr>
+    <Footer></Footer>
+    <!-- Bootstrap core JavaScript -->
+    <script src="/lib/jquery/jquery.min.js"></script>
+    <script src="/lib/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="/lib/cookieconsent/cookieconsent.min.js" data-cfasync="false"></script>
+    <script>
+        window.cookieconsent.initialise({
+            "palette": {
+                "popup": {
+                    "background": "#eb6c44",
+                    "text": "#ffffff"
+                },
+                "button": {
+                    "background": "#f5d948"
+                }
+            },
+            "position": "bottom-right",
+            "content": {
+                "href": "/cookiepolicy/"
+            }
+        });
+    </script>
 </body>
 </html>
 
