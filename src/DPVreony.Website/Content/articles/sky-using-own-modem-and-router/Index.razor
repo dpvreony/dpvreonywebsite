@@ -1,0 +1,103 @@
+@using DPVreony.Website.Components.Partials
+@using DPVreony.Website.Features.Articles
+@using NodaTime
+@{
+    var articleMetadata = new ArticleMetadataModel(
+        ArticleStatus.Draft,
+        new Version(0, 2),
+        new LocalDate(2020, 08, 09),
+        new LocalDate(2021, 02, 28),
+        new LocalDate(2021, 02, 28),
+        new LocalDate(2021, 05, 28));
+}
+<div class="row">
+    <div class="col-md-8">
+        <h1>Using your own Modem and Router with a Sky internet connection</h1>
+        <h2>Introduction</h2>
+
+        <p>You may find the equipment provided by Sky for your internet connection is unreliable. This can be:</p>
+
+        <ul>
+            <li>Frequent Internet Connection drops.</li>
+            <li>Wifi signal weakness with frequent drop outs.</li>
+            <li>You experience internet\dns issues but appear to remain on a stable Wifi. When using a WiFi signal monitoring tool you notice that the Sky Q (or mini) boxes, or Signal Booster offer a stronger signal than the hub. What is happening in this scenario is you are connected on the mesh but the mesh device is losing connection to the hub.</li>
+            <li>LAN ports won't route traffic over the internet port without a hard reset every few hours. Yet the wifi continues to have internet access.</li>
+        </ul>
+
+        Note: Sky have a paid offering of guaranteed signal strength. But read the small print and take with a pinch of salt. The hubs are cheap mass produced products and depending on the layout of your house (concrete walls etc.) you can only achieve so much with these services. If you're having issues with the mesh network you may want to consider connecting your SkyQ devices via network cables or over powerline adapters.
+
+        <h2>Equipment you need</h2>
+        <ul>
+            <li>A standalone modem and router than can support MPoA</li>
+            <li>A combined modem \ router product that can support MPoA</li>
+        </ul>
+
+        <h2>What is MPoA</h2>
+
+        <p>MPoA is an authentication mechanism that allows Internet Service Providers to authentication a connection via DHCP negotiation and \or the phone line itself rather than a conventional username and password (PPPoA \ PPPoE).</p>
+
+        <h2>Case Demonstration</h2>
+
+        <p>In this demonstration I am going to detail how to configure using a standalone modem and a standalone router. The equipment I'm going to use is:</p>
+
+        <ul>
+            <li>DrayTek Vigor 130</li>
+            <li>Netgear AC4000 Nighthawk X6S (R8000P)</li>
+        </ul>
+
+        DISCLAIMER: I have no vested interests in the organizations relating to these products. I also offer no guarantees or liabilities on these products.
+
+        WARNING: Before starting make sure your devices have up to date firmware. The stock netgear firmware as of 2020 doesn't show the necessary options in the management UI, but the latest firmware does.
+
+        <h2>Setting up the DrayTek Vigor 130</h2>
+
+        INFO: Further details are available on the <a href="https://www.draytek.co.uk/support/guides/sky-fibre-setup-guide">DrayTek Support Site: Sky Fibre Broadband & Now TV Setup Guide</a>.
+
+        <h2>Setting up the Netgear AC4000 Nighthawk X6S (R8000P)</h2>
+
+        <table>
+            <tr>
+                <th>DHCP Option Number</th>
+                <th>DHCP Option Description</th>
+                <th>DHCP Option Value</th>
+            </tr>
+            <tr>
+                <td>Option 60</td>
+                <td>Vendor Class Identifier String</td>
+                <td>6.14.1aN_UNI|PCBAFAST2504Nv1.0</td>
+            </tr>
+            <tr>
+                <td>Option 61</td>
+                <td>Client Identifier String</td>
+                <td>7c4ca5123456@skydsl|abcd1234</td>
+            </tr>
+        </table>
+
+        INFO: You may want to consider duplicating your Sky WiFi SSID and Password. Disable the WiFi first so not to cause any drop in service while setting up the replacement.
+
+        <h2>Switching over</h2>
+
+        TODO
+        <h2>Other options</h2>
+
+        <h3>Age dependent netgear devices</h3>
+
+        <p>I have successfully connected Sky internet connections using other Netgear devices. You should check if the model you're interested in has a firmware that supports ? or you could consider custom firmware but beware of the risks (such as bricking the device) and invalidating any warranty you may have.</p>
+
+        <p>Models (and firmware at the time) I've had success with:</p>
+
+        <ul>
+            <li>AC2600 Nighthawk using updated official netgear firmware v1.0.2.68</li>
+            <li>N600 (WNDR3800) using OpenWRT firmware v19.07.03</li>
+        </ul>
+
+        <h2>References</h2>
+        <ul>
+            <li><a href="https://openwrt.org/toh/netgear/wndr3800">OpenWRT Wiki: Netgear WNDR3800</a> Accessed 2020-08-11</li>
+            <li><a href="https://www.draytek.co.uk/support/guides/sky-fibre-setup-guide">DrayTek Support: Sky Fibre Broadband & Now TV Setup Guide</a> Accessed 2020-05-02</li>
+        </ul>
+    </div>
+    <div class="col-md-4">
+        <ArticleMetadataSummary Model="articleMetadata"></ArticleMetadataSummary>
+    </div>
+</div>
