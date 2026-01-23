@@ -25,22 +25,20 @@ namespace DPVreony.Website
 
             var builder = WebApplication.CreateBuilder(args);
 
+            builder.Logging.SetMinimumLevel(LogLevel.Debug);
+
             var services = builder.Services;
             services.AddRazorComponents();
 
             // configures site wide settings
             // hot reload note - these will not be reflected until the application restarts
-            services.AddContentEngineService(_ => new ContentEngineOptions
+            var contentEngine = services.AddContentEngineService(_ => new ContentEngineOptions
             {
                 SiteTitle = "DPVreony",
                 SiteDescription = "Website for DPVreony",
                 ContentRootPath = "Content/_trunk",
-            }).WithMarkdownContentService(_ => new MarkdownContentOptions<BlogFrontMatter>
-            {
-                ContentPath = "Content",
-                BasePageUrl = string.Empty,
-                ExcludeSubfolders = true
-            });
+            }).AddMermaidDiagramContentService(() => new MermaidDiagramConversionContentOptions("Content/test"));
+            ;
 
             //.WithMarkdownContentService(_ => new MarkdownContentOptions<BlogFrontMatter>
             //{
@@ -49,6 +47,7 @@ namespace DPVreony.Website
             //});
 
             services.AddMonorailCss();
+
             services.AddKeyedSingleton<TestServer>(
                 "mermaid",
                 static (sp, _) =>
@@ -59,6 +58,7 @@ namespace DPVreony.Website
                         loggerFactory,
                         fileSystem);
                 });
+
             services.AddSingleton<PlaywrightRenderer>(static provider =>
             {
                 var mermaidHttpServer = provider.GetRequiredKeyedService<TestServer>("mermaid");
@@ -72,6 +72,7 @@ namespace DPVreony.Website
                     mermaidHttpServer,
                     logMessageActionsWrapper);
             });
+
             services.AddSingleton<IPlaywrightRendererBrowserInstance>(static provider =>
             {
                 var playwrightRenderer = provider.GetRequiredService<PlaywrightRenderer>();

@@ -12,16 +12,13 @@ namespace DPVreony.Website.Features.Mermaid
     {
         private MermaidDiagramConversionContentOptions _options;
         private IFileSystem _fileSystem;
-        private PlaywrightRendererBrowserInstance _browserInstance;
 
         public MermaidDiagramConversionService(
             MermaidDiagramConversionContentOptions options,
-            IFileSystem fileSystem,
-            Whipstaff.Mermaid.Playwright.PlaywrightRendererBrowserInstance browserInstance)
+            IFileSystem fileSystem)
         {
             _options = options;
             _fileSystem = fileSystem;
-            _browserInstance = browserInstance;
         }
 
         public int SearchPriority => 5;

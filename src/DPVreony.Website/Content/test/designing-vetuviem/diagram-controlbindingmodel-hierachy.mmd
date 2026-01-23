@@ -1,0 +1,14 @@
+classDiagram
+    class UnboundControlCControlBindingModel
+    class UnboundControlBControlBindingModel
+    class UnboundControlAControlBindingModel
+    class ControlCControlBindingModel
+    class ControlBControlBindingModel
+    class ControlAControlBindingModel
+    class PlatformBaseControlBindingModel
+    UnboundControlCControlBindingModel ..|> ControlCControlBindingModel
+    UnboundControlBControlBindingModel ..|> ControlBControlBindingModel
+    UnboundControlAControlBindingModel ..|> ControlAControlBindingModel
+    UnboundControlBControlBindingModel ..|> UnboundControlCControlBindingModel
+    UnboundControlAControlBindingModel ..|> UnboundControlBControlBindingModel
+    PlatformBaseControlBindingModel ..|> UnboundControlAControlBindingModel
