@@ -31,11 +31,13 @@ namespace DPVreony.Website
                 ContentPath = "Content",
                 BasePageUrl = string.Empty,
                 ExcludeSubfolders = true
-            }).WithMarkdownContentService(_ => new MarkdownContentOptions<BlogFrontMatter>
-            {
-                ContentPath = "Content/Articles",
-                BasePageUrl = "/articles", 
             });
+
+            //.WithMarkdownContentService(_ => new MarkdownContentOptions<BlogFrontMatter>
+            //{
+            //    ContentPath = "Content/Articles",
+            //    BasePageUrl = "/articles", 
+            //});
 
             builder.Services.AddMonorailCss();
 
