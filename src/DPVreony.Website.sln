@@ -1,9 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.30320.27
+# Visual Studio Version 18
+VisualStudioVersion = 18.2.11415.280 d18.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DPVreony.Website", "DPVreony.Website\DPVreony.Website.csproj", "{6584F3DD-C461-4BD2-91C6-C26A65CD90B7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DPVreony.Website.AspireAppHost", "DPVreony.Website.AspireAppHost\DPVreony.Website.AspireAppHost.csproj", "{F420971F-33B4-43A3-B6E4-CC17547921CF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DPVreony.WebsiteBuilder", "DPVreony.WebsiteBuilder\DPVreony.WebsiteBuilder.csproj", "{C23041DC-9BBA-4451-A3CE-FFE2E76FEF2E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +19,14 @@ Global
 		{6584F3DD-C461-4BD2-91C6-C26A65CD90B7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6584F3DD-C461-4BD2-91C6-C26A65CD90B7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6584F3DD-C461-4BD2-91C6-C26A65CD90B7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F420971F-33B4-43A3-B6E4-CC17547921CF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F420971F-33B4-43A3-B6E4-CC17547921CF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F420971F-33B4-43A3-B6E4-CC17547921CF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F420971F-33B4-43A3-B6E4-CC17547921CF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C23041DC-9BBA-4451-A3CE-FFE2E76FEF2E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C23041DC-9BBA-4451-A3CE-FFE2E76FEF2E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C23041DC-9BBA-4451-A3CE-FFE2E76FEF2E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C23041DC-9BBA-4451-A3CE-FFE2E76FEF2E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
