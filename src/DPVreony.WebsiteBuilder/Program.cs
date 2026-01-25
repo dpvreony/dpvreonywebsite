@@ -24,7 +24,10 @@ namespace DPVreony.WebsiteBuilder
 #if TBC
             app.GenerateStaticContent("../../../../DPVreony.Website/wwwroot");
 #endif
-            app.Run();
+            await app.RunAsync()
+                .ConfigureAwait(false);
+
+            return 0;
         }
     }
 }
