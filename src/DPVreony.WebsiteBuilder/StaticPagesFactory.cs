@@ -8,8 +8,10 @@ namespace DPVreony.WebsiteBuilder
         public static IEnumerable<PageResource> GetCollection() =>
         [
             new("/"),
-            new("/Privacy"),
-            new("/Blog/Articles/"),
+            new("/opensource"),
+            new("/resume"),
+            new("/privacy"),
+            new("/articles/"),
         ];
     }
 }
