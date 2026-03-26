@@ -22,6 +22,7 @@
 
   <!-- these tasks remove the need for gulp, grunt, npm, etc. to be used for file copying -->
   <ItemGroup>
+    <ArticleFilesToCopy Include="$(ProjectDir)Pages\articles\**\*.mmd" />
     <FontFilesToCopy Include="$(ProjectDir)fonts\*.*" />
     <NpmBootStrapFilesToCopy Include="$(ProjectDir)node_modules\bootstrap\dist\**\*.*" />
     <NpmCookieConsentFilesToCopy Include="$(ProjectDir)node_modules\cookieconsent\build\*.*" />
@@ -34,7 +35,8 @@
     <NpmFontAwesomeFreeFilesToCopy Include="$(ProjectDir)node_modules\@fortawesome\fontawesome-free\**\*.woff2" />
   </ItemGroup>
   <Target Name="CopyNpmTasks" BeforeTargets="BeforeBuild">
-    <Message Text="Starting NPM Package Copy Task" />
+    <Message Text="Starting static asset copy task." />
+    <Copy SkipUnchangedFiles="True" SourceFiles="@(ArticleFilesToCopy)" DestinationFiles="@(ArticleFilesToCopy->'$(ProjectDir)wwwroot\articles\%(RecursiveDir)%(Filename)%(Extension)')" />
     <Copy SkipUnchangedFiles="True" SourceFiles="@(FontFilesToCopy)" DestinationFiles="@(FontFilesToCopy->'$(ProjectDir)wwwroot\fonts\%(RecursiveDir)%(Filename)%(Extension)')" />
     <Copy SkipUnchangedFiles="True" SourceFiles="@(NpmBootStrapFilesToCopy)" DestinationFiles="@(NpmBootStrapFilesToCopy->'$(ProjectDir)wwwroot\lib\bootstrap\%(RecursiveDir)%(Filename)%(Extension)')" />
     <Copy SkipUnchangedFiles="True" SourceFiles="@(NpmCookieConsentFilesToCopy)" DestinationFiles="@(NpmCookieConsentFilesToCopy->'$(ProjectDir)wwwroot\lib\cookieconsent\%(RecursiveDir)%(Filename)%(Extension)')" />
