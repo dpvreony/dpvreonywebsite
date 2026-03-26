@@ -1,0 +1,69 @@
+﻿@page
+@using DPVreony.Website.Features.Articles
+@using NodaTime
+@{
+    var articleMetadata = new ArticleMetadataModel(
+        ArticleStatus.Released,
+        new Version(1, 0),
+        new LocalDate(2026, 01, 09),
+        new LocalDate(2026, 01, 09),
+        new LocalDate(2026, 01, 09),
+        new LocalDate(2021, 06, 01));
+}
+<div class="row">
+    <div class="col-md-8">
+        <h1>Mitigating J-curves in Digital Transformation.</h1>
+
+        <h2>Introduction</h2>
+        <p>In transformation programmes, the “J-curve” is often treated as an unavoidable law of change: performance dips before it improves, disruption precedes benefit, and short-term pain is the price of long-term gain. This narrative is comforting, but frequently misleading.</p>
+        <p>In reality, pronounced J-curves are rarely accidental. More often, they are symptoms - indicators that something fundamental has gone wrong earlier in the initiative. While not every dip can be eliminated, most severe J-curves are both predictable and avoidable.</p>
+
+        <h2>What J-Curves Really Indicate</h2>
+        <p>A steep or prolonged J-curve is usually not a feature of transformation itself, but of how the transformation was conceived and executed.</p>
+
+        <h3>Misunderstood requirements</h3>
+        <p>When requirements are poorly understood or inadequately validated, organisations implement solutions that technically “work” but fail operationally. The resulting rework, user frustration, and process gaps manifest immediately as performance decline.</p>
+
+        <h3>Poor transformation change management</h3>
+        Technology changes faster than people. When training, communication, stakeholder engagement, and adoption planning lag behind delivery, productivity drops. Resistance increases, workarounds emerge, and the organisation pays the price in lost momentum.
+
+        <h3>Going too early</h3>
+        Initiatives launched before data is clean, processes are stable, or organisational readiness is achieved tend to collapse under real-world usage. Early enthusiasm cannot compensate for immature foundations.
+
+        <h3>Going too big</h3>
+        Large, monolithic rollouts amplify risk. When everything changes at once, failures cascade, issues are harder to isolate, and recovery options narrow. The J-curve steepens because the blast radius is unnecessarily wide.
+
+        <h3>Failure to conduct proper due diligence</h3>
+        Insufficient vendor assessment, weak commercial scrutiny, untested assumptions, and superficial architectural reviews all defer risk - they do not remove it. That risk reappears later as operational disruption.
+
+        <h2>When J-Curves Are Unavoidable - and How to Mitigate Them</h2>
+
+        <p>There are scenarios where some degree of performance dip is unavoidable: regulatory change, legacy system retirement, or market-driven urgency can compress timelines and constrain options. In these cases, the goal shifts from avoidance to mitigation.</p>
+
+        <p>Several proven mechanisms significantly reduce the depth and duration of J-curves:</p>
+
+        <h3>Penalty clauses in contracts</h3>
+        Commercial structures matter. Well-designed penalty and service credit clauses align vendor incentives with operational outcomes, not just delivery milestones.
+
+        <h3>Pilots with small groups</h3>
+        Controlled pilots expose real-world issues early, when they are cheaper and safer to fix. They convert unknown risks into known, manageable ones.
+
+        <h3>Side-by-side operation</h3>
+        Running new and legacy systems in parallel preserves business continuity while confidence builds. It provides empirical evidence rather than assumptions.
+
+        <h3>Read-only deployments</h3>
+        Introducing new platforms in a read-only or advisory mode allows users to validate outputs without operational dependency. Trust is built before reliance.
+
+        <h3>Rollback and rollforward strategies</h3>
+        Rollback should not be interpreted as abandoning the transformation. A credible rollback plan ensures the organisation can revert to a stable state if critical issues arise. Equally important is the concept of rollforward - the ability to deploy a rapid, targeted fix that addresses defects without reversing progress. In mature delivery models, rollback and rollforward are complementary: one protects continuity, the other preserves momentum. The presence of both options reduces risk, improves confidence, and materially limits the impact of disruption.
+
+        <h2>Conclusion</h2>
+
+        <p>J-curves should never be accepted as a default cost of transformation. They are diagnostic signals - pointing to gaps in understanding, preparation, governance, or execution. While not all disruption can be eliminated, most severe performance declines are preventable through disciplined planning, staged delivery, and commercial realism.</p>
+
+        <p>The question is not whether transformation will be challenging. It is whether those challenges are addressed deliberately - or deferred until they surface as a J-curve that everyone claims was "inevitable".</p>
+    </div>
+    <div class="col-md-4">
+        @await Html.PartialAsync("_article_metadatasummary", articleMetadata)
+    </div>
+</div>
