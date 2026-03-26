@@ -28,7 +28,7 @@
     <ul>
         @foreach (var article in articles)
         {
-        <li><a href="@article.Value">@article.Key</a></li>
+        <li><a href="@(article.Value)/">@article.Key</a></li>
         }
     </ul>
 }
