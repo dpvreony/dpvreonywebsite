@@ -131,44 +131,39 @@ namespace DPVreony.WebsiteBuilder
                     regenerationInterval: regenInterval);
             }
 
-            app.MapGet("/*/{filename}.svg",
-                static async (
-                    HttpRequest request,
-                    string filename,
-                    Whipstaff.Mermaid.Playwright.IPlaywrightRendererBrowserInstance playwrightRendererBrowserInstance,
-                    IFileSystem fileSystem,
-                    IWebHostEnvironment environment) =>
+            app.Use(async (context, next) =>
+            {
+                if (context.Request.Method == HttpMethods.Get && 
+                    context.Request.Path.Value?.EndsWith(".svg", StringComparison.OrdinalIgnoreCase) == true)
                 {
-                    // need the http request path to be able to resolve the source file for the diagram, so we can check if it exists and is within the web root, etc. before trying to render it
-                    var requestPath = request.Path.Value;
-                    if (string.IsNullOrEmpty(requestPath))
-                    {
-                        return Results.BadRequest();
-                    }
+                    var path = context.Request.Path.Value.TrimStart('/');
+                    var mmdPath = System.IO.Path.ChangeExtension(path, ".mmd");
 
-                    var mmdPath = System.IO.Path.ChangeExtension(requestPath.TrimStart('/'), ".mmd");
-
+                    var environment = context.RequestServices.GetRequiredService<IWebHostEnvironment>();
                     var fileInfo = environment.WebRootFileProvider.GetFileInfo(mmdPath);
-                    if (!fileInfo.Exists)
+
+                    if (fileInfo.Exists)
                     {
-                        return Results.NotFound("Source .mmd file not found");
+                        var fileSystem = context.RequestServices.GetRequiredService<IFileSystem>();
+                        var playwrightRendererBrowserInstance = context.RequestServices.GetRequiredService<IPlaywrightRendererBrowserInstance>();
+
+                        var sourceFileInfo = fileSystem.FileInfo.New(mmdPath);
+                        var mermaidDiagram = await playwrightRendererBrowserInstance.GetDiagramAsync(sourceFileInfo)
+                            .ConfigureAwait(false);
+
+                        if (mermaidDiagram != null)
+                        {
+                            var fileBytes = System.Text.Encoding.UTF8.GetBytes(mermaidDiagram.Svg);
+                            context.Response.ContentType = "image/svg+xml";
+                            await context.Response.Body.WriteAsync(fileBytes)
+                                .ConfigureAwait(false);
+                            return;
+                        }
                     }
+                }
 
-                    var sourceFileInfo = fileSystem.FileInfo.New(mmdPath);
-                    var mermaidDiagram = await playwrightRendererBrowserInstance.GetDiagramAsync(sourceFileInfo)
-                        .ConfigureAwait(false);
-
-                    if (mermaidDiagram == null)
-                    {
-                        return Results.NotFound();
-                    }
-
-                    var fileBytes = System.Text.Encoding.UTF8.GetBytes(mermaidDiagram.Svg);
-
-                    return Results.File(
-                        fileBytes,
-                        "image/svg+xml");
-                });
+                await next(context).ConfigureAwait(false);
+            });
 
             await app.RunAsync()
                 .ConfigureAwait(false);
