@@ -7,6 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="AspNetCore.SassCompiler" Version="1.97.1" />
     <PackageReference Include="AspNetStatic" Version="0.27.7" />
     <PackageReference Include="AspNetStaticContrib" Version="1.2.1" />
     <PackageReference Include="AspNetStaticContrib.Stekeblad" Version="1.0.0" />
@@ -19,4 +20,24 @@
     <Folder Include="Pages\Shared\" />
   </ItemGroup>
 
+  <!-- these tasks remove the need for gulp, grunt, npm, etc. to be used for file copying -->
+  <ItemGroup>
+    <NpmBootStrapFilesToCopy Include="$(ProjectDir)node_modules\bootstrap\dist\**\*.*" />
+    <NpmCookieConsentFilesToCopy Include="$(ProjectDir)node_modules\cookieconsent\build\*.*" />
+    <NpmHighlightJsFilesToCopy Include="$(ProjectDir)node_modules\highlight.js\lib\*.*" />
+    <NpmJQueryFilesToCopy Include="$(ProjectDir)node_modules\jquery\dist\**\*.*" />
+    <NpmFontAwesomeFreeFilesToCopy Include="$(ProjectDir)node_modules\@fortawesome\fontawesome-free\**\*.css" />
+    <NpmFontAwesomeFreeFilesToCopy Include="$(ProjectDir)node_modules\@fortawesome\fontawesome-free\**\*.js" />
+    <NpmFontAwesomeFreeFilesToCopy Include="$(ProjectDir)node_modules\@fortawesome\fontawesome-free\**\*.svg" />
+    <NpmFontAwesomeFreeFilesToCopy Include="$(ProjectDir)node_modules\@fortawesome\fontawesome-free\**\*.tff" />
+    <NpmFontAwesomeFreeFilesToCopy Include="$(ProjectDir)node_modules\@fortawesome\fontawesome-free\**\*.woff2" />
+  </ItemGroup>
+  <Target Name="CopyNpmTasks" BeforeTargets="BeforeBuild">
+    <Message Text="Starting NPM Package Copy Task" />
+    <Copy SkipUnchangedFiles="True" SourceFiles="@(NpmBootStrapFilesToCopy)" DestinationFiles="@(NpmBootStrapFilesToCopy->'$(ProjectDir)theme\input\lib\bootstrap\%(RecursiveDir)%(Filename)%(Extension)')" />
+    <Copy SkipUnchangedFiles="True" SourceFiles="@(NpmCookieConsentFilesToCopy)" DestinationFiles="@(NpmCookieConsentFilesToCopy->'$(ProjectDir)theme\input\lib\cookieconsent\%(RecursiveDir)%(Filename)%(Extension)')" />
+    <Copy SkipUnchangedFiles="True" SourceFiles="@(NpmHighlightJsFilesToCopy)" DestinationFiles="@(NpmHighlightJsFilesToCopy->'$(ProjectDir)theme\input\lib\highlightjs\%(RecursiveDir)%(Filename)%(Extension)')" />
+    <Copy SkipUnchangedFiles="True" SourceFiles="@(NpmJQueryFilesToCopy)" DestinationFiles="@(NpmJQueryFilesToCopy->'$(ProjectDir)theme\input\lib\jquery\%(RecursiveDir)%(Filename)%(Extension)')" />
+    <Copy SkipUnchangedFiles="True" SourceFiles="@(NpmFontAwesomeFreeFilesToCopy)" DestinationFiles="@(NpmFontAwesomeFreeFilesToCopy->'$(ProjectDir)theme\input\lib\fontawesome-free\%(RecursiveDir)%(Filename)%(Extension)')" />
+  </Target>
 </Project>
