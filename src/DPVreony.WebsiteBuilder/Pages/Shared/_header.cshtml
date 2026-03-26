@@ -1,10 +1,4 @@
-﻿@{ string backgroundImage = null;
-                if (Document.ContainsKey(WebKeys.Image))
-                {
-                    backgroundImage = $"background-image: url(\"{Context.GetLink(Document.GetString(WebKeys.Image))}\")";
-                }
-                string description = Document.WithoutSettings().GetString("Lead") ?? Document.WithoutSettings().GetString(WebKeys.Description); }
-<header class="header">
+﻿<header class="header">
     <div class="headerinner">
         <div class="floatcontainer">
             <div class="sitetitle">

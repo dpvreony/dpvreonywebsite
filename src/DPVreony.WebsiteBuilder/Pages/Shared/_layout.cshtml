@@ -2,10 +2,10 @@
 <html lang="en">
 @await Html.PartialAsync("_head")
 <body>
-    <!-- Navigation -->
-    @RenderSectionOrPartial("Navigation", "_navigation")
+<!-- Navigation -->
+    @await Html.PartialAsync("_navigation")
     <!-- Page Header -->
-    @RenderSectionOrPartial("Header", "_header")
+    @await Html.PartialAsync("_header")
     <!-- Main Content -->
     <div class="container">
         <div class="row">
@@ -20,12 +20,12 @@
     </div>
     <hr>
     <!-- Footer -->
-    @RenderSectionOrPartial("Footer", "_footer")
-@await Html.PartialAsync("_scripts")
-@await RenderSectionAsync("Scripts", false)
-<!-- Bootstrap core JavaScript -->
-    <script src="@Context.GetLink("/lib/jquery/jquery.min.js")"></script>
-    <script src="@Context.GetLink("/lib/bootstrap/js/bootstrap.bundle.min.js")"></script>
+    @await Html.PartialAsync("_footer")
+    @await Html.PartialAsync("_scripts")
+    @await RenderSectionAsync("Scripts", false)
+    <!-- Bootstrap core JavaScript -->
+    <script src="/lib/jquery/jquery.min.js"></script>
+    <script src="/lib/bootstrap/js/bootstrap.bundle.min.js"></script>
     <script src="/lib/cookieconsent/cookieconsent.min.js" data-cfasync="false"></script>
     <script>
         window.cookieconsent.initialise({

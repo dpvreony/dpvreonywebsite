@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
@@ -7,9 +7,15 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="AspNetStatic" Version="0.27.2" />
+    <PackageReference Include="AspNetStatic" Version="0.27.7" />
     <PackageReference Include="AspNetStaticContrib" Version="1.2.1" />
     <PackageReference Include="AspNetStaticContrib.Stekeblad" Version="1.0.0" />
+    <PackageReference Include="Whipstaff.NodaTime" Version="9.1.36" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Components\" />
+    <Folder Include="Pages\Shared\" />
   </ItemGroup>
 
 </Project>
