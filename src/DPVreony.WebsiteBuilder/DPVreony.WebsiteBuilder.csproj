@@ -42,4 +42,26 @@
     <Copy SkipUnchangedFiles="True" SourceFiles="@(NpmJQueryFilesToCopy)" DestinationFiles="@(NpmJQueryFilesToCopy->'$(ProjectDir)wwwroot\lib\jquery\%(RecursiveDir)%(Filename)%(Extension)')" />
     <Copy SkipUnchangedFiles="True" SourceFiles="@(NpmFontAwesomeFreeFilesToCopy)" DestinationFiles="@(NpmFontAwesomeFreeFilesToCopy->'$(ProjectDir)wwwroot\lib\fontawesome-free\%(RecursiveDir)%(Filename)%(Extension)')" />
   </Target>
+
+  <PropertyGroup>
+    <NpmInstallStamp>$(ProjectDir)node_modules\.msbuild-npm-install.stamp</NpmInstallStamp>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <NpmInstallInputs Include="$(ProjectDir)\package.json" />
+    <NpmInstallInputs Include="$(ProjectDir)\package-lock.json" />
+  </ItemGroup>
+
+  <Target Name="NpmInstallIncremental"
+          BeforeTargets="CopyNpmTasks"
+          Inputs="@(NpmInstallInputs)"
+          Outputs="$(NpmInstallStamp)"
+          Condition="!Exists('$(ProjectDir)\node_modules\') OR !Exists('$(NpmInstallStamp)')">
+    <Message Text="Running npm install (inputs changed or stamp missing)..." Importance="high" />
+    <Exec WorkingDirectory="$(ProjectDir)" Command="npm install" />
+
+    <!-- Update/create the stamp so incremental build can compare timestamps next time -->
+    <Touch Files="$(NpmInstallStamp)" AlwaysCreate="true" />
+  </Target>
+
 </Project>
