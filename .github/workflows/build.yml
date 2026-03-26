@@ -5,7 +5,7 @@ on:
   push:
     branches: [ main ]
   pull_request:
-    types: [opened, synchronize, reopened, closed]
+    types: [opened, synchronize, reopened]
     branches: [ main ]
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
@@ -36,10 +36,10 @@ jobs:
     - name: Verify the head ref context
       run: echo 'Head Ref Context is ${{ github.head_ref }}'
 
-    - name: Install .NET 8
+    - name: Install .NET
       uses: actions/setup-dotnet@v5
       with:
-        dotnet-version: 10.0.x
+        global-json-file: "global.json"
 
     - name: NPM package restore
       run: |
@@ -62,7 +62,7 @@ jobs:
         dotnet build ${{ env.solutionpath }} --configuration Release --no-restore /bl:artifacts\\binlog\\build.binlog /p:ContinuousIntegrationBuild=true
 
     - name: Install Playwright
-      working-directory: src/dpvreony.website/bin/Release/net8.0
+      working-directory: src/dpvreony.website/bin/Release/net10.0
       shell: pwsh
       run: .\playwright.ps1 install
 
