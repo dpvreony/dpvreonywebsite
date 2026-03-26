@@ -25,7 +25,9 @@ namespace DPVreony.WebsiteBuilder
             this StaticResourcesInfoProvider staticResourcesInfoProvider,
             IWebHostEnvironment environment)
         {
-
+            return staticResourcesInfoProvider.Add(environment.GetWebRootJsResources(
+                ["lib/cookieconsent/*.js"],
+                dontOptimize: true));
         }
 
         public static StaticResourcesInfoProvider AddFontAwesomeFree(
@@ -51,7 +53,9 @@ namespace DPVreony.WebsiteBuilder
             this StaticResourcesInfoProvider staticResourcesInfoProvider,
             IWebHostEnvironment environment)
         {
-
+            return staticResourcesInfoProvider.Add(environment.GetWebRootJsResources(
+                ["lib/jquery*/**/*.js", "lib/jquery*/**/*.map"],
+                dontOptimize: true));
         }
     }
 }
