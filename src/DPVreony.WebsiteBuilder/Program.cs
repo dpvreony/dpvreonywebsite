@@ -12,7 +12,9 @@ using Microsoft.AspNetCore.TestHost;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Logging.Abstractions;
 using Microsoft.Playwright;
+using Whipstaff.Mermaid.HttpServer;
 using Whipstaff.Mermaid.Playwright;
 using Whipstaff.Playwright;
 
@@ -23,18 +25,24 @@ namespace DPVreony.WebsiteBuilder
     {
         public static async Task<int> Main(string[] args)
         {
+            // Create the Mermaid TestServer OUTSIDE of the main DI container for complete isolation
+            var loggerFactory = new NullLoggerFactory();
+            var fileSystem = new FileSystem();
+            var mermaidTestServer = MermaidHttpServerFactory.GetTestServer(
+                loggerFactory,
+                fileSystem);
 
             var builder = WebApplication.CreateBuilder(args);
             var services = builder.Services;
 
-            services.AddSingleton<IFileSystem>(new FileSystem());
+            services.AddSingleton<IFileSystem>(fileSystem);
 
             services.AddRouting(
                 options =>
                 {
                     options.LowercaseUrls = true;
                     options.LowercaseQueryStrings = true;
-                    options.AppendTrailingSlash = false;
+                    options.AppendTrailingSlash = true;
                 });
 
             services.AddRazorPages();
@@ -43,12 +51,16 @@ namespace DPVreony.WebsiteBuilder
                 GetStaticResourcesInfoProvider(builder)
                 );
 
-            services.AddSingleton<PlaywrightRenderer>(static provider =>
+            services.AddKeyedSingleton<TestServer>(
+                "mermaid",
+                (_, _) => mermaidTestServer);
+
+            services.AddSingleton<PlaywrightRenderer>(provider =>
             {
                 var mermaidHttpServer = provider.GetRequiredKeyedService<TestServer>("mermaid");
                 var logMessageActions = new PlaywrightRendererBrowserInstanceLogMessageActions();
-                var loggerFactory = provider.GetRequiredService<ILoggerFactory>();
-                var logger = loggerFactory.CreateLogger<PlaywrightRendererBrowserInstance>();
+                var appLoggerFactory = provider.GetRequiredService<ILoggerFactory>();
+                var logger = appLoggerFactory.CreateLogger<PlaywrightRendererBrowserInstance>();
                 var logMessageActionsWrapper = new PlaywrightRendererBrowserInstanceLogMessageActionsWrapper(
                     logMessageActions,
                     logger);
