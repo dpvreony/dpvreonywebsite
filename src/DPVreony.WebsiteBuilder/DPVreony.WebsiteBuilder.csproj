@@ -34,10 +34,10 @@
   </ItemGroup>
   <Target Name="CopyNpmTasks" BeforeTargets="BeforeBuild">
     <Message Text="Starting NPM Package Copy Task" />
-    <Copy SkipUnchangedFiles="True" SourceFiles="@(NpmBootStrapFilesToCopy)" DestinationFiles="@(NpmBootStrapFilesToCopy->'$(ProjectDir)theme\input\lib\bootstrap\%(RecursiveDir)%(Filename)%(Extension)')" />
-    <Copy SkipUnchangedFiles="True" SourceFiles="@(NpmCookieConsentFilesToCopy)" DestinationFiles="@(NpmCookieConsentFilesToCopy->'$(ProjectDir)theme\input\lib\cookieconsent\%(RecursiveDir)%(Filename)%(Extension)')" />
-    <Copy SkipUnchangedFiles="True" SourceFiles="@(NpmHighlightJsFilesToCopy)" DestinationFiles="@(NpmHighlightJsFilesToCopy->'$(ProjectDir)theme\input\lib\highlightjs\%(RecursiveDir)%(Filename)%(Extension)')" />
-    <Copy SkipUnchangedFiles="True" SourceFiles="@(NpmJQueryFilesToCopy)" DestinationFiles="@(NpmJQueryFilesToCopy->'$(ProjectDir)theme\input\lib\jquery\%(RecursiveDir)%(Filename)%(Extension)')" />
-    <Copy SkipUnchangedFiles="True" SourceFiles="@(NpmFontAwesomeFreeFilesToCopy)" DestinationFiles="@(NpmFontAwesomeFreeFilesToCopy->'$(ProjectDir)theme\input\lib\fontawesome-free\%(RecursiveDir)%(Filename)%(Extension)')" />
+    <Copy SkipUnchangedFiles="True" SourceFiles="@(NpmBootStrapFilesToCopy)" DestinationFiles="@(NpmBootStrapFilesToCopy->'$(ProjectDir)wwwroot\lib\bootstrap\%(RecursiveDir)%(Filename)%(Extension)')" />
+    <Copy SkipUnchangedFiles="True" SourceFiles="@(NpmCookieConsentFilesToCopy)" DestinationFiles="@(NpmCookieConsentFilesToCopy->'$(ProjectDir)wwwroot\lib\cookieconsent\%(RecursiveDir)%(Filename)%(Extension)')" />
+    <Copy SkipUnchangedFiles="True" SourceFiles="@(NpmHighlightJsFilesToCopy)" DestinationFiles="@(NpmHighlightJsFilesToCopy->'$(ProjectDir)wwwroot\lib\highlightjs\%(RecursiveDir)%(Filename)%(Extension)')" />
+    <Copy SkipUnchangedFiles="True" SourceFiles="@(NpmJQueryFilesToCopy)" DestinationFiles="@(NpmJQueryFilesToCopy->'$(ProjectDir)wwwroot\lib\jquery\%(RecursiveDir)%(Filename)%(Extension)')" />
+    <Copy SkipUnchangedFiles="True" SourceFiles="@(NpmFontAwesomeFreeFilesToCopy)" DestinationFiles="@(NpmFontAwesomeFreeFilesToCopy->'$(ProjectDir)wwwroot\lib\fontawesome-free\%(RecursiveDir)%(Filename)%(Extension)')" />
   </Target>
 </Project>
