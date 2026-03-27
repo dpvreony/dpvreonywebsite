@@ -3,12 +3,12 @@
 @using NodaTime
 @{
     var articleMetadata = new ArticleMetadataModel(
-        ArticleStatus.Draft,
-        new Version(0, 1),
+        ArticleStatus.Released,
+        new Version(1, 0),
         new LocalDate(2021, 05, 31),
-        new LocalDate(2021, 05, 31),
-        new LocalDate(2021, 05, 31),
-        new LocalDate(2021, 07, 01));
+        new LocalDate(2026, 03, 27),
+        new LocalDate(2026, 03, 27),
+        new LocalDate(2026, 09, 27));
 }
 <div class="row">
     <div class="col-md-8">
@@ -190,6 +190,27 @@
         <p>
             By capturing this comprehensive set of metrics, you can build a detailed report of your application's health, 
             identifying not just obvious failures but also subtle issues that may impact user experience or indicate technical debt.
+        </p>
+
+        <h2>Conclusion</h2>
+        <p>
+            Implementing a web crawler as part of your integration testing strategy provides comprehensive coverage that goes far 
+            beyond traditional endpoint testing. By combining ASP.NET Core's <code>WebApplicationFactory</code> with Playwright.NET, 
+            you create a powerful testing environment that runs entirely in-memory, requiring no external infrastructure while still 
+            exercising your application through a real browser engine.
+        </p>
+        <p>
+            The systematic crawling approach automatically discovers and validates every page in your application, capturing a rich 
+            set of metrics including HTTP status codes, console messages, page errors, request failures, CSS validation, and 
+            accessibility compliance. This comprehensive validation catches issues that might otherwise slip through to production, 
+            from broken links and missing resources to subtle problems like Content Security Policy violations, undefined CSS classes, 
+            or incomplete alt text on images.
+        </p>
+        <p>
+            Most importantly, this approach is fully automated and can run as part of your CI/CD pipeline without requiring external 
+            services or complex infrastructure setup. By investing in web crawling tests, you gain confidence that your entire 
+            application is healthy, accessible, and ready for deployment, while also building a valuable regression test suite that 
+            continuously validates your application's integrity as it evolves.
         </p>
 
         <h2>References</h2>
