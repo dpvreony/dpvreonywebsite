@@ -149,14 +149,6 @@ namespace DPVreony.WebsiteBuilder
                     context.Request.Path.Value?.EndsWith(".svg", StringComparison.OrdinalIgnoreCase) == true)
                 {
                     var environment = context.RequestServices.GetRequiredService<IWebHostEnvironment>();
-                    var svgFileInfo = environment.WebRootFileProvider.GetFileInfo(context.Request.Path.Value);
-                    if (svgFileInfo.Exists)
-                    {
-                        // we've already got an SVG file, so just serve it up
-                        // we let the static files middleware handle it, so we can skip our custom handling
-                        await next(context);
-                    }
-
                     var path = context.Request.Path.Value.TrimStart('/');
                     var mmdPath = System.IO.Path.ChangeExtension(path, ".mmd");
 
@@ -182,7 +174,8 @@ namespace DPVreony.WebsiteBuilder
                     }
                 }
 
-                await next(context).ConfigureAwait(false);
+                await next(context)
+                    .ConfigureAwait(false);
             });
 
             await app.RunAsync()
