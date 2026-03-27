@@ -190,6 +190,7 @@ namespace DPVreony.WebsiteBuilder
 
             return new StaticResourcesInfoProvider()
                 .Add(StaticPagesFactory.GetCollection())
+                .Add(StaticPagesFactory.GetBinResources())
                 .Add(environment.GetWebRootCssResources(
                     ["css/**/*.css"]))
                 .Add(environment.GetWebRootCssResources(

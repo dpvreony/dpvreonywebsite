@@ -14,8 +14,12 @@ namespace DPVreony.WebsiteBuilder
             new("/privacy/"),
             new("/articles/"),
             new("/articles/designing-vetuviem/"),
-            new("/articles/designing-vetuviem/diagram-class-viewtoviewmodel-relationship.svg") { OptimizationType = OptimizationType.None},
-            new("/articles/designing-vetuviem/diagram-controlbindingmodel-hierachy.svg") { OptimizationType = OptimizationType.None},
+        ];
+
+        public static IEnumerable<BinResource> GetBinResources() =>
+        [
+            new("/articles/designing-vetuviem/diagram-class-viewtoviewmodel-relationship.svg"),
+            new("/articles/designing-vetuviem/diagram-controlbindingmodel-hierachy.svg"),
         ];
     }
 }
