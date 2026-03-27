@@ -3,22 +3,514 @@
 @using NodaTime
 @{
     var articleMetadata = new ArticleMetadataModel(
-        ArticleStatus.Draft,
-        new Version(0, 1),
+        ArticleStatus.Released,
+        new Version(1, 0),
         new LocalDate(2021, 05, 31),
-        new LocalDate(2021, 05, 31),
-        new LocalDate(2021, 05, 31),
-        new LocalDate(2021, 07, 01));
+        new LocalDate(2026, 03, 27),
+        new LocalDate(2026, 03, 27),
+        new LocalDate(2026, 09, 27));
 }
 <div class="row">
     <div class="col-md-8">
         <h1>Using Architecture Decision Records.</h1>
 
         <h2>Introduction</h2>
-        <p>TODO</p>
+        <p>
+            Architecture Decision Records (ADRs) are lightweight documents that capture important architectural decisions made during software development,
+            along with their context and consequences. Each ADR describes a specific decision, why it was made, what alternatives were considered,
+            and the expected impact on the system.
+        </p>
+        <p>
+            ADRs provide valuable documentation that helps teams understand the reasoning behind past decisions, especially as projects evolve
+            and team members change. They serve as a historical record that prevents repeated debates over settled issues and helps maintain
+            consistency in architectural approaches.
+        </p>
+        <p>
+            By keeping ADRs in version control alongside the code, they become part of the project's living documentation,
+            making it easier to trace the evolution of architectural thinking and understand the trade-offs that shaped the current system.
+        </p>
+        
+        <h2>Structure of an ADR</h2>
+        <p>
+            While ADR formats can vary between teams, most follow a consistent structure that ensures all relevant information is captured.
+            A typical ADR includes the following sections:
+        </p>
+        <ul>
+            <li>
+                <strong>Title</strong> - A short, descriptive name that clearly identifies the decision. Titles are often numbered sequentially 
+                (e.g., "ADR-001: Use PostgreSQL for primary data storage") to make them easy to reference.
+            </li>
+            <li>
+                <strong>Status</strong> - The current state of the decision, such as Proposed, Accepted, Rejected, Deprecated, or Superseded. 
+                This helps readers quickly understand whether the decision is still active or has been replaced by a newer ADR.
+            </li>
+            <li>
+                <strong>Context</strong> - The background and circumstances that led to the need for a decision. This section describes the problem, 
+                constraints, requirements, and any relevant technical or business context that influenced the decision.
+            </li>
+            <li>
+                <strong>Decision</strong> - A clear statement of what was decided. This should be concise and unambiguous, describing the chosen 
+                approach or solution without justification (which belongs in other sections).
+            </li>
+            <li>
+                <strong>Consequences</strong> - The expected outcomes of the decision, both positive and negative. This includes anticipated benefits, 
+                drawbacks, trade-offs, risks, and any technical debt or follow-up work that may result from the decision.
+            </li>
+            <li>
+                <strong>Alternatives Considered</strong> - A summary of other options that were evaluated and why they were not chosen. This prevents 
+                future teams from revisiting the same alternatives without understanding why they were rejected.
+            </li>
+            <li>
+                <strong>References</strong> (optional) - Links to relevant documentation, discussions, prototypes, or external resources that 
+                provide additional context or supporting information.
+            </li>
+        </ul>
+        <p>
+            Many teams use templates to ensure consistency across their ADRs. Popular formats include Michael Nygard's original template, 
+            the <a href="https://adr.github.io/madr/" target="_blank">MADR (Markdown Architectural Decision Records)</a> format, and the 
+            <a href="https://www.ozimmer.ch/practices/2020/04/27/ArchitectureDecisionMaking.html" target="_blank">Y-statement</a> format that structures decisions as 
+            "In the context of [context], facing [concern], we decided for [option] to achieve [quality], accepting [downside]."
+        </p>
+
+        <h2>Creating and Maintaining ADRs</h2>
+        <p>
+            Creating an ADR should be part of the natural decision-making process. When a significant architectural choice needs to be made, 
+            document it immediately while the context is fresh and the reasoning is clear. Use a consistent template and numbering scheme 
+            to make ADRs easy to reference and navigate.
+        </p>
+
+        <h3>The ADR Lifecycle</h3>
+        <p>
+            ADRs follow a lifecycle that reflects the evolution of architectural decisions over time. Understanding this lifecycle is crucial 
+            for maintaining an accurate and useful record of architectural thinking:
+        </p>
+        <ul>
+            <li>
+                <strong>Proposed</strong> - The decision is under consideration and discussion. This status allows teams to document and 
+                evaluate options before commitment.
+            </li>
+            <li>
+                <strong>Accepted</strong> - The decision has been approved and is being implemented or is already in effect. This is the 
+                active state for current architectural decisions.
+            </li>
+            <li>
+                <strong>Deprecated</strong> - The decision is no longer recommended but may still be in use in parts of the system. This 
+                status signals that the approach should not be used for new work.
+            </li>
+            <li>
+                <strong>Superseded</strong> - The decision has been replaced by a newer decision. The ADR should include a clear reference 
+                to the superseding ADR and explain why the change was necessary.
+            </li>
+            <li>
+                <strong>Rejected</strong> - The proposal was considered but not accepted. Documenting rejected decisions prevents future 
+                teams from revisiting the same unsuccessful approaches.
+            </li>
+        </ul>
+        <p>
+            The following diagram illustrates the ADR lifecycle and how decisions evolve over time:
+        </p>
+        <div class="mermaid">
+            stateDiagram-v2
+                [*] --> Proposed: Create ADR
+                Proposed --> Accepted: Approve decision
+                Proposed --> Rejected: Decline proposal
+                Accepted --> Deprecated: No longer recommended
+                Accepted --> Superseded: Replace with new ADR
+                Accepted --> Proposed: Evolve decision<br/>(create new ADR)
+                Superseded --> [*]
+                Rejected --> [*]
+                Deprecated --> Superseded: Formally replace
+
+                note right of Proposed
+                    Document decision<br/>
+                    while under review
+                end note
+
+                note right of Accepted
+                    Active decision<br/>
+                    in current use
+                end note
+
+                note right of Superseded
+                    Replaced by newer ADR<br/>
+                    Retained for history
+                end note
+
+                note right of Deprecated
+                    Avoid for new work<br/>
+                    May still exist in code
+                end note
+        </div>
+
+        <h3>Replacing and Retiring ADRs</h3>
+        <p>
+            As systems evolve, architectural decisions inevitably change. When this happens, it's critical to retain older ADRs for historical 
+            reference rather than deleting or overwriting them. This historical record provides valuable context about why certain approaches 
+            were tried and abandoned, preventing teams from repeating past mistakes.
+        </p>
+        <p>
+            When retiring an ADR, mark it as Superseded and include:
+        </p>
+        <ul>
+            <li>A clear reference to the new ADR that replaces it (e.g., "Superseded by ADR-042")</li>
+            <li>The date when the decision was superseded</li>
+            <li>A brief explanation of why the change was necessary</li>
+            <li>Any migration considerations or transition period details</li>
+        </ul>
+        <p>
+            Common reasons for superseding ADRs include:
+        </p>
+        <ul>
+            <li>
+                <strong>Hosting and Infrastructure Changes</strong> - Moving from on-premises to cloud, changing cloud providers, or adopting 
+                containerization often requires revisiting storage, networking, and deployment decisions.
+            </li>
+            <li>
+                <strong>Operating System and Framework Lifecycles</strong> - As platforms reach end-of-life or new versions offer compelling 
+                features, decisions about runtime environments, dependencies, and compatibility need to be updated. For example, migrating from 
+                .NET Framework to modern .NET, or upgrading from older Linux distributions.
+            </li>
+            <li>
+                <strong>Technology Maturity</strong> - Technologies that were experimental or cutting-edge when chosen may become mainstream 
+                and stable, or conversely, may fail to gain adoption and be abandoned.
+            </li>
+            <li>
+                <strong>Practice and Pattern Evolution</strong> - Industry best practices evolve as lessons are learned. Patterns like 
+                microservices, event sourcing, or CQRS may be adopted or replaced based on organizational experience and changing requirements.
+            </li>
+            <li>
+                <strong>Scale and Performance Requirements</strong> - As systems grow, decisions that worked at small scale may need to be 
+                replaced with solutions that handle higher throughput, larger data volumes, or more complex workloads.
+            </li>
+            <li>
+                <strong>Security and Compliance Changes</strong> - New security vulnerabilities, regulatory requirements, or compliance 
+                standards may necessitate replacing cryptographic algorithms, authentication mechanisms, or data handling approaches.
+            </li>
+            <li>
+                <strong>Cost Optimization</strong> - Financial constraints or changing pricing models may drive decisions to replace expensive 
+                services with more cost-effective alternatives.
+            </li>
+        </ul>
+        <p>
+            By maintaining this historical chain of decisions, teams can understand not just what the current architecture is, but how it 
+            evolved and why certain paths were taken or abandoned. This knowledge is invaluable during system audits, onboarding new team 
+            members, and planning future architectural changes.
+        </p>
+
+        <h2>Benefits of Using ADRs</h2>
+        <p>
+            Beyond the immediate value of documenting individual decisions, ADRs provide substantial long-term benefits that compound over time.
+            Teams that consistently use ADRs often find they become an indispensable part of their development culture.
+        </p>
+        <ul>
+            <li>
+                <strong>Knowledge Retention and Transfer</strong> - ADRs preserve institutional knowledge that would otherwise be lost when team 
+                members leave or move to other projects. New team members can understand not just what the architecture is, but why it evolved 
+                that way, dramatically reducing the time needed to become productive contributors.
+            </li>
+            <li>
+                <strong>Faster Onboarding</strong> - Instead of relying on tribal knowledge or lengthy explanations from senior developers, 
+                new team members can read through ADRs to understand the "why" behind architectural choices. This self-service approach to learning 
+                the system's history accelerates onboarding and builds confidence in new contributors.
+            </li>
+            <li>
+                <strong>Avoiding Repeated Debates</strong> - Once a decision is documented and accepted, teams can reference the ADR when similar 
+                questions arise, avoiding endless re-litigation of settled issues. This saves significant time in meetings and design discussions, 
+                allowing teams to focus on new challenges rather than rehashing old ones.
+            </li>
+            <li>
+                <strong>Better Decision Quality</strong> - The structured format of ADRs encourages thorough analysis of alternatives and 
+                consequences. The act of writing forces deeper thinking about trade-offs, often revealing issues or considerations that might 
+                be overlooked in informal discussions.
+            </li>
+            <li>
+                <strong>Team Alignment</strong> - ADRs provide a shared understanding of architectural direction, which is especially valuable 
+                for distributed teams across time zones. They ensure everyone is working from the same architectural foundation, reducing conflicts 
+                and misunderstandings about technical direction.
+            </li>
+            <li>
+                <strong>Audit Trail and Governance</strong> - For organizations with compliance or governance requirements, ADRs provide a 
+                clear audit trail of architectural decisions, their justifications, and approvals. This documentation can be crucial during 
+                audits, regulatory reviews, or post-incident analyses.
+            </li>
+            <li>
+                <strong>Long-term Maintainability</strong> - Years after a decision is made, ADRs help future maintainers understand constraints 
+                and trade-offs that may not be obvious from the code alone. This context prevents well-intentioned "improvements" that unknowingly 
+                violate important assumptions or reintroduce previously rejected approaches.
+            </li>
+            <li>
+                <strong>Reduced Technical Debt</strong> - By making architectural decisions explicit and considering consequences upfront, 
+                teams are more likely to make choices that balance short-term needs with long-term maintainability, reducing accumulation of 
+                technical debt.
+            </li>
+        </ul>
+
+        <h2>Benefits of ADRs when working with AI agents</h2>
+        <p>
+            AI coding agents like GitHub Copilot and Claude can leverage ADRs as part of their context and instruction set to make more informed 
+            decisions when assisting with code changes. By including ADRs in the workspace or referencing them in custom instructions, 
+            these agents gain insight into the architectural principles and constraints that govern the project.
+        </p>
+        <p>
+            When an AI agent has access to ADRs, it can:
+        </p>
+        <ul>
+            <li><strong>Respect existing architectural decisions</strong> - Understanding why certain patterns or technologies were chosen helps agents suggest solutions that align with established principles rather than introducing conflicting approaches.</li>
+            <li><strong>Avoid superseded patterns</strong> - ADRs that mark decisions as superseded guide agents away from deprecated approaches, ensuring new code follows current best practices.</li>
+            <li><strong>Provide context-aware suggestions</strong> - Knowledge of the trade-offs documented in ADRs enables agents to make recommendations that fit within the project's architectural constraints.</li>
+            <li><strong>Generate draft ADRs</strong> - When significant architectural changes are proposed, agents can help draft new ADRs by analyzing the change, identifying alternatives, and documenting consequences.</li>
+            <li><strong>Maintain consistency across the codebase</strong> - By understanding architectural decisions, agents can help enforce consistency when implementing features or refactoring code.</li>
+        </ul>
+        <p>
+            An often-overlooked benefit of incorporating ADR creation into your AI agent workflow is that it provides a valuable validation 
+            checkpoint. When you ask an AI agent to draft or update an ADR as part of implementing a feature or making architectural changes, 
+            the resulting ADR document serves as a text-based proof of understanding. By reviewing the agent's ADR draft, you can quickly 
+            verify that the AI has correctly understood:
+        </p>
+        <ul>
+            <li>The context and constraints of your request</li>
+            <li>The architectural implications of the proposed changes</li>
+            <li>Alternative approaches and why they were or weren't chosen</li>
+            <li>The trade-offs and consequences of the decision</li>
+        </ul>
+        <p>
+            This gives you two validation points rather than one: you can review both the proposed code changes and the architectural 
+            reasoning behind them. If the ADR reveals a misunderstanding of your requirements or constraints, you can catch and correct 
+            it before the agent proceeds with implementation. This text-based validation is often easier and faster to review than 
+            code alone, especially for complex architectural decisions that span multiple files or components.
+        </p>
+        <p>
+            Beyond validation, AI agents dramatically reduce the time and effort required to produce high-quality ADRs. One of the 
+            primary reasons teams struggle to adopt ADRs consistently is the perceived burden of writing documentation. AI assistants 
+            eliminate much of this friction by generating well-structured first drafts based on conversational descriptions of the 
+            problem and proposed solution. What might have taken 30-60 minutes to write manually can often be drafted by an AI in 
+            seconds, leaving you to review, refine, and approve rather than starting from a blank page.
+        </p>
+        <p>
+            AI agents excel at several aspects of ADR creation that developers often find tedious or time-consuming:
+        </p>
+        <ul>
+            <li>
+                <strong>Articulating trade-offs clearly</strong> - AI can help express the nuances of technical trade-offs in clear, 
+                accessible language that benefits both technical and non-technical stakeholders.
+            </li>
+            <li>
+                <strong>Identifying alternatives</strong> - By drawing on broad knowledge of architectural patterns and technologies, 
+                AI can suggest alternatives you may not have explicitly considered, enriching the "Alternatives Considered" section.
+            </li>
+            <li>
+                <strong>Maintaining consistent format</strong> - AI agents naturally follow templates and maintain consistent structure 
+                across all ADRs, reducing the cognitive load of remembering what sections to include.
+            </li>
+            <li>
+                <strong>Updating existing ADRs</strong> - When decisions evolve, AI can help draft superseding ADRs that properly reference 
+                previous decisions and explain the rationale for change, maintaining the historical chain.
+            </li>
+        </ul>
+        <p>
+            This efficiency gain transforms ADRs from a documentation burden into a lightweight practice that teams can sustain long-term. 
+            When creating an ADR takes minutes instead of an hour, teams are far more likely to document decisions consistently, ensuring 
+            that the architectural record remains current and comprehensive.
+        </p>
+        <p>
+            To maximize the effectiveness of ADRs with AI agents, consider storing them in a well-known location like <code>/docs/adr/</code> 
+            or <code>/architecture/decisions/</code>, and reference this location in your project's README or custom instructions for the AI.
+            Many teams also include a link to their ADR index in repository-level instruction files (such as <code>.copilot-instructions.md</code> 
+            or <code>.github/copilot-instructions.md</code>) so agents can easily discover and reference them during coding sessions.
+        </p>
+        <p>
+            Additionally, when working with AI agents on tasks that may require architectural decisions, explicitly asking the agent to 
+            consult existing ADRs or draft a new one helps maintain the discipline of documenting important choices. This creates a 
+            collaborative workflow where both human developers and AI assistants contribute to the project's architectural documentation.
+        </p>
+
+        <h2>Challenges and Best Practices</h2>
+        <p>
+            While ADRs offer significant benefits, teams often encounter challenges when adopting and maintaining them. Common obstacles include:
+        </p>
+        <ul>
+            <li>
+                <strong>Initial overhead</strong> - Taking time to document decisions can feel like it slows down development, especially when teams 
+                are used to informal decision-making processes.
+            </li>
+            <li>
+                <strong>Keeping them updated</strong> - As systems evolve, ADRs can become outdated if not properly maintained, potentially leading 
+                to confusion about which decisions are still relevant.
+            </li>
+            <li>
+                <strong>Adoption resistance</strong> - Team members may resist the additional documentation burden, particularly if they don't 
+                immediately see the value or if the process feels bureaucratic.
+            </li>
+            <li>
+                <strong>Finding the right level of detail</strong> - ADRs that are too detailed become burdensome to write and read, while those 
+                that are too brief may not provide enough context for future understanding.
+            </li>
+        </ul>
+        <p>
+            To overcome these challenges and maximize the value of ADRs, consider these best practices:
+        </p>
+        <ul>
+            <li>
+                <strong>Make it easy</strong> - Use templates and tools to reduce friction. Keep ADRs in Markdown format within the repository 
+                so they're easy to create and update with standard text editors or AI assistance.
+            </li>
+            <li>
+                <strong>Keep them short</strong> - Focus on capturing the essential information. An ADR doesn't need to be exhaustive—aim for 
+                one or two pages that can be read in a few minutes.
+            </li>
+            <li>
+                <strong>Write them at decision time</strong> - Document decisions when they're made, while context is fresh. Retroactively 
+                creating ADRs is much harder and often results in incomplete or inaccurate records.
+            </li>
+            <li>
+                <strong>Involve the team</strong> - Make ADR creation a collaborative activity. Reviews and discussions help ensure buy-in 
+                and improve the quality of both the decision and its documentation.
+            </li>
+            <li>
+                <strong>Embrace status changes</strong> - Don't delete ADRs when decisions change. Instead, mark them as Deprecated or Superseded 
+                and create new ADRs that reference the old ones. This preserves the historical context.
+            </li>
+            <li>
+                <strong>Review regularly</strong> - Periodically review your ADRs during retrospectives or architecture reviews to ensure they're 
+                still relevant and to identify decisions that need to be revisited.
+            </li>
+            <li>
+                <strong>Start small</strong> - Begin by documenting only significant architectural decisions. As the practice becomes established, 
+                you can expand to include more tactical decisions if desired.
+            </li>
+            <li>
+                <strong>Make them discoverable</strong> - Maintain an index or table of contents, and reference ADRs in code comments, pull requests, 
+                and technical discussions so team members learn to consult them.
+            </li>
+        </ul>
+
+        <h2>Tools and Resources</h2>
+        <p>
+            Several tools can help streamline the process of creating and managing ADRs, making it easier for teams to adopt and maintain 
+            this practice. These tools range from command-line utilities to editor integrations and automation frameworks.
+        </p>
+        <h3>Command-Line Tools</h3>
+        <ul>
+            <li>
+                <strong><a href="https://github.com/npryce/adr-tools" target="_blank">adr-tools</a></strong> - A collection of shell scripts 
+                for creating and managing ADRs. Provides commands to create new ADRs, link them together, and generate table of contents.
+            </li>
+            <li>
+                <strong><a href="https://github.com/phodal/adr" target="_blank">ADR CLI (Rust)</a></strong> - A fast, cross-platform ADR 
+                management tool written in Rust that supports multiple ADR formats including MADR.
+            </li>
+            <li>
+                <strong><a href="https://github.com/npryce/adr-log" target="_blank">adr-log</a></strong> - Generates a changelog-style 
+                summary of ADRs, useful for creating indexes or documentation pages.
+            </li>
+        </ul>
+        <h3>Editor Extensions</h3>
+        <ul>
+            <li>
+                <strong>VS Code Extensions</strong> - Several Visual Studio Code extensions provide snippets and templates for creating 
+                ADRs, including support for MADR format with auto-completion and validation.
+            </li>
+            <li>
+                <strong>IntelliJ Plugins</strong> - Plugins available for JetBrains IDEs that offer ADR templates and navigation support.
+            </li>
+        </ul>
+        <h3>Documentation Generators</h3>
+        <ul>
+            <li>
+                <strong><a href="https://github.com/adr/adr-viewer" target="_blank">ADR Viewer</a></strong> - Generates a browsable HTML 
+                website from your ADR collection, making it easy to navigate and search through decisions.
+            </li>
+            <li>
+                <strong><a href="https://github.com/mrwilson/adr-viewer" target="_blank">Web-based ADR Viewer</a></strong> - A web application 
+                that can display ADRs with graph visualization showing relationships between decisions.
+            </li>
+        </ul>
+        <h3>Integration with Development Workflows</h3>
+        <p>
+            Many teams integrate ADR creation into their development workflows by:
+        </p>
+        <ul>
+            <li>
+                <strong>Pull Request Templates</strong> - Including ADR requirements in PR templates when architectural changes are proposed
+            </li>
+            <li>
+                <strong>CI/CD Validation</strong> - Automating checks to ensure ADRs follow the correct format and are properly linked
+            </li>
+            <li>
+                <strong>Wiki Generation</strong> - Automatically publishing ADRs to team wikis or documentation sites
+            </li>
+            <li>
+                <strong>Architecture Diagrams</strong> - Tools like <a href="https://c4model.com/" target="_blank">C4 Model</a> can reference 
+                ADRs to provide context for architectural diagrams
+            </li>
+        </ul>
+        <h3>AI-Assisted ADR Creation</h3>
+        <p>
+            Modern AI coding assistants can significantly reduce the effort of creating ADRs by:
+        </p>
+        <ul>
+            <li>Drafting initial ADR content based on code changes or architectural discussions</li>
+            <li>Identifying when new ADRs may be needed during feature development</li>
+            <li>Suggesting alternatives and consequences based on common architectural patterns</li>
+            <li>Formatting and validating ADRs against team templates</li>
+            <li>Generating summaries and indexes of existing ADRs</li>
+        </ul>
+
+        <h2>Conclusion</h2>
+        <p>
+            Architecture Decision Records represent a lightweight yet powerful approach to documenting the architectural thinking behind 
+            software systems. By capturing not just what decisions were made, but why they were made and what alternatives were considered, 
+            ADRs create a valuable historical record that benefits teams throughout the lifetime of a project.
+        </p>
+        <p>
+            The practice of writing ADRs encourages more thoughtful decision-making, improves team communication, and preserves institutional 
+            knowledge that would otherwise be lost. While there is an initial investment of time and effort, teams that adopt ADRs consistently 
+            report that the benefits far outweigh the costs, particularly as projects mature and team composition changes.
+        </p>
+        <p>
+            Starting with ADRs doesn't require a major process overhaul or heavy tooling investment. Begin by selecting a simple template, 
+            creating a dedicated directory in your repository, and documenting your next significant architectural decision. As the practice 
+            becomes established, you'll find that ADRs naturally become part of your team's architectural workflow.
+        </p>
+        <p>
+            In an era where AI coding assistants are becoming increasingly common, ADRs take on additional importance as machine-readable 
+            architectural guidance. By maintaining well-structured ADRs, teams can ensure that both human developers and AI assistants 
+            understand and respect the architectural principles that guide the project.
+        </p>
+        <p>
+            Whether you're working on a small team project or a large enterprise system, ADRs provide a scalable, low-overhead way to 
+            capture and communicate architectural decisions. Start small, stay consistent, and watch as your collection of ADRs becomes 
+            an invaluable resource for your team.
+        </p>
 
         <h2>References</h2>
-        <p>TODO</p>
+        <ul>
+            <li>
+                <a href="https://cognitect.com/blog/2011/11/15/documenting-architecture-decisions" target="_blank">
+                    Michael Nygard - Documenting Architecture Decisions
+                </a>
+            </li>
+            <li>
+                <a href="https://adr.github.io/madr/" target="_blank">
+                    MADR - Markdown Architectural Decision Records
+                </a>
+            </li>
+            <li>
+                <a href="https://www.ozimmer.ch/practices/2020/04/27/ArchitectureDecisionMaking.html" target="_blank">
+                    Olaf Zimmermann - Architectural Decision Guidance Across Projects - Y-Statements
+                </a>
+            </li>
+            <li>
+                <a href="https://github.com/joelparkerhenderson/architecture-decision-record" target="_blank">
+                    Joel Parker Henderson - Architecture Decision Record (ADR) Examples and Templates
+                </a>
+            </li>
+            <li>
+                <a href="https://adr.github.io/" target="_blank">
+                    ADR GitHub Organization - Tools and Resources
+                </a>
+            </li>
+        </ul>
     </div>
     <div class="col-md-4">
         @await Html.PartialAsync("_article_metadatasummary", articleMetadata)
