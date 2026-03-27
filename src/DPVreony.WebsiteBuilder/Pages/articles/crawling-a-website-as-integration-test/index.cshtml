@@ -1,1 +1,223 @@
 ﻿@page
+@using DPVreony.Website.Features.Articles
+@using NodaTime
+@{
+    var articleMetadata = new ArticleMetadataModel(
+        ArticleStatus.Draft,
+        new Version(0, 1),
+        new LocalDate(2021, 05, 31),
+        new LocalDate(2021, 05, 31),
+        new LocalDate(2021, 05, 31),
+        new LocalDate(2021, 07, 01));
+}
+<div class="row">
+    <div class="col-md-8">
+        <h1>Crawling a website as an integration test.</h1>
+
+        <h2>Introduction</h2>
+        <p>
+            Integration testing web applications often involves testing individual endpoints or user flows in isolation. 
+            However, a comprehensive approach is to crawl your entire website systematically, following all internal links 
+            to ensure every page loads successfully without errors. This technique helps identify broken links, missing resources, 
+            server errors, and routing issues that might not be caught by unit tests or limited integration tests.
+        </p>
+        <p>
+            By implementing a web crawler as part of your integration test suite, you can automatically verify that all pages 
+            in your application are accessible, render correctly, and return appropriate HTTP status codes. This approach is 
+            particularly valuable for static site generators, content management systems, and any web application with a 
+            significant number of interconnected pages.
+        </p>
+
+        <h2>ASP.NET Core Integration Testing with Playwright</h2>
+        <p>
+            ASP.NET Core provides powerful capabilities for integration testing through the 
+            <code>Microsoft.AspNetCore.Mvc.Testing</code> package, which allows you to create an in-memory test server using 
+            <code>WebApplicationFactory&lt;TEntryPoint&gt;</code>. When combined with Playwright.NET, you can crawl your entire 
+            website without any external HTTP traffic, making it ideal for running on your local development machine or as part 
+            of your CI/CD pipeline.
+        </p>
+        <p>
+            The in-memory test server approach offers several advantages: it runs entirely within your test process, doesn't 
+            require port binding or network configuration, provides fast test execution, and ensures complete isolation from 
+            external dependencies. By integrating Playwright.NET, you gain access to a real browser engine (Chromium, Firefox, 
+            or WebKit) that can execute JavaScript, handle client-side routing, and validate the fully rendered output of your 
+            web application.
+        </p>
+        <p>
+            A critical aspect of integrating Playwright.NET with <code>WebApplicationFactory</code> is the need to intercept and 
+            route page requests through the in-memory test server. Since Playwright operates as a real browser that makes actual 
+            HTTP requests, you must use Playwright's routing interception capabilities to redirect those requests to the 
+            <code>HttpClient</code> created by <code>TestServer.CreateClient()</code>. This is accomplished using 
+            <code>page.RouteAsync()</code> to intercept matching URL patterns and fulfill them with responses from the in-memory 
+            server, effectively bridging the gap between the browser's network requests and your in-memory application instance.
+        </p>
+        <p>
+            The following example demonstrates how to set up routing interception. First, create an <code>HttpClient</code> from 
+            your test server, then configure Playwright to intercept requests for a specific URL pattern and route them through 
+            a handler method:
+        </p>
+        <code>
+            var inMemoryHttpClient = myHttpServer.CreateClient();
+            await page.RouteAsync(
+                pageUrl,
+                route => MyRouteHandlerAsync(inMemoryHttpClient, route))
+                .ConfigureAwait(false);
+        </code>
+        <p>
+            The handler method receives each intercepted route from Playwright and processes it by forwarding the request to the 
+            in-memory <code>HttpClient</code>. The response from the test server is then converted into a format Playwright can 
+            use to fulfill the browser's original request, including status code, body content, and content type headers:
+        </p>
+        <code>
+            private static async Task MyRouteHandlerAsync(HttpClient httpClient, IRoute route)
+            {
+                using (var request = GetRequestFromRoute(route))
+                {
+                    var response = await httpClient.SendAsync(request)
+                        .ConfigureAwait(false);
+                    var routeFulfillOptions = new RouteFulfillOptions
+                    {
+                        Status = (int)response.StatusCode,
+                        Body = await response.Content.ReadAsStringAsync().ConfigureAwait(false),
+                    };
+
+                    if (response.Content.Headers.ContentType != null)
+                    {
+                        routeFulfillOptions.ContentType = response.Content.Headers.ContentType.ToString();
+                    }
+
+                    await route.FulfillAsync(routeFulfillOptions)
+                        .ConfigureAwait(false);
+                }
+            }
+        </code>
+        <p>
+            This combination enables you to start from your application's home page, extract all internal links from the rendered 
+            DOM, follow each link systematically, and verify that every page returns a successful HTTP status code and renders 
+            without errors. The crawler can maintain a queue of discovered URLs, track visited pages to avoid infinite loops, 
+            and generate comprehensive reports of any issues found during the crawl process.
+        </p>
+
+        <h2>Aims and Objectives of Web Crawling</h2>
+        <p>
+            A comprehensive web crawler for integration testing should capture and verify multiple aspects of your application's 
+            behavior. The primary objectives include:
+        </p>
+        <ul>
+            <li>
+                <strong>HTTP Status Code Validation:</strong> Ensure every page returns the expected HTTP status code, typically 
+                200 OK for successful pages. Track pages that return 404 Not Found, 500 Internal Server Error, or other error codes.
+            </li>
+            <li>
+                <strong>Console Message Monitoring:</strong> Capture browser console messages (logs, warnings, errors) generated 
+                during page navigation. This helps identify JavaScript errors, deprecation warnings, or unexpected client-side 
+                behavior that may not cause visible failures but indicates underlying issues. Particular attention should be paid to:
+                <ul>
+                    <li>
+                        <strong>Content Security Policy (CSP) Violations:</strong> Messages indicating blocked resources due to CSP 
+                        rules, which can prevent scripts, styles, or other resources from loading even though they appear in the HTML.
+                    </li>
+                    <li>
+                        <strong>Mixed Content Warnings:</strong> Alerts when HTTPS pages attempt to load HTTP resources, which browsers 
+                        may block for security reasons.
+                    </li>
+                    <li>
+                        <strong>Cross-Origin Resource Sharing (CORS) Errors:</strong> Messages indicating failed cross-origin requests 
+                        that may prevent API calls or resource loading from different domains.
+                    </li>
+                    <li>
+                        <strong>Deprecation Warnings:</strong> Browser notifications about deprecated APIs or features that may break 
+                        in future browser versions.
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <strong>Page Error Detection:</strong> Track page-level errors such as unhandled exceptions in JavaScript, 
+                rendering failures, or timeout issues that could indicate problems with page initialization or resource loading.
+            </li>
+            <li>
+                <strong>Request Failure Tracking:</strong> Monitor failed HTTP requests for resources like images, stylesheets, 
+                scripts, or API calls. Failed requests can indicate broken references, missing files, or CORS configuration issues.
+            </li>
+            <li>
+                <strong>Link Discovery and Coverage:</strong> Systematically extract and follow all internal links to ensure 
+                complete site coverage. Track which pages have been visited and how many times each URL is referenced, helping 
+                identify orphaned pages or broken navigation paths.
+            </li>
+            <li>
+                <strong>Same-Domain Enforcement:</strong> Respect domain boundaries by only following internal links, preventing 
+                the crawler from following external links that could lead to infinite crawling or testing third-party sites.
+            </li>
+            <li>
+                <strong>CSS Validation and Analysis:</strong> Analyze the CSS usage on each page to identify potential styling issues:
+                <ul>
+                    <li>
+                        <strong>Undefined CSS Classes:</strong> Detect CSS classes that are used in the DOM (applied to HTML elements) 
+                        but are not defined in any loaded stylesheet. This can indicate missing CSS files, broken build pipelines, 
+                        or references to classes that were removed from stylesheets but remain in the HTML.
+                    </li>
+                    <li>
+                        <strong>Unused CSS Classes:</strong> Identify CSS classes that are defined in stylesheets but never actually 
+                        used in the DOM, helping to detect dead code and opportunities for stylesheet optimization.
+                    </li>
+                    <li>
+                        <strong>Cross-Origin Stylesheet Access:</strong> Track when stylesheets cannot be analyzed due to CORS 
+                        restrictions, which may hide potential issues in externally hosted CSS files.
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <strong>Accessibility Validation:</strong> Verify that pages meet basic accessibility standards to ensure they are 
+                usable by people with disabilities and compliant with regulations like WCAG (Web Content Accessibility Guidelines):
+                <ul>
+                    <li>
+                        <strong>Image Alt Attribute Validation:</strong> Check that all <code>&lt;img&gt;</code> elements have 
+                        meaningful alternative text. This includes verifying that alt attributes are not empty or whitespace-only, 
+                        and optionally validating that alt text follows best practices such as ending with proper punctuation 
+                        (typically a period) to ensure screen readers pause appropriately between elements.
+                    </li>
+                    <li>
+                        <strong>Semantic HTML Usage:</strong> Identify pages that may lack proper semantic structure, such as missing 
+                        heading hierarchies, landmark regions, or ARIA labels that assist screen readers in navigating content.
+                    </li>
+                    <li>
+                        <strong>Keyboard Navigation:</strong> Detect interactive elements that may not be keyboard-accessible, 
+                        ensuring users who cannot use a mouse can still navigate and interact with the application.
+                    </li>
+                </ul>
+            </li>
+        </ul>
+        <p>
+            By capturing this comprehensive set of metrics, you can build a detailed report of your application's health, 
+            identifying not just obvious failures but also subtle issues that may impact user experience or indicate technical debt.
+        </p>
+
+        <h2>References</h2>
+        <ul>
+            <li>
+                <a href="https://github.com/dpvreony/whipstaff/blob/main/src/Whipstaff.Playwright/Crawler/WebCrawler.cs" 
+                   target="_blank" rel="noopener noreferrer">
+                    Whipstaff WebCrawler Implementation
+                </a> - A reference implementation of a Playwright-based web crawler that captures console messages, 
+                page errors, and request failures.
+            </li>
+            <li>
+                <a href="https://github.com/dpvreony/whipstaff/blob/main/src/Whipstaff.Playwright/PageExtensions.cs" 
+                   target="_blank" rel="noopener noreferrer">
+                    Whipstaff Playwright PageExtensions
+                </a> - Extension methods for Playwright IPage that provide CSS class analysis, detecting undefined 
+                and unused classes in stylesheets.
+            </li>
+            <li>
+                <a href="https://github.com/dpvreony/whipstaff/blob/main/src/Whipstaff.Mermaid/Playwright/PlaywrightRendererBrowserInstance.cs" 
+                   target="_blank" rel="noopener noreferrer">
+                    Whipstaff PlaywrightRendererBrowserInstance
+                </a> - Example implementation showing how to intercept and route Playwright page requests through an 
+                in-memory test server using <code>page.RouteAsync()</code>.
+            </li>
+        </ul>
+    </div>
+    <div class="col-md-4">
+        @await Html.PartialAsync("_article_metadatasummary", articleMetadata)
+    </div>
+</div>
