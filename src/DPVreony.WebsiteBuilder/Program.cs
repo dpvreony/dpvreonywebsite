@@ -25,9 +25,9 @@ namespace DPVreony.WebsiteBuilder
     {
         public static async Task<int> Main(string[] args)
         {
-            // Create the Mermaid TestServer OUTSIDE of the main DI container for complete isolation
             var loggerFactory = new NullLoggerFactory();
             var fileSystem = new FileSystem();
+            _ = new Whipstaff.Playwright.InstallationHelper(PlaywrightBrowserType.Chromium).InstallPlaywright();
             var mermaidTestServer = MermaidHttpServerFactory.GetTestServer(
                 loggerFactory,
                 fileSystem);
@@ -148,18 +148,26 @@ namespace DPVreony.WebsiteBuilder
                 if (context.Request.Method == HttpMethods.Get && 
                     context.Request.Path.Value?.EndsWith(".svg", StringComparison.OrdinalIgnoreCase) == true)
                 {
+                    var environment = context.RequestServices.GetRequiredService<IWebHostEnvironment>();
+                    var svgFileInfo = environment.WebRootFileProvider.GetFileInfo(context.Request.Path.Value);
+                    if (svgFileInfo.Exists)
+                    {
+                        // we've already got an SVG file, so just serve it up
+                        // we let the static files middleware handle it, so we can skip our custom handling
+                        await next(context);
+                    }
+
                     var path = context.Request.Path.Value.TrimStart('/');
                     var mmdPath = System.IO.Path.ChangeExtension(path, ".mmd");
 
-                    var environment = context.RequestServices.GetRequiredService<IWebHostEnvironment>();
                     var fileInfo = environment.WebRootFileProvider.GetFileInfo(mmdPath);
 
-                    if (fileInfo.Exists)
+                    if (fileInfo.Exists && fileInfo.PhysicalPath != null)
                     {
                         var fileSystem = context.RequestServices.GetRequiredService<IFileSystem>();
                         var playwrightRendererBrowserInstance = context.RequestServices.GetRequiredService<IPlaywrightRendererBrowserInstance>();
 
-                        var sourceFileInfo = fileSystem.FileInfo.New(mmdPath);
+                        var sourceFileInfo = fileSystem.FileInfo.New(fileInfo.PhysicalPath);
                         var mermaidDiagram = await playwrightRendererBrowserInstance.GetDiagramAsync(sourceFileInfo)
                             .ConfigureAwait(false);
 
