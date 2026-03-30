@@ -17,7 +17,7 @@
         <h2>Introduction</h2>
         <p>
             Feature usage tracking is an important practice for understanding how users interact with your software applications. 
-            By collecting and analyzing data about which features are used, how often they're accessed, and in what contexts, 
+            By collecting and analyzing data about which features are used, how often they're accessed, and in what context, 
             development teams can make informed decisions about product direction, resource allocation, and user experience improvements.
         </p>
         <p>
@@ -358,7 +358,7 @@
         <p>
             Customer tracking data should have defined retention periods that balance analytical value with privacy considerations. Define retention
             periods based on analytical needs, with older data aggregated into summary statistics and detailed event data deleted after a defined period.
-            Implement processes to honor customer data deletion requests within required timeframes.
+            Implement processes to honour customer data deletion requests within required timeframes.
         </p>
         <p>
             Customer deletion requests typically require complete removal of associated tracking data. Your tracking system should maintain the capability
@@ -372,7 +372,7 @@
         </p>
         <p>
             When employees leave the organization, evaluate whether their historical usage data should be retained for compliance or audit purposes,
-            anonymized by removing personal identifiers, or deleted entirely. This determination depends on regulatory requirements and legitimate
+            anonymised by removing personal identifiers, or deleted entirely. This determination depends on regulatory requirements and legitimate
             business needs for historical analysis.
         </p>
         <h3>Security and Access Controls</h3>
@@ -391,6 +391,194 @@
         <p>
             Consider the sensitivity of exposing individual employee usage patterns. Aggregated reports showing team or department usage may serve
             analytical purposes without revealing individual employee behavior, reducing privacy concerns while maintaining useful insights.
+        </p>
+
+        <h2>Common Pitfalls</h2>
+        <p>
+            Feature usage tracking implementations often encounter similar challenges that can undermine their effectiveness or create unintended consequences.
+        </p>
+        <h3>Over-tracking</h3>
+        <p>
+            Tracking too many events or capturing excessive detail can degrade application performance and generate overwhelming amounts of data
+            that obscure useful insights. Each tracking event consumes processing resources, network bandwidth if transmitted remotely, and storage space.
+            Applications that track every user action, such as every keystroke or mouse movement, may experience performance degradation that affects
+            user experience more negatively than the insights gained from tracking justify.
+        </p>
+        <p>
+            Excessive tracking also creates noise in analytical data. When every minor action generates tracking events, identifying meaningful patterns
+            becomes more difficult. Focus tracking on significant user actions and workflow milestones rather than capturing every interaction.
+            A document editor benefits more from tracking when users save, export, or share documents than from tracking every character typed.
+        </p>
+        <h3>Under-tracking</h3>
+        <p>
+            Conversely, tracking too little data or failing to capture necessary context limits the insights you can extract. Feature usage counts
+            without success indicators don't reveal whether users accomplished their goals. Tracking feature entry points without tracking exits
+            makes it difficult to measure completion rates or identify abandonment. Duration tracking without contextual information about what
+            users were doing makes it hard to interpret whether long durations indicate problems or normal usage patterns.
+        </p>
+        <p>
+            Missing context about the environment or circumstances of feature usage can also limit analysis. Understanding that a feature has declining
+            usage is less useful without knowing whether this coincides with a deployment, a change in user demographics, or external factors.
+            Capturing appropriate contextual metadata such as application version, platform, and user segment enables more nuanced analysis.
+        </p>
+        <h3>Data Accuracy Issues</h3>
+        <p>
+            Clock skew between clients and servers can produce inaccurate duration measurements and incorrect sequence ordering in user journeys.
+            When timing data relies on client-side clocks that may be incorrectly set, duration measurements become unreliable. Using server timestamps
+            where possible or implementing clock synchronization checks helps maintain timing accuracy.
+        </p>
+        <p>
+            Duplicate tracking events can inflate usage counts and skew analysis. Network retries, user navigation patterns, or application bugs
+            may cause the same action to generate multiple tracking events. Implementing deduplication strategies, such as assigning unique identifiers
+            to user actions and filtering duplicate events during analysis, helps maintain data accuracy.
+        </p>
+        <p>
+            Lost tracking data from network failures, client crashes, or dropped messages can undercount feature usage. While perfect reliability
+            may be impractical, understanding that tracking data represents a sample rather than complete coverage affects how you interpret results.
+            High-priority tracking may justify more robust delivery mechanisms, while lower-priority tracking can tolerate some data loss.
+        </p>
+        <h3>Development and Testing Data</h3>
+        <p>
+            Tracking data from development, testing, and staging environments can contaminate production analytics if not properly segregated.
+            Developer testing, automated test suites, and quality assurance activities generate usage patterns that don't reflect real user behavior.
+            This data can significantly skew usage statistics, particularly for features under active development that receive disproportionate testing attention.
+        </p>
+        <p>
+            Implement clear environment tagging in tracking data and filter non-production environments from user-facing analytics. Some organizations
+            maintain separate tracking systems for production versus non-production environments to ensure complete segregation. Others tag all events
+            with environment identifiers and filter during analysis. Either approach requires consistent implementation to prevent contamination.
+        </p>
+        <h3>Ignoring Performance Impact</h3>
+        <p>
+            Synchronous tracking that blocks user workflows while sending data degrades user experience. A feature that takes 50 milliseconds to execute
+            but waits for a 200-millisecond tracking call to complete appears slow to users. Implement tracking asynchronously using fire-and-forget patterns
+            so tracking overhead doesn't impact perceived application responsiveness. Accept that some tracking events may be lost if application instances
+            terminate before asynchronous operations complete, balancing reliability against performance impact.
+        </p>
+        <h3>Insufficient Testing</h3>
+        <p>
+            Tracking implementations require testing just like other application code. Bugs in tracking code can generate incorrect data, missing events,
+            or excessive tracking that impacts performance. Silent failures in tracking code may go unnoticed while producing incomplete or inaccurate data.
+        </p>
+        <p>
+            Include tracking in your testing strategy. Verify that features generate expected tracking events under various scenarios including success,
+            failure, and edge cases. Monitor tracking system health and implement alerts for tracking failures, missing expected data, or unexpected volumes
+            that might indicate bugs. Treat tracking infrastructure as production code requiring appropriate quality standards.
+        </p>
+        <h3>Lack of Documentation</h3>
+        <p>
+            Undocumented tracking makes it difficult for team members to understand what data exists, what it means, and how to interpret it.
+            As applications evolve and team members change, knowledge about tracking implementation can be lost. This results in underutilization
+            of available data or misinterpretation of tracking events.
+        </p>
+        <p>
+            Document what features are tracked, what each tracking event represents, what data is captured, and how to interpret the results.
+            Maintain this documentation alongside code, updating it when tracking changes. Consider including metadata in tracking events themselves
+            that describes their purpose and structure, making the data more self-documenting for analysis tools.
+        </p>
+        <h3>Tool Complexity and Cognitive Load</h3>
+        <p>
+            Organizations often accumulate multiple APM and observability tools over time, each serving specific purposes. Adding feature usage
+            tracking as yet another system or dashboard increases cognitive load on teams who must navigate multiple tools to understand
+            application behavior. When developers need to check one tool for performance metrics, another for error tracking, a third for
+            feature usage, and a fourth for user analytics, the overhead of context switching reduces effectiveness.
+        </p>
+        <p>
+            Consider integrating feature usage tracking with existing observability platforms rather than introducing standalone systems.
+            Many APM tools support custom metrics and events that can accommodate feature usage data alongside performance and error information.
+            This consolidation reduces the number of systems teams need to learn and maintain, making insights more accessible and actionable.
+        </p>
+        <p>
+            Evaluate whether your organization can effectively adopt and maintain new tracking infrastructure. A sophisticated tracking system
+            that teams find too complex to use provides less value than a simpler implementation integrated with familiar tools. The most comprehensive
+            tracking implementation fails if teams don't consult the data when making decisions because accessing it requires too much effort.
+        </p>
+        <p>
+            When feature usage tracking must be separate from other observability tools, minimize cognitive overhead through consistent interfaces,
+            shared authentication, and integration that surfaces relevant feature usage data within existing workflows. Teams are more likely to
+            use tracking data in decision-making when it appears alongside other information they regularly consult rather than requiring navigation
+            to separate systems.
+        </p>
+
+        <h2>Data Store Organization</h2>
+        <p>
+            Deciding how to structure data stores for feature usage tracking affects scalability, access patterns, and organizational collaboration.
+        </p>
+        <h3>Per-Application versus Per-Environment</h3>
+        <p>
+            Organizations face a choice between organizing tracking data stores by application or by environment. A per-application approach
+            creates separate data stores for each application, regardless of environment. This means Application A has one data store containing
+            tracking data from development, staging, and production environments. A per-environment approach creates separate data stores for
+            each environment, with all applications in production sharing one data store and all applications in development sharing another.
+        </p>
+        <p>
+            Per-application organization provides clearer application ownership and access control. Each application team controls their tracking
+            data and can manage retention, access, and analysis independently. This structure simplifies scenarios where different applications
+            have different compliance requirements or where application teams operate with significant autonomy. However, cross-application analysis
+            becomes more complex, requiring queries across multiple data stores.
+        </p>
+        <p>
+            Per-environment organization facilitates transparency and cross-application insights within each environment. When all production applications
+            report to a single data store, understanding usage patterns across your entire production ecosystem becomes straightforward. This structure
+            helps identify system-wide trends, compare feature adoption across applications, and understand user journeys that span multiple applications.
+            However, it requires careful access control to ensure teams can only access data appropriate to their responsibilities.
+        </p>
+        <h3>Scalability for Larger Organizations</h3>
+        <p>
+            As organizations grow, single data stores may encounter scaling limitations. Organizations with dozens or hundreds of applications
+            generating high volumes of tracking data may need to partition data stores to maintain query performance and manageability.
+        </p>
+        <p>
+            Partitioning strategies can combine application and environment dimensions. A large organization might maintain separate data stores
+            for production, staging, and development environments, with production further partitioned by application domain or business unit.
+            Customer-facing applications might share a production data store, while internal tools use a separate one, balancing the benefits
+            of consolidated data with practical scaling constraints.
+        </p>
+        <p>
+            Consider the query patterns that matter most to your organization when deciding partitioning strategies. If cross-application analysis
+            within production is valuable, keep production applications in shared data stores. If application teams rarely need cross-application
+            insights, per-application data stores may simplify management without sacrificing useful analysis.
+        </p>
+        <h3>Team Ownership Considerations</h3>
+        <p>
+            When different teams own different applications, organizational boundaries often influence data store structure. Teams operating
+            independently with minimal coordination may prefer separate data stores that they control completely. This autonomy allows each team
+            to make tracking decisions, implement changes, and manage data without coordinating with other teams.
+        </p>
+        <p>
+            However, organizational separation doesn't necessarily require technical separation. Teams can share infrastructure while maintaining
+            appropriate access controls. Clear data governance policies defining which teams can access which tracking data, combined with technical
+            access controls enforcing these policies, enable shared data stores without compromising team autonomy or data security.
+        </p>
+        <h3>Centralization Benefits and Prerequisites</h3>
+        <p>
+            Centralizing feature usage tracking for all applications in an environment into a single data store provides transparency benefits
+            when implemented appropriately. Product leaders gain visibility into usage patterns across the entire application portfolio.
+            Platform teams can identify opportunities for shared functionality or infrastructure. Cross-functional initiatives can measure
+            impact across multiple applications.
+        </p>
+        <p>
+            Centralization requires appropriate safeguards to be practical and safe. Access controls must prevent teams from accessing
+            tracking data for applications they don't maintain. Performance must remain acceptable as data volume grows. Data governance
+            policies must address concerns about centralizing potentially sensitive information. Query tools need to support filtering
+            and organizing data from multiple applications effectively.
+        </p>
+        <p>
+            Organizations considering centralization should evaluate whether they can implement these prerequisites effectively. If access control
+            mechanisms are insufficient, if scaling concerns make centralization impractical, or if data sensitivity makes centralization
+            unacceptable to teams, per-application data stores may be more appropriate. Centralization provides benefits, but only when
+            implemented in ways that teams find safe and practical for their specific circumstances.
+        </p>
+        <h3>Hybrid Approaches</h3>
+        <p>
+            Some organizations implement hybrid approaches that balance centralization benefits with practical constraints. Applications might
+            write tracking data to both local data stores under team control and central data stores for organization-wide visibility.
+            Central stores might contain aggregated or anonymized data while detailed data remains in application-specific stores.
+        </p>
+        <p>
+            These hybrid approaches add complexity but can address situations where both detailed application-level analysis and cross-application
+            visibility are important. The additional operational overhead of maintaining multiple data stores requires justification through
+            concrete benefits that simpler approaches cannot provide.
         </p>
 
         <h2>References</h2>
