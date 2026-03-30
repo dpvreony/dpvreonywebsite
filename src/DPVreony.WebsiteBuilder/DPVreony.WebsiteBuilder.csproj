@@ -54,11 +54,7 @@
     <NpmInstallInputs Include="$(ProjectDir)\package-lock.json" />
   </ItemGroup>
 
-  <Target Name="NpmInstallIncremental"
-          BeforeTargets="CopyNpmTasks"
-          Inputs="@(NpmInstallInputs)"
-          Outputs="$(NpmInstallStamp)"
-          Condition="!Exists('$(ProjectDir)\node_modules\') OR !Exists('$(NpmInstallStamp)')">
+  <Target Name="NpmInstallIncremental" BeforeTargets="CopyNpmTasks" Inputs="@(NpmInstallInputs)" Outputs="$(NpmInstallStamp)" Condition="!Exists('$(ProjectDir)\node_modules\') OR !Exists('$(NpmInstallStamp)')">
     <Message Text="Running npm install (inputs changed or stamp missing)..." Importance="high" />
     <Exec WorkingDirectory="$(ProjectDir)" Command="npm install" />
 
