@@ -242,6 +242,157 @@
             or growing support requests, rather than modifying working features simply to appear modern or adopt trending technologies.
         </p>
 
+        <h2>Privacy and Compliance</h2>
+        <p>
+            Implementing feature usage tracking requires careful consideration of privacy regulations and user expectations around data collection.
+            The considerations differ between tracking external users (customers) and internal organization users (employees).
+        </p>
+        <h3>Regulatory Requirements</h3>
+        <h4>External Users</h4>
+        <p>
+            Privacy regulations such as GDPR in Europe, CCPA in California, and similar frameworks in other jurisdictions impose requirements
+            on how you collect, store, and use tracking data from customers. These regulations typically require that you have a lawful basis
+            for processing personal data, provide transparency about what data you collect, and respect user rights around their data.
+            Customer-facing applications generally face stricter consent requirements and must provide clear privacy notices.
+        </p>
+        <p>
+            Understanding which regulations apply to your customer base and ensuring your tracking implementation complies with applicable requirements
+            should be part of your initial design. Consulting with legal or compliance teams helps identify specific obligations,
+            particularly around data retention periods, cross-border data transfers, and required documentation.
+        </p>
+        <h4>Internal Users</h4>
+        <p>
+            Tracking internal employee usage may fall under different regulatory frameworks, including employment law and data protection regulations
+            specific to employee monitoring. Many jurisdictions require employers to inform employees about monitoring activities and provide
+            legitimate business justification. Internal tracking should align with organizational policies around employee privacy
+            and data protection.
+        </p>
+        <p>
+            Employee monitoring regulations vary significantly by jurisdiction. Some regions require explicit consent or works council approval
+            for tracking employee activities, while others permit it with appropriate notice. Consult with legal and human resources teams
+            to ensure internal tracking complies with employment regulations and organizational policies.
+        </p>
+        <h3>User Consent and Control</h3>
+        <h4>External Users</h4>
+        <p>
+            Providing customers with control over tracking aligns with both regulatory requirements and user expectations. Depending on your jurisdiction
+            and the nature of tracking, you may need explicit customer consent before collecting feature usage data. Consent mechanisms should be
+            clear about what data you collect and why, avoiding vague descriptions. Opt-out mechanisms should be straightforward to access and
+            immediately effective.
+        </p>
+        <p>
+            Customer-facing applications often benefit from granular consent options, allowing users to accept essential tracking while declining
+            optional analytics. This respects user preferences while maintaining necessary operational data collection.
+        </p>
+        <h4>Internal Users</h4>
+        <p>
+            Internal tracking typically operates under different consent models than customer tracking. Organizations often have legitimate business
+            interests in tracking internal application usage for security, compliance, and operational purposes. However, transparency remains important.
+            Employees should understand what tracking occurs in internal applications and how data is used.
+        </p>
+        <p>
+            While explicit opt-out may not be appropriate for internal tracking serving security or compliance purposes, organizations should
+            clearly communicate tracking policies through employee handbooks, acceptable use policies, or system notifications. This transparency
+            builds trust and ensures employees understand how their application usage is monitored.
+        </p>
+        <h3>Internal Users Acting on Behalf of Customers</h3>
+        <p>
+            Systems where internal users perform actions on behalf of customers, such as CRM platforms, billing systems, customer support tools,
+            and order fulfillment systems, require careful consideration of both employee and customer privacy.
+        </p>
+        <p>
+            Feature usage tracking in these systems may capture actions taken by employees that directly affect customer accounts or data.
+            While you have legitimate interests in tracking employee usage of internal systems, you must also consider customer privacy when
+            those actions involve customer information. Tracking that an employee accessed a customer record, processed an order, or updated
+            billing information touches both employee monitoring and customer data protection.
+        </p>
+        <p>
+            Design tracking in these systems to distinguish between operational actions (which employee performed which system function) and
+            customer-specific details (which customer was affected). For analytical purposes, you often need to know that the "create order"
+            feature was used 500 times this week, not necessarily which specific customer orders were created. This separation allows you to
+            track employee productivity and system usage patterns while minimizing the collection of customer-identifiable information.
+        </p>
+        <p>
+            When tracking must include customer identifiers, such as for audit trails or compliance requirements, apply appropriate security
+            and access controls. Audit logs showing which employee accessed which customer account serve legitimate security and compliance
+            purposes, but should be protected more strictly than general feature usage analytics. Consider separating detailed audit logs
+            from aggregated usage analytics, with different retention periods and access controls appropriate to each purpose.
+        </p>
+        <p>
+            Customer data deletion requests add complexity in these scenarios. When customers request deletion of their data, consider whether
+            tracking data showing that employees accessed or modified customer records should be included in the deletion. Regulatory requirements
+            and audit needs may require retaining records of employee actions for compliance purposes, even after customer data deletion.
+            However, such retention should be limited to what's necessary for legitimate compliance requirements and should not extend to
+            optional analytics.
+        </p>
+        <p>
+            Transparency about tracking in customer-facing contexts where employees act on behalf of customers helps maintain trust. Privacy
+            notices should indicate that customer service interactions, order processing, and similar activities may generate records for
+            quality assurance, training, or compliance purposes. This transparency applies to both the employees performing the actions and
+            the customers affected by them.
+        </p>
+        <h3>Data Minimization</h3>
+        <h4>External Users</h4>
+        <p>
+            Customer tracking should collect only data necessary for analytical purposes. Feature usage tracking focused on aggregated patterns
+            often doesn't require personally identifiable information. Anonymous identifiers that distinguish sessions without revealing individual
+            customer identities can provide sufficient insight while minimizing privacy risk.
+        </p>
+        <p>
+            Avoid collecting sensitive customer data such as personal information entered in forms, document content, or other user-generated data
+            unless absolutely necessary. Consider whether you can achieve insights through less intrusive means, such as tracking that a form
+            field was completed rather than the specific value entered.
+        </p>
+        <h4>Internal Users</h4>
+        <p>
+            Internal tracking may require linking usage to specific employees for legitimate purposes such as license management, security investigations,
+            or productivity analysis. However, data minimization principles still apply. Collect only information necessary for specific business purposes,
+            and avoid tracking personal activities in applications used for both work and personal purposes.
+        </p>
+        <p>
+            Be particularly careful with tracking in applications that handle sensitive employee data, such as HR systems or internal reporting tools.
+            Ensure tracking doesn't inadvertently capture protected information about employee health, union membership, or other sensitive categories.
+        </p>
+        <h3>Data Retention and Deletion</h3>
+        <h4>External Users</h4>
+        <p>
+            Customer tracking data should have defined retention periods that balance analytical value with privacy considerations. Define retention
+            periods based on analytical needs, with older data aggregated into summary statistics and detailed event data deleted after a defined period.
+            Implement processes to honor customer data deletion requests within required timeframes.
+        </p>
+        <p>
+            Customer deletion requests typically require complete removal of associated tracking data. Your tracking system should maintain the capability
+            to identify and remove data associated with specific customers, which may require retaining pseudonymous identifiers that can be linked
+            to customer accounts for deletion purposes.
+        </p>
+        <h4>Internal Users</h4>
+        <p>
+            Internal tracking data retention should align with organizational record-keeping requirements and employment regulations. Some jurisdictions
+            require specific retention periods for employee-related data, while others mandate deletion after employees leave the organization.
+        </p>
+        <p>
+            When employees leave the organization, evaluate whether their historical usage data should be retained for compliance or audit purposes,
+            anonymized by removing personal identifiers, or deleted entirely. This determination depends on regulatory requirements and legitimate
+            business needs for historical analysis.
+        </p>
+        <h3>Security and Access Controls</h3>
+        <h4>External Users</h4>
+        <p>
+            Customer tracking data requires protection appropriate to its sensitivity. Limit access to customer tracking data to team members who
+            require it for analysis and decision-making. Implement encryption for data at rest and in transit. Be particularly careful about
+            combining customer tracking data with other customer data sources, as this may make previously anonymous data identifiable.
+        </p>
+        <h4>Internal Users</h4>
+        <p>
+            Internal tracking data about employee behavior requires careful access control. Limit access to individuals with legitimate business needs,
+            such as IT administrators, security teams, or managers with appropriate justification. Audit access to employee tracking data to ensure
+            it isn't accessed inappropriately or used for purposes beyond stated business objectives.
+        </p>
+        <p>
+            Consider the sensitivity of exposing individual employee usage patterns. Aggregated reports showing team or department usage may serve
+            analytical purposes without revealing individual employee behavior, reducing privacy concerns while maintaining useful insights.
+        </p>
+
         <h2>References</h2>
         <p>TODO</p>
     </div>
