@@ -1,6 +1,6 @@
 {
   "profiles": {
-    "DPVreony.WebsiteBuilder": {
+    "DPVreony.Website": {
       "commandName": "Project",
       "launchBrowser": true,
       "environmentVariables": {
