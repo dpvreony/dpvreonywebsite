@@ -5,7 +5,7 @@
     var articleMetadata = new ArticleMetadataModel(
         ArticleStatus.Released,
         new Version(1, 0),
-        new LocalDate(2026, 03, 30),
+        new LocalDate(2025, 08, 25),
         new LocalDate(2026, 03, 30),
         new LocalDate(2026, 03, 30),
         new LocalDate(2026, 09, 30));
@@ -15,12 +15,13 @@
         <h1>GDPR Problems: Unrealistic partner count on a consent prompt.</h1>
 
         <h2>Introduction</h2>
-        <p>
-            When confronted with a cookie consent banner declaring "we and our 919 partners" wish to process your personal data, 
-            most users experience a mixture of resignation and disbelief. How can any organization meaningfully claim to have 
-            established legitimate data processing relationships with nearly a thousand third parties? More importantly, how can 
-            any data subject possibly provide informed consent when faced with such an overwhelming number?
-        </p>
+    <p>
+        When confronted with a cookie consent banner declaring "we and our 919 partners" wish to process your personal data, 
+        users face fundamental questions about the validity of such arrangements. How can any organization meaningfully claim to have 
+        established legitimate data processing relationships with nearly a thousand third parties? More importantly, how can 
+        any data subject possibly provide informed consent when presented with such an extensive list of entities?
+    </p>
+    <img src="problematic-consent-prompt.png" alt="A Website GDPR Consent popup. It contains a header stating. We care about your privacy. Followed by We and our 919 partners store and access personal data, like browsing data on unique identifiers, on your device."
         <p>
             The General Data Protection Regulation (GDPR) was designed with clear principles: data subjects should understand who 
             will process their personal data, for what specific purposes, and with what legal basis. The regulation emphasizes 
@@ -501,7 +502,7 @@
                 authority and coordinating enforcement becomes complicated.
             </li>
             <li>
-                <strong>Compliance theater</strong> - Organizations implement superficial consent prompts that appear compliant whilst 
+                <strong>Compliance theatre</strong> - Organizations implement superficial consent prompts that appear compliant whilst 
                 fundamentally failing to provide meaningful protection, making violations difficult to prove.
             </li>
             <li>
@@ -555,7 +556,7 @@
                 individual tracking.
             </li>
             <li>
-                <strong>On-device processing</strong> - Where feasible, process data on user devices rather than sharing with external partners.
+                <strong>On-device processing</strong> - Where feasible, process data on user devices (or your own hosting solution) rather than sharing with external partners.
             </li>
         </ul>
 
@@ -744,7 +745,7 @@
             <li>
                 <strong>Consent mechanism redesign</strong> - Implement consent interfaces that:
                 <ul>
-                    <li>Present manageable number of clearly explained partners</li>
+                    <li>Present a manageable number of clearly explained partners</li>
                     <li>Avoid dark patterns and asymmetric effort</li>
                     <li>Provide genuine granular control where appropriate</li>
                     <li>Make withdrawal as easy as provision</li>
