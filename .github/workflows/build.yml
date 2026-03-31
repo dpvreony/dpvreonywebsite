@@ -49,6 +49,10 @@ jobs:
       run: |
         dotnet build ${{ env.solutionpath }} --configuration Release --no-restore /bl:artifacts\\binlog\\build.binlog /p:ContinuousIntegrationBuild=true
 
+    - name: Create HTTPS localhost certificate
+      run: |
+        dotnet dev-certs https
+
     - name: Build Website
       working-directory: src/dpvreony.website
       run: |
