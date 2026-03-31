@@ -41,6 +41,31 @@ jobs:
       with:
         global-json-file: "global.json"
 
+    - name: Create + trust HTTPS dev cert (Ubuntu)
+      shell: bash
+      run: |
+        set -euo pipefail
+
+        sudo apt-get update
+        sudo apt-get install -y --no-install-recommends ca-certificates
+        sudo update-ca-certificates
+
+        # Recreate and export dev cert
+        dotnet dev-certs https --clean
+        dotnet dev-certs https
+
+        CERT_PASSWORD='${{ secrets.DEVCERT_PASSWORD }}'
+        dotnet dev-certs https -ep /tmp/aspnet-devcert.pfx -p "$CERT_PASSWORD"
+        dotnet dev-certs https -ep /tmp/aspnet-devcert.crt --format PEM
+
+        # Trust it system-wide on Ubuntu
+        sudo cp /tmp/aspnet-devcert.crt /usr/local/share/ca-certificates/aspnet-devcert.crt
+        sudo update-ca-certificates
+
+        # Make available to later steps (optional)
+        echo "ASPNETCORE_Kestrel__Certificates__Default__Path=/tmp/aspnet-devcert.pfx" >> "$GITHUB_ENV"
+        echo "ASPNETCORE_Kestrel__Certificates__Default__Password=$CERT_PASSWORD" >> "$GITHUB_ENV"
+
     - name: Restore Packages
       run: |
         dotnet restore ${{ env.solutionpath }} /bl:artifacts\\binlog\\restore.binlog
