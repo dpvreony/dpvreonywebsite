@@ -77,7 +77,7 @@ namespace DPVreony.WebsiteBuilder
 
             // Use the "no-ssg" arg to omit static file generation
             // during development (hot-reload, etc.)
-            var allowSSG = !args.HasOmitSsgArg();
+            var allowSSG = !args.HasOmitSsgArg() || Environment.GetEnvironmentVariable("GITHUB_ACTIONS") == "true";
 
             var exitWhenDone = args.HasExitWhenDoneArg();
 
