@@ -1,16 +1,14 @@
-@import "../node_modules/bootstrap/scss/functions.scss";
-@import "../node_modules/bootstrap/scss/variables.scss";
-@import "../node_modules/bootstrap/scss/mixins.scss";
-@import "mixins.scss";
-@import "global.scss";
-@import "navbar.scss";
-@import "masthead.scss";
-@import "post.scss";
-@import "contact.scss";
-@import "footer.scss";
-@import "bootstrap-overrides.scss";
-@import "extras.scss";
-@import "overrides.scss";
+@use "mixins";
+@use "global";
+@use "navbar";
+@use "masthead";
+@use "post";
+@use "contact";
+@use "footer";
+@use "bootstrap-overrides";
+@use "extras";
+@use "overrides";
+@use "resume";
 
 @font-face {
     font-family: 'logobloqo2regular';
@@ -49,8 +47,6 @@ p.card-text {
 .navbar-brand {
     visibility: collapse;
 }
-
-@import "resume.scss";
 
 div.code {
     background-color: #404040;
