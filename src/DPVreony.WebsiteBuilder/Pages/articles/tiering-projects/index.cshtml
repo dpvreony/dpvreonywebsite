@@ -1,0 +1,273 @@
+﻿@page
+@using DPVreony.Website.Features.Articles
+@using NodaTime
+@{
+    var articleMetadata = new ArticleMetadataModel(
+        ArticleStatus.Draft,
+        new Version(0, 1),
+        new LocalDate(2023, 11, 06),
+        new LocalDate(2026, 03, 31),
+        new LocalDate(2026, 03, 31),
+        new LocalDate(2026, 10, 01));
+}
+<div class="row">
+    <div class="col-md-8">
+        <h1>Tiering projects</h1>
+
+        <h2>Introduction</h2>
+        <p>
+            In software development organizations, especially those managing multiple projects or repositories, it's essential to understand
+            how to prioritize and organize work. Tiering projects provides a framework for making strategic decisions about where to invest
+            engineering effort, how to manage technical debt, and where to focus quality improvements.
+        </p>
+        <p>
+            There are multiple approaches to tiering projects, each offering different perspectives on prioritization:
+            dependency order, downstream impact, value, and development experience. These approaches are complementary and can be used together to create
+            a comprehensive understanding of your project portfolio.
+        </p>
+
+        <h2>Tiering by Dependency Order</h2>
+        <p>
+            Dependency order tiering organizes projects based on their position in the dependency graph. Projects are classified from
+            lowest-level (no dependencies on internal projects) to highest-level (depends on many internal projects).
+        </p>
+        <h3>Characteristics</h3>
+        <ul>
+            <li><strong>Tier 0 (Foundation):</strong> Projects with no internal dependencies, only external libraries</li>
+            <li><strong>Tier 1 (Core):</strong> Projects that depend only on Tier 0 projects</li>
+            <li><strong>Tier N:</strong> Projects that depend on Tier N-1 (or lower) projects</li>
+            <li><strong>Top Tier:</strong> Applications and executables that consume the entire stack</li>
+        </ul>
+        <h3>Benefits</h3>
+        <ul>
+            <li>Clearly identifies foundational components that require higher stability</li>
+            <li>Helps prevent circular dependencies and maintain clean architecture</li>
+            <li>Makes build order and deployment dependencies explicit</li>
+            <li>Identifies which projects need stronger versioning and compatibility guarantees</li>
+        </ul>
+        <h3>Application</h3>
+        <p>
+            Lower-tier projects typically require stricter breaking change policies, more comprehensive testing, and careful versioning
+            since changes ripple upward through the dependency chain. Higher-tier projects have more flexibility for rapid iteration.
+        </p>
+
+        <h2>Tiering by Downstream Impact</h2>
+        <p>
+            Downstream impact tiering categorizes projects based on how many other projects depend on them. This is the inverse perspective
+            of dependency order, focusing on the blast radius of changes.
+        </p>
+        <h3>Characteristics</h3>
+        <ul>
+            <li><strong>High Impact:</strong> Projects consumed by many downstream projects</li>
+            <li><strong>Medium Impact:</strong> Projects consumed by several downstream projects</li>
+            <li><strong>Low Impact:</strong> Projects consumed by few or no downstream projects</li>
+        </ul>
+        <h3>Benefits</h3>
+        <ul>
+            <li>Identifies where bugs or breaking changes will have the widest effect</li>
+            <li>Helps prioritize where to invest in quality, testing, and documentation</li>
+            <li>Highlights projects that need stronger API design and backward compatibility</li>
+            <li>Informs risk assessment for planned changes</li>
+        </ul>
+        <h3>Application</h3>
+        <p>
+            High-impact projects deserve greater scrutiny in code reviews, more extensive automated testing, and careful consideration
+            of API evolution. They may also be candidates for formal deprecation policies and migration guides when changes are necessary.
+            Low-impact projects can tolerate more experimentation and rapid iteration.
+        </p>
+
+        <h2>Tiering by Value</h2>
+        <p>
+            Value-based tiering classifies projects according to their business or organizational value. This approach is less technical
+            and more strategic, focusing on the return on investment for engineering effort.
+        </p>
+        <h3>Characteristics</h3>
+        <ul>
+            <li><strong>Strategic:</strong> Projects critical to core business capabilities or competitive advantage</li>
+            <li><strong>Important:</strong> Projects that support key functionality but aren't differentiators</li>
+            <li><strong>Utility:</strong> Projects that provide supporting functionality or convenience</li>
+            <li><strong>Experimental:</strong> Projects exploring new capabilities or technologies</li>
+        </ul>
+        <h3>Benefits</h3>
+        <ul>
+            <li>Aligns technical decisions with business priorities</li>
+            <li>Helps allocate scarce resources (senior developers, security reviews, etc.)</li>
+            <li>Identifies candidates for sunsetting or open sourcing</li>
+            <li>Provides context for making trade-offs between quality and speed</li>
+        </ul>
+        <h3>Application</h3>
+        <p>
+            Strategic projects warrant ongoing investment in modernization, performance optimization, and feature development.
+            Utility projects might be candidates for replacement with third-party solutions or community-maintained alternatives.
+            Experimental projects need clear success criteria and exit strategies.
+        </p>
+
+        <h2>Tiering by Development Experience and Build Support</h2>
+        <p>
+            Development experience and build support tiering recognizes that different projects require different levels of
+            developer tooling, build infrastructure, and support systems. This perspective focuses on the operational aspects
+            of maintaining and evolving projects.
+        </p>
+        <h3>Characteristics</h3>
+        <ul>
+            <li><strong>Premium Support:</strong> Projects with dedicated build pipelines, comprehensive local development tooling,
+                automated testing infrastructure, and dedicated support teams</li>
+            <li><strong>Standard Support:</strong> Projects with standard CI/CD pipelines, documented setup procedures,
+                and shared team support</li>
+            <li><strong>Basic Support:</strong> Projects with minimal build automation, basic documentation,
+                and community-based support</li>
+            <li><strong>Self-Service:</strong> Projects where developers are expected to figure out setup and builds independently</li>
+        </ul>
+        <h3>Benefits</h3>
+        <ul>
+            <li>Optimizes resource allocation for build infrastructure and tooling investments</li>
+            <li>Sets clear expectations for developers about available support and tooling</li>
+            <li>Identifies projects that may need developer experience improvements to attract contributors</li>
+            <li>Helps prioritize investments in build system modernization and automation</li>
+            <li>Reduces onboarding friction by making support levels explicit</li>
+        </ul>
+        <h3>Application</h3>
+        <p>
+            Premium support projects might include features like one-click local development setup, pre-commit hooks,
+            comprehensive build validation, automated dependency updates, and dedicated Slack channels or support rotations.
+            Standard support projects have documented README files, CI/CD for main branches, and team-based support.
+            Basic and self-service projects rely more heavily on developer initiative and may accept longer feedback cycles.
+        </p>
+        <h3>Considerations for Build Infrastructure</h3>
+        <ul>
+            <li><strong>Build agents:</strong> Premium tiers might use dedicated, high-performance build agents while basic tiers share general-purpose agents</li>
+            <li><strong>Caching strategies:</strong> Higher tiers benefit from aggressive caching and incremental builds to speed up development cycles</li>
+            <li><strong>Local environment support:</strong> Premium tiers may include containerized development environments, dev containers, or infrastructure-as-code for local setups</li>
+            <li><strong>Monitoring and alerting:</strong> Higher tiers warrant build health dashboards and proactive alerting for failures</li>
+            <li><strong>Artifact management:</strong> Premium tiers might publish to multiple registries with symbol servers and debug packages</li>
+        </ul>
+        <h3>Developer Experience Indicators</h3>
+        <ul>
+            <li><strong>Time to first build:</strong> How long from cloning to successfully building the project</li>
+            <li><strong>Build feedback time:</strong> How quickly developers get CI/CD results</li>
+            <li><strong>Documentation quality:</strong> Completeness of setup guides, architecture docs, and troubleshooting resources</li>
+            <li><strong>Tooling maturity:</strong> Availability of IDE extensions, code generators, test runners, and debugging tools</li>
+            <li><strong>Support responsiveness:</strong> Expected time to get help with build or development issues</li>
+        </ul>
+
+        <h2>Strategic Use of Tiering: Centralizing Build Infrastructure</h2>
+        <p>
+            Beyond classification, tiering can be used architecturally to dramatically reduce maintenance overhead across large
+            project portfolios. By creating higher-tier repositories that consolidate build workflows, reusable actions, and
+            tooling scripts, organizations can achieve massive efficiency gains.
+        </p>
+        <h3>The Consolidation Pattern</h3>
+        <p>
+            In this pattern, top-tier repositories exist specifically to provide shared build infrastructure that lower-tier
+            projects consume. Instead of each project maintaining its own build toolchain, workflow definitions, and scripts,
+            they reference centralized, versioned build infrastructure from upstream repositories.
+        </p>
+        <h3>The Maintenance Mathematics</h3>
+        <p>
+            Consider an organization with 100 repositories, each depending on 10 different build-related packages or tools
+            (build engines, linters, formatters, test frameworks, etc.):
+        </p>
+        <ul>
+            <li><strong>Without consolidation:</strong> Each of the 100 repositories must update all 10 packages independently.
+                Total updates required: 100 repositories × 10 packages = 1,000 updates</li>
+            <li><strong>With consolidation:</strong> One top-tier repository maintains the 10 packages. Each of the 100 lower-tier
+                repositories updates their reference to the consolidated infrastructure once per release cycle.
+                Total updates required: 10 packages (in consolidation repo) + 100 repository references = 110 updates</li>
+        </ul>
+        <p>
+            This represents a <strong>90% reduction in maintenance effort</strong> (from 1,000 to 110 updates). The savings compound
+            with monthly or quarterly release cycles and as the number of repositories or tooling dependencies grows.
+        </p>
+        <h3>Implementation Examples</h3>
+        <ul>
+            <li><strong>Consolidated workflow repository:</strong> A top-tier repo containing reusable GitHub Actions workflows,
+                Azure DevOps pipeline templates, or Jenkins shared libraries. Lower-tier projects reference these via workflow
+                includes or template imports.</li>
+            <li><strong>Build script packages:</strong> PowerShell modules, npm packages, or NuGet packages containing common
+                build scripts (versioning, artifact publishing, code signing). Projects reference a specific version and only
+                update when upgrading to a new release of the consolidated tooling.</li>
+            <li><strong>Docker base images:</strong> Top-tier repositories maintain standardized build environment images
+                with all required tooling pre-installed. Lower-tier projects use these images, inheriting all toolchain
+                updates automatically or on-demand.</li>
+            <li><strong>Composite actions:</strong> Reusable GitHub Action composites or Azure DevOps task groups that
+                encapsulate multi-step build operations. Updates to the composite propagate to all consumers.</li>
+        </ul>
+        <h3>Release and Update Strategy</h3>
+        <ul>
+            <li><strong>Versioned releases:</strong> The consolidated infrastructure repository publishes semantic-versioned
+                releases (e.g., monthly or quarterly)</li>
+            <li><strong>Controlled adoption:</strong> Lower-tier projects can choose when to adopt new infrastructure versions,
+                allowing testing and validation</li>
+            <li><strong>Automated notifications:</strong> Dependabot, Renovate, or similar tools can automatically create
+                PRs in downstream repos when new infrastructure versions are available</li>
+            <li><strong>Breaking change management:</strong> Major version bumps signal breaking changes, allowing projects
+                to plan migrations deliberately</li>
+        </ul>
+        <h3>Benefits Beyond Maintenance Reduction</h3>
+        <ul>
+            <li><strong>Consistency:</strong> All projects use the same build patterns, making it easier for developers to
+                move between projects</li>
+            <li><strong>Best practices propagation:</strong> Security improvements, performance optimizations, and bug fixes
+                in build infrastructure automatically benefit all consumers</li>
+            <li><strong>Easier compliance:</strong> Centralized control makes it simpler to enforce organizational policies
+                (code signing, security scanning, artifact retention)</li>
+            <li><strong>Knowledge centralization:</strong> Build expertise is concentrated in one place rather than scattered
+                across hundreds of repositories</li>
+            <li><strong>Onboarding acceleration:</strong> New projects can adopt proven build infrastructure immediately
+                rather than reinventing solutions</li>
+        </ul>
+        <h3>Challenges and Mitigations</h3>
+        <ul>
+            <li><strong>Challenge:</strong> Single point of failure if consolidated infrastructure has bugs
+                <br/><strong>Mitigation:</strong> Thorough testing of infrastructure changes, canary deployments to subset of projects</li>
+            <li><strong>Challenge:</strong> One size doesn't fit all project types
+                <br/><strong>Mitigation:</strong> Provide multiple workflow templates or configurable parameters for different scenarios</li>
+            <li><strong>Challenge:</strong> Upgrade coordination across many projects
+                <br/><strong>Mitigation:</strong> Automation tools for bulk updates, clear communication of changes, gradual rollout windows</li>
+            <li><strong>Challenge:</strong> Governance and ownership of shared infrastructure
+                <br/><strong>Mitigation:</strong> Clear ownership model, RFC process for major changes, representatives from consuming teams</li>
+        </ul>
+
+        <h2>Combining Tiering Approaches</h2>
+        <p>
+            The most effective project management strategies use all tiering approaches together. A project that is both
+            high-impact and strategic demands different treatment than a low-impact utility project, even if they're at similar
+            dependency tiers. Similarly, development experience requirements should align with the project's importance and usage patterns.
+        </p>
+        <h3>Example Combinations</h3>
+        <ul>
+            <li><strong>Low dependency tier + High impact + Strategic + Premium support:</strong> Foundation libraries that are business-critical.
+                Require exceptional quality standards, comprehensive testing, careful evolution, and excellent developer experience with fast build times and comprehensive tooling.</li>
+            <li><strong>High dependency tier + Low impact + Utility + Basic support:</strong> Internal tools or applications used by small teams.
+                Can iterate rapidly with minimal process and self-service build infrastructure.</li>
+            <li><strong>Medium tier + Medium impact + Experimental + Standard support:</strong> New features or capabilities being piloted.
+                Balance innovation with stability of dependencies, with sufficient build automation to validate ideas quickly.</li>
+            <li><strong>Low tier + High impact + Important + Premium support:</strong> Shared infrastructure components.
+                Need robust build pipelines, excellent documentation, and responsive support to prevent blocking multiple teams.</li>
+        </ul>
+
+        <h2>Practical Recommendations</h2>
+        <ul>
+            <li><strong>Document your tiers:</strong> Make tier classifications visible in README files, architecture diagrams, or project metadata</li>
+            <li><strong>Automate detection:</strong> Use dependency analysis tools to programmatically determine dependency and impact tiers</li>
+            <li><strong>Review regularly:</strong> Project tiers change over time as business needs and architecture evolve</li>
+            <li><strong>Set tier-specific policies:</strong> Define different requirements for testing, code review, deployment, and versioning based on tiers</li>
+            <li><strong>Align build support with tier:</strong> Match your build infrastructure investment to the project's dependency position, impact, and value</li>
+            <li><strong>Measure developer experience:</strong> Track metrics like time-to-first-build and build feedback time to validate support tier assignments</li>
+            <li><strong>Communicate tiers:</strong> Ensure team members understand how tiers affect their work and decision-making</li>
+        </ul>
+
+        <h2>Conclusion</h2>
+        <p>
+            Tiering projects provides a structured approach to managing complexity in multi-project organizations. By understanding
+            projects through the lenses of dependency order, downstream impact, value, and development experience, teams can make more informed decisions
+            about where to invest effort, how to manage risk, and how to balance quality with velocity. The key is to use these
+            approaches complementarily, recognizing that different situations call for different prioritization perspectives. Aligning
+            build support and developer experience with a project's technical and strategic importance creates a coherent system
+            that helps teams work effectively at scale.
+        </p>
+    </div>
+    <div class="col-md-4">
+        @await Html.PartialAsync("_article_metadatasummary", articleMetadata)
+    </div>
+</div>
