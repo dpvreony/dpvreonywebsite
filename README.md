@@ -19,7 +19,7 @@ This repository contains the source code for the DPVreony public website. It is 
 You need:
 
 * [.NET 10 SDK](https://dotnet.microsoft.com/download) or later
-* [Visual Studio 2022 (17.0.0)](https://visualstudio.microsoft.com/) or later (or the `dotnet` CLI)
+* [Visual Studio 2026 (18.0.0)](https://visualstudio.microsoft.com/) or later (or the `dotnet` CLI)
 * [Node.js](https://nodejs.org/) (used automatically by MSBuild to restore npm packages; no manual `npm install` required)
 
 To build from the solution root:
