@@ -52,6 +52,11 @@ jobs:
           -CertStoreLocation "Cert:\CurrentUser\My" `
           -Password (ConvertTo-SecureString "pfx-password" -AsPlainText -Force) | Out-Null
 
+        Import-PfxCertificate `
+          -FilePath "$env:RUNNER_TEMP\https-devcert.pfx" `
+          -CertStoreLocation "Cert:\CurrentUser\Root" `
+          -Password (ConvertTo-SecureString "pfx-password" -AsPlainText -Force) | Out-Null
+
     - name: Configure ASP.NET Core to use cert
       shell: pwsh
       run: |

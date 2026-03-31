@@ -132,11 +132,6 @@ namespace DPVreony.WebsiteBuilder
 
             app.MapRazorPages();
 
-            // Ignore SSL errors for loopback requests when running locally or in CI,
-            // where the dev certificate is not in the trusted root store.
-            var ignoreSslErrors = app.Environment.IsDevelopment() ||
-                Environment.GetEnvironmentVariable("GITHUB_ACTIONS") == "true";
-
             if (allowSSG)
             {
                 app.GenerateStaticContent(
@@ -145,8 +140,7 @@ namespace DPVreony.WebsiteBuilder
                     alwaysDefaultFile: false,
                     dontUpdateLinks: false,
                     dontOptimizeContent: false,
-                    regenerationInterval: regenInterval,
-                    ignoreSslErrors: ignoreSslErrors);
+                    regenerationInterval: regenInterval);
             }
 
             app.Use(async (context, next) =>
