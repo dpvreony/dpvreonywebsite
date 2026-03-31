@@ -44,14 +44,24 @@ jobs:
     - name: Create HTTPS dev cert (no trust prompt)
       shell: pwsh
       run: |
-        dotnet dev-certs https --clean
+        dotnet dev-certs https
+
+    - name: Export HTTPS dev cert
+      shell: pwsh
+      run: |
         dotnet dev-certs https -ep "$env:RUNNER_TEMP\https-devcert.pfx" -p "pfx-password"
 
+    - name: Import HTTPS dev cert to current user
+      shell: pwsh
+      run: |
         Import-PfxCertificate `
           -FilePath "$env:RUNNER_TEMP\https-devcert.pfx" `
           -CertStoreLocation "Cert:\CurrentUser\My" `
           -Password (ConvertTo-SecureString "pfx-password" -AsPlainText -Force) | Out-Null
 
+    - name: Import HTTPS dev cert to root
+      shell: pwsh
+      run: |
         Import-PfxCertificate `
           -FilePath "$env:RUNNER_TEMP\https-devcert.pfx" `
           -CertStoreLocation "Cert:\CurrentUser\Root" `
