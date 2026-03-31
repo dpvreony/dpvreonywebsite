@@ -31,8 +31,7 @@ namespace VitaeCyclum.AspireAppHost
         {
             var builder = DistributedApplication.CreateBuilder(args);
 
-            builder.AddProject<Projects.DPVreony_WebsiteBuilder>("website-builder");
-            // builder.AddProject<Projects.DPVreony_Website>("public-website");
+            builder.AddProject<Projects.DPVreony_Website>("public-website");
 
             return builder;
         }

@@ -3,31 +3,27 @@
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>net10.0</TargetFramework>
-    <LangVersion>latest</LangVersion>
+    <Nullable>enable</Nullable>
   </PropertyGroup>
 
   <ItemGroup>
-    <Content Remove="package.json" />
+    <PackageReference Include="AspNetCore.SassCompiler" Version="1.97.1" />
+    <PackageReference Include="AspNetStatic" Version="0.27.7" />
+    <PackageReference Include="AspNetStaticContrib" Version="1.2.1" />
+    <PackageReference Include="AspNetStaticContrib.Stekeblad" Version="1.0.0" />
+    <PackageReference Include="Whipstaff.Mermaid" Version="9.1.36" />
+    <PackageReference Include="Whipstaff.NodaTime" Version="9.1.36" />
   </ItemGroup>
 
   <ItemGroup>
-    <None Include="package.json" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <PackageReference Include="Statiq.Highlight" Version="1.0.0-beta.72" />
-    <PackageReference Include="TestableIO.System.IO.Abstractions.Wrappers" Version="22.1.0" />
-    <PackageReference Include="Whipstaff.NodaTime" Version="9.0.7" />
-    <PackageReference Include="Whipstaff.Mermaid" Version="9.0.7" />
-    <PackageReference Include="Whipstaff.Statiq" Version="9.0.7-beta" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Features\Resume\" />
+    <Folder Include="Components\" />
+    <Folder Include="Pages\Shared\" />
   </ItemGroup>
 
   <!-- these tasks remove the need for gulp, grunt, npm, etc. to be used for file copying -->
   <ItemGroup>
+    <ArticleFilesToCopy Include="$(ProjectDir)Pages\articles\**\*.mmd" />
+    <FontFilesToCopy Include="$(ProjectDir)fonts\*.*" />
     <NpmBootStrapFilesToCopy Include="$(ProjectDir)node_modules\bootstrap\dist\**\*.*" />
     <NpmCookieConsentFilesToCopy Include="$(ProjectDir)node_modules\cookieconsent\build\*.*" />
     <NpmHighlightJsFilesToCopy Include="$(ProjectDir)node_modules\highlight.js\lib\*.*" />
@@ -39,12 +35,31 @@
     <NpmFontAwesomeFreeFilesToCopy Include="$(ProjectDir)node_modules\@fortawesome\fontawesome-free\**\*.woff2" />
   </ItemGroup>
   <Target Name="CopyNpmTasks" BeforeTargets="BeforeBuild">
-    <Message Text="Starting NPM Package Copy Task" />
-    <Copy SkipUnchangedFiles="True" SourceFiles="@(NpmBootStrapFilesToCopy)" DestinationFiles="@(NpmBootStrapFilesToCopy->'$(ProjectDir)theme\input\lib\bootstrap\%(RecursiveDir)%(Filename)%(Extension)')" />
-    <Copy SkipUnchangedFiles="True" SourceFiles="@(NpmCookieConsentFilesToCopy)" DestinationFiles="@(NpmCookieConsentFilesToCopy->'$(ProjectDir)theme\input\lib\cookieconsent\%(RecursiveDir)%(Filename)%(Extension)')" />
-    <Copy SkipUnchangedFiles="True" SourceFiles="@(NpmHighlightJsFilesToCopy)" DestinationFiles="@(NpmHighlightJsFilesToCopy->'$(ProjectDir)theme\input\lib\highlightjs\%(RecursiveDir)%(Filename)%(Extension)')" />
-    <Copy SkipUnchangedFiles="True" SourceFiles="@(NpmJQueryFilesToCopy)" DestinationFiles="@(NpmJQueryFilesToCopy->'$(ProjectDir)theme\input\lib\jquery\%(RecursiveDir)%(Filename)%(Extension)')" />
-    <Copy SkipUnchangedFiles="True" SourceFiles="@(NpmFontAwesomeFreeFilesToCopy)" DestinationFiles="@(NpmFontAwesomeFreeFilesToCopy->'$(ProjectDir)theme\input\lib\fontawesome-free\%(RecursiveDir)%(Filename)%(Extension)')" />
+    <Message Text="Starting static asset copy task." />
+    <Copy SkipUnchangedFiles="True" SourceFiles="@(ArticleFilesToCopy)" DestinationFiles="@(ArticleFilesToCopy->'$(ProjectDir)wwwroot\articles\%(RecursiveDir)%(Filename)%(Extension)')" />
+    <Copy SkipUnchangedFiles="True" SourceFiles="@(FontFilesToCopy)" DestinationFiles="@(FontFilesToCopy->'$(ProjectDir)wwwroot\fonts\%(RecursiveDir)%(Filename)%(Extension)')" />
+    <Copy SkipUnchangedFiles="True" SourceFiles="@(NpmBootStrapFilesToCopy)" DestinationFiles="@(NpmBootStrapFilesToCopy->'$(ProjectDir)wwwroot\lib\bootstrap\%(RecursiveDir)%(Filename)%(Extension)')" />
+    <Copy SkipUnchangedFiles="True" SourceFiles="@(NpmCookieConsentFilesToCopy)" DestinationFiles="@(NpmCookieConsentFilesToCopy->'$(ProjectDir)wwwroot\lib\cookieconsent\%(RecursiveDir)%(Filename)%(Extension)')" />
+    <Copy SkipUnchangedFiles="True" SourceFiles="@(NpmHighlightJsFilesToCopy)" DestinationFiles="@(NpmHighlightJsFilesToCopy->'$(ProjectDir)wwwroot\lib\highlightjs\%(RecursiveDir)%(Filename)%(Extension)')" />
+    <Copy SkipUnchangedFiles="True" SourceFiles="@(NpmJQueryFilesToCopy)" DestinationFiles="@(NpmJQueryFilesToCopy->'$(ProjectDir)wwwroot\lib\jquery\%(RecursiveDir)%(Filename)%(Extension)')" />
+    <Copy SkipUnchangedFiles="True" SourceFiles="@(NpmFontAwesomeFreeFilesToCopy)" DestinationFiles="@(NpmFontAwesomeFreeFilesToCopy->'$(ProjectDir)wwwroot\lib\fontawesome-free\%(RecursiveDir)%(Filename)%(Extension)')" />
+  </Target>
+
+  <PropertyGroup>
+    <NpmInstallStamp>$(ProjectDir)node_modules\.msbuild-npm-install.stamp</NpmInstallStamp>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <NpmInstallInputs Include="$(ProjectDir)\package.json" />
+    <NpmInstallInputs Include="$(ProjectDir)\package-lock.json" />
+  </ItemGroup>
+
+  <Target Name="NpmInstallIncremental" BeforeTargets="CopyNpmTasks" Inputs="@(NpmInstallInputs)" Outputs="$(NpmInstallStamp)" Condition="!Exists('$(ProjectDir)\node_modules\') OR !Exists('$(NpmInstallStamp)')">
+    <Message Text="Running npm install (inputs changed or stamp missing)..." Importance="high" />
+    <Exec WorkingDirectory="$(ProjectDir)" Command="npm install" />
+
+    <!-- Update/create the stamp so incremental build can compare timestamps next time -->
+    <Touch Files="$(NpmInstallStamp)" AlwaysCreate="true" />
   </Target>
 
 </Project>

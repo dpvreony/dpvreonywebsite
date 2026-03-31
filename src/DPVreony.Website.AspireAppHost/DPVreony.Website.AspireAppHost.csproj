@@ -15,7 +15,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\DPVreony.WebsiteBuilder\DPVreony.WebsiteBuilder.csproj" />
     <ProjectReference Include="..\DPVreony.Website\DPVreony.Website.csproj" />
   </ItemGroup>
 
