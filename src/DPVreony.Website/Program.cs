@@ -79,7 +79,7 @@ namespace DPVreony.WebsiteBuilder
             // during development (hot-reload, etc.)
             var allowSSG = !args.HasOmitSsgArg() || Environment.GetEnvironmentVariable("GITHUB_ACTIONS") == "true";
 
-            var exitWhenDone = args.HasExitWhenDoneArg();
+            var exitWhenDone = args.HasExitWhenDoneArg() || Environment.GetEnvironmentVariable("GITHUB_ACTIONS") == "true";
 
             TimeSpan? regenInterval =
                 !exitWhenDone &&
