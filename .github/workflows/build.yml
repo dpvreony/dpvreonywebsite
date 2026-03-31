@@ -47,6 +47,11 @@ jobs:
         dotnet dev-certs https --clean
         dotnet dev-certs https -ep "$env:RUNNER_TEMP\https-devcert.pfx" -p "pfx-password"
 
+        Import-PfxCertificate `
+          -FilePath "$env:RUNNER_TEMP\https-devcert.pfx" `
+          -CertStoreLocation "Cert:\CurrentUser\My" `
+          -Password (ConvertTo-SecureString "pfx-password" -AsPlainText -Force) | Out-Null
+
     - name: Configure ASP.NET Core to use cert
       shell: pwsh
       run: |
