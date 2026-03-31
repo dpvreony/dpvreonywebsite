@@ -41,38 +41,6 @@ jobs:
       with:
         global-json-file: "global.json"
 
-    - name: Create HTTPS dev cert (no trust prompt)
-      shell: pwsh
-      run: |
-        dotnet dev-certs https
-
-    - name: Export HTTPS dev cert
-      shell: pwsh
-      run: |
-        dotnet dev-certs https -ep "$env:RUNNER_TEMP\https-devcert.pfx" -p "pfx-password"
-
-    - name: Import HTTPS dev cert to current user
-      shell: pwsh
-      run: |
-        Import-PfxCertificate `
-          -FilePath "$env:RUNNER_TEMP\https-devcert.pfx" `
-          -CertStoreLocation "Cert:\CurrentUser\My" `
-          -Password (ConvertTo-SecureString "pfx-password" -AsPlainText -Force) | Out-Null
-
-    - name: Import HTTPS dev cert to root
-      shell: pwsh
-      run: |
-        Import-PfxCertificate `
-          -FilePath "$env:RUNNER_TEMP\https-devcert.pfx" `
-          -CertStoreLocation "Cert:\CurrentUser\Root" `
-          -Password (ConvertTo-SecureString "pfx-password" -AsPlainText -Force) | Out-Null
-
-    - name: Configure ASP.NET Core to use cert
-      shell: pwsh
-      run: |
-        "ASPNETCORE_Kestrel__Certificates__Default__Path=$env:RUNNER_TEMP\https-devcert.pfx" | Out-File -FilePath $env:GITHUB_ENV -Append
-        "ASPNETCORE_Kestrel__Certificates__Default__Password=pfx-password" | Out-File -FilePath $env:GITHUB_ENV -Append
-
     - name: Restore Packages
       run: |
         dotnet restore ${{ env.solutionpath }} /bl:artifacts\\binlog\\restore.binlog
