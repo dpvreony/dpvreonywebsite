@@ -1,0 +1,245 @@
+﻿@page
+@using DPVreony.Website.Features.Articles
+@using NodaTime
+@{
+    var articleMetadata = new ArticleMetadataModel(
+        ArticleStatus.Draft,
+        new Version(0, 1),
+        new LocalDate(2021, 05, 31),
+        new LocalDate(2021, 05, 31),
+        new LocalDate(2021, 05, 31),
+        new LocalDate(2021, 07, 01));
+}
+<div class="row">
+    <div class="col-md-8">
+        <h1>Utilizing Technical Steering for Knowledge Management.</h1>
+
+        <h2>Introduction</h2>
+        <p>
+            Technical Steering is a governance framework that enables development teams to establish consistent, well-documented technical decisions whilst maintaining architectural integrity across projects and products. In contrast to traditional top-down architecture boards, technical steering emphasises collaborative decision-making, continuous documentation, and knowledge sharing through structured artifacts such as Architecture Decision Records (ADRs) and Request for Comments (RFCs).
+        </p>
+        <p>
+            Within the context of knowledge management, technical steering functions as both a decision-making framework and a knowledge capture mechanism. By mandating the documentation of contextual information, evaluated options, and the rationale underlying technical choices, organisations establish a searchable repository of institutional knowledge. This repository helps the onboarding of new team members, prevents the recurrence of resolved debates, and provides historical context for future architectural evolution.
+        </p>
+        <p>
+            A fundamental objective of knowledge management through technical steering is the enhancement of knowledge quality and retention. By establishing a transparent platform for knowledge access and contribution, organisations democratise technical knowledge and significantly mitigate risks associated with personnel attrition. This approach provides parity to all individuals who can access the knowledge, fostering transparency and equality across the organisation. When knowledge exists solely within individuals' expertise, their departure creates substantial organisational risk and loss of institutional memory. Technical steering addresses this vulnerability by ensuring critical technical knowledge is shared, documented, and made accessible to the broader organisation.
+        </p>
+        <p>
+            This article examines how technical steering practices can be used as a comprehensive knowledge management strategy, analysing the artifacts produced, the cultural transformations required, and the long-term organisational benefits of treating technical decision-making as a knowledge creation process rather than merely a governance checkpoint.
+        </p>
+
+        <h2>Technical Steering as a Knowledge System</h2>
+        <p>
+            Traditional knowledge management approaches often treat documentation as a separate activity, performed after technical work is complete. This separation frequently results in incomplete, outdated, or non-existent documentation, as teams prioritise delivery over documentation. Technical steering inverts this relationship by making documentation an integral component of the decision-making process itself.
+        </p>
+        <p>
+            The knowledge system created through technical steering operates on several levels simultaneously. At the tactical level, it captures specific technical decisions and their rationale. At the strategic level, it reveals patterns in architectural thinking and evolving principles. At the organisational level, it demonstrates how technical decisions align with business objectives and respond to changing market conditions.
+        </p>
+
+        <h2>Key Artifacts in Technical Steering</h2>
+        <p>
+            Technical steering produces several categories of artifacts, each serving distinct knowledge management purposes whilst contributing to a cohesive whole.
+        </p>
+
+        <h3>Architecture Decision Records (ADRs)</h3>
+        <p>
+            Architecture Decision Records form the foundational documentation layer of technical steering. Each ADR captures a single significant architectural decision, documenting the context that necessitated the decision, the alternatives evaluated, the chosen approach, and the expected consequences. By maintaining ADRs in version control alongside the codebase, they remain accessible and evolve with the system they describe.
+        </p>
+        <p>
+            From a knowledge management perspective, ADRs serve multiple functions. They provide immediate context for code reviewers and new team members. They establish precedents that guide future decisions. They prevent the erosion of architectural intent as systems evolve. Most importantly, they share the reasoning process, transforming tacit knowledge held by individual architects into explicit knowledge available to the organisation.
+        </p>
+
+        <h3>Request for Comments (RFCs)</h3>
+        <p>
+            Request for Comments documents help collaborative decision-making before commitment. Unlike ADRs which record decisions already made, RFCs propose approaches and solicit feedback from stakeholders. This consultation process generates valuable knowledge artifacts, as discussions and critiques reveal concerns, constraints, and alternative perspectives that might otherwise remain unexpressed.
+        </p>
+        <p>
+            The RFC process creates knowledge in several ways. The act of writing an RFC forces authors to clarify their thinking and explain their assumptions. The review process surfaces expertise from across the organisation. The resolution process demonstrates how the organisation balances competing concerns and priorities. Even rejected RFCs contribute to organisational knowledge by documenting approaches that were considered but deemed unsuitable.
+        </p>
+
+        <h3>Technical Design Documents</h3>
+        <p>
+            Technical design documents complement ADRs by providing deeper implementation detail for complex features or systems. Whilst ADRs focus on decisions and their rationale, design documents describe how systems work, their component interactions, and their operational characteristics. These documents typically include system diagrams, interface specifications, data flow descriptions, and operational considerations.
+        </p>
+        <p>
+            Design documents represent critical knowledge assets that reduce onboarding time and enable maintenance activities. They provide the conceptual models necessary to understand complex systems without requiring exhaustive code analysis. They serve as reference materials during incident response and troubleshooting. They help handover between teams and support capacity planning activities.
+        </p>
+
+        <h3>Meeting Notes and Decision Logs</h3>
+        <p>
+            Structured meeting notes from technical steering sessions capture the deliberative process behind decisions. These notes document the questions raised, concerns expressed, and commitments made during discussions. By maintaining these records, organisations preserve context that might otherwise be lost, particularly the reasoning behind decisions that were not controversial enough to warrant a full RFC but significant enough to require coordination.
+        </p>
+
+        <h2>Cultural Transformation for Knowledge-Centric Steering</h2>
+        <p>
+            Implementing technical steering as a knowledge management practice requires cultural changes beyond process adoption. Organisations must develop values and behaviours that support knowledge creation and sharing.
+        </p>
+
+        <h3>From Individual Expertise to Collective Knowledge</h3>
+        <p>
+            Traditional technical cultures often celebrate individual expertise and create knowledge gatekeepers who accumulate specialised knowledge without systematic sharing. Technical steering challenges this model by requiring knowledge to be shared and documented. Architects and technical leads must explain their reasoning, subject their assumptions to review, and contribute to a shared knowledge base rather than maintaining exclusive expertise.
+        </p>
+        <p>
+            This transformation requires recognising and rewarding different behaviours. Organisations should value clear documentation as highly as clever solutions. They should celebrate knowledge sharing rather than knowledge hoarding. They should measure technical leadership by the clarity and accessibility of decisions rather than the complexity of solutions or the exclusivity of understanding.
+        </p>
+
+        <h3>Embracing Transparency</h3>
+        <p>
+            Knowledge management through technical steering depends on transparency. Decisions, discussions, and rationale must be visible to appropriate audiences. This transparency can create initial discomfort, as individuals accustomed to private decision-making must adapt to public review and accountability.
+        </p>
+        <p>
+            However, transparency generates substantial benefits. It enables distributed decision-making by providing context and precedent. It helps learning by exposing junior team members to senior technical thinking. It improves decision quality by subjecting proposals to broader critique. It builds trust by demonstrating that decisions are made rationally rather than arbitrarily.
+        </p>
+
+        <h3>Accepting Imperfect Documentation</h3>
+        <p>
+            Perfectionism represents a significant barrier to knowledge management. Teams may resist documentation because they cannot achieve comprehensive coverage or because initial attempts seem inadequate compared to the complexity they seek to describe. Technical steering addresses this challenge by accepting that documentation, like code, is iterative and improvable.
+        </p>
+        <p>
+            Organisations should encourage incremental documentation improvement. An imperfect ADR created immediately is vastly more valuable than a perfect ADR that is never written. Documentation can be refined over time as understanding improves and additional context becomes available. The goal is progress rather than perfection.
+        </p>
+
+        <h2>Knowledge Quality and Maintenance</h2>
+        <p>
+            Creating knowledge artifacts is insufficient; organisations must actively maintain quality and relevance. Technical steering requires processes that ensure documentation remains accurate and useful.
+        </p>
+
+        <h3>Documentation Lifecycles</h3>
+        <p>
+            Knowledge artifacts have lifecycles that must be managed explicitly. ADRs may become deprecated as technology choices evolve. Design documents may require updates as systems are modified. RFCs may need revision as requirements change. Establishing clear lifecycle states (proposed, accepted, deprecated, superseded) and maintaining these states ensures users can distinguish between current and historical knowledge.
+        </p>
+
+        <h3>Regular Review and Updates</h3>
+        <p>
+            Documentation degrades over time as systems evolve. Regular review cycles should be established to identify outdated information, update changed decisions, and deprecate obsolete artifacts. These reviews can be incorporated into sprint retrospectives, quarterly planning cycles, or architectural review sessions.
+        </p>
+
+        <h3>Measuring Documentation Value</h3>
+        <p>
+            Organisations should establish metrics that indicate documentation health and usage. Metrics might include the frequency of documentation access, the time-to-productivity for new team members, the reduction in repeated technical questions, or the percentage of significant decisions with corresponding ADRs. These measurements help justify continued investment in knowledge management and identify areas requiring attention.
+        </p>
+
+        <h2>Implementation Approach</h2>
+        <p>
+            Organisations seeking to implement technical steering for knowledge management should adopt a gradual, pragmatic approach that builds capability and demonstrates value step by step.
+        </p>
+
+        <h3>Start with High-Impact Decisions</h3>
+        <p>
+            Begin by documenting the most significant and contentious technical decisions. These high-impact areas generate the greatest knowledge management value and demonstrate the benefits of structured documentation. As teams become comfortable with the practice, expand coverage to include more routine decisions.
+        </p>
+
+        <h3>Establish Templates and Tools</h3>
+        <p>
+            Reduce friction by providing clear templates for ADRs, RFCs, and design documents. Establish simple tooling that integrates with existing workflows. Store documentation in version control systems alongside code, or use platforms that developers already use regularly. The easier it is to create and access documentation, the more likely teams are to maintain it.
+        </p>
+
+        <h3>Build a Documentation Culture</h3>
+        <p>
+            Create explicit expectations around documentation. Include documentation creation in definition of done criteria. Discuss documentation in code reviews. Reference ADRs during technical discussions. Celebrate excellent documentation examples. Make documentation a normal part of technical work rather than an optional addition.
+        </p>
+
+        <h3>Provide Training and Support</h3>
+        <p>
+            Not all developers are experienced technical writers. Provide training on effective documentation practices. Offer feedback on initial documentation attempts. Create examples that show good practices. Support team members as they develop documentation skills.
+        </p>
+
+        <h2>Benefits of Technical Steering for Knowledge Management</h2>
+        <p>
+            Organisations that successfully implement technical steering as a knowledge management practice gain substantial benefits across multiple dimensions.
+        </p>
+
+        <h3>Accelerated Onboarding</h3>
+        <p>
+            New team members can access a rich repository of context and rationale that explains not just what the system does, but why it was built that way. This understanding accelerates productivity and reduces the burden on existing team members to provide context repeatedly.
+        </p>
+
+        <h3>Improved Decision Consistency</h3>
+        <p>
+            Access to historical decisions and their rationale enables teams to make consistent choices aligned with established patterns and principles. This consistency reduces cognitive load, simplifies maintenance, and supports system coherence.
+        </p>
+
+        <h3>Risk Mitigation</h3>
+        <p>
+            By sharing and documenting knowledge, organisations reduce their dependency on specific individuals. When team members leave, their contributions to the decision record remain accessible. This continuity protects against knowledge loss and reduces the organisational impact of personnel changes.
+        </p>
+
+        <h3>Enhanced Collaboration</h3>
+        <p>
+            Transparent decision-making and accessible knowledge help collaboration across team boundaries. Developers can understand decisions made by other teams, identify opportunities for alignment, and contribute to discussions outside their immediate domain.
+        </p>
+
+        <h3>Informed Evolution</h3>
+        <p>
+            Understanding the reasoning behind past decisions enables informed evolution. Teams can evaluate whether original assumptions remain valid, whether circumstances have changed sufficiently to justify revisiting decisions, and how to evolve systems whilst maintaining architectural integrity.
+        </p>
+
+        <h2>Challenges and Solutions</h2>
+        <p>
+            Implementing technical steering for knowledge management presents challenges that organisations must anticipate and address.
+        </p>
+
+        <h3>Documentation Overhead</h3>
+        <p>
+            Teams may perceive documentation as overhead that slows delivery. Address this concern by demonstrating how documentation reduces future costs through reduced onboarding time, fewer repeated questions, and improved decision quality. Start with lightweight documentation approaches that provide value without excessive effort.
+        </p>
+
+        <h3>Maintaining Documentation Currency</h3>
+        <p>
+            Documentation inevitably becomes outdated as systems evolve. Establish clear ownership for documentation maintenance. Include documentation updates as part of feature work. Implement review cycles that identify and address documentation drift.
+        </p>
+
+        <h3>Finding the Right Level of Detail</h3>
+        <p>
+            Determining appropriate documentation detail is challenging. Too little detail provides insufficient context; too much detail becomes unmaintainable. Encourage teams to focus on capturing the reasoning and context that will be most valuable to future readers, whilst avoiding excessive implementation detail that duplicates information available in code.
+        </p>
+
+        <h3>Ensuring Accessibility</h3>
+        <p>
+            Documentation is valuable only if it can be discovered and accessed. Implement search capabilities, maintain clear indexing and organisation, and ensure documentation is stored in locations that teams access regularly. Consider establishing a documentation portal that aggregates artifacts and provides navigation.
+        </p>
+
+        <h2>Conclusion</h2>
+        <p>
+            Technical steering represents more than a governance approach; it is a comprehensive knowledge management strategy that transforms how organisations capture, share, and use technical expertise. By integrating documentation into the decision-making process, establishing transparent practices, and fostering a culture that values knowledge sharing, organisations create enduring knowledge assets that transcend individual expertise.
+        </p>
+        <p>
+            The benefits extend beyond improved documentation to include accelerated onboarding, enhanced decision quality, reduced organisational risk, and sustained architectural integrity. Whilst implementation requires cultural transformation and ongoing commitment, the long-term value of accessible, high-quality technical knowledge justifies this investment.
+        </p>
+        <p>
+            Organisations that embrace technical steering as a knowledge management practice position themselves to scale more effectively, adapt more readily to change, and maintain continuity despite personnel transitions. In an era where knowledge represents competitive advantage, technical steering provides a systematic approach to developing and preserving this critical organisational asset.
+        </p>
+
+        <h2>References</h2>
+        <ul>
+            <li>
+                Nygard, M. (2011). <em>Documenting Architecture Decisions</em>. 
+                <a href="https://cognitect.com/blog/2011/11/15/documenting-architecture-decisions" target="_blank">https://cognitect.com/blog/2011/11/15/documenting-architecture-decisions</a>
+            </li>
+            <li>
+                Thoughtworks Technology Radar. <em>Architecture Decision Records</em>. 
+                <a href="https://www.thoughtworks.com/radar/techniques/lightweight-architecture-decision-records" target="_blank">https://www.thoughtworks.com/radar/techniques/lightweight-architecture-decision-records</a>
+            </li>
+            <li>
+                Polanyi, M. (1966). <em>The Tacit Dimension</em>. University of Chicago Press.
+            </li>
+            <li>
+                Nonaka, I., & Takeuchi, H. (1995). <em>The Knowledge-Creating Company: How Japanese Companies Create the Dynamics of Innovation</em>. Oxford University Press.
+            </li>
+            <li>
+                Zimmermann, O. (2020). <em>Architectural Decision Guidance Across Projects</em>. 
+                <a href="https://www.ozimmer.ch/practices/2020/04/27/ArchitectureDecisionMaking.html" target="_blank">https://www.ozimmer.ch/practices/2020/04/27/ArchitectureDecisionMaking.html</a>
+            </li>
+            <li>
+                Fowler, M. (2006). <em>CodeAsDocumentation</em>. 
+                <a href="https://martinfowler.com/bliki/CodeAsDocumentation.html" target="_blank">https://martinfowler.com/bliki/CodeAsDocumentation.html</a>
+            </li>
+            <li>
+                Ford, N., Richards, M., Sadalage, P., & Dehghani, Z. (2021). <em>Software Architecture: The Hard Parts</em>. O'Reilly Media.
+            </li>
+        </ul>
+    </div>
+    <div class="col-md-4">
+        @await Html.PartialAsync("_article_metadatasummary", articleMetadata)
+    </div>
+</div>

@@ -1,0 +1,30 @@
+﻿@model Dhgms.DPVreony.Website.ViewModels.SkillLevelViewModel
+
+@functions {
+    private string GetYearText(int durationYears)
+    {
+        return durationYears > 1 ? "Years" : "Year";
+    }
+
+    private string GetMonthText(int durationMonths)
+    {
+        return durationMonths > 1 ? "Months" : "Month";
+    }
+}
+@{
+    var skills = Model.Skills;
+}
+<h3>@Model.Level</h3>
+@if (skills == null || skills.Count < 1)
+{
+    <p>There are no skills to display</p>
+}
+else
+{
+    <ul>
+        @foreach (var skill in skills)
+        {
+            <li>@skill.Name : @(skill.Duration.Years > 0 ? $"{skill.Duration.Years} {GetYearText(skill.Duration.Years)}" : $"{skill.Duration.Months} {GetMonthText(skill.Duration.Months)}")</li>
+        }
+    </ul>
+}

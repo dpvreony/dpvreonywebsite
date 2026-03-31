@@ -1,0 +1,10 @@
+﻿@page
+@{
+    const string title = "My Résumé";
+}
+<main>
+    <h1>@title</h1>
+    @await Html.PartialAsync("_resume_experience")
+    @await Html.PartialAsync("_resume_skills")
+    @*@Html.Partial("_resume_projects")*@
+</main>
