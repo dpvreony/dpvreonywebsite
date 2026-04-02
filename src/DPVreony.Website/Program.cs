@@ -47,7 +47,14 @@ namespace DPVreony.WebsiteBuilder
 
             services.AddRazorPages();
 
-            services.AddHealthChecks();
+            services.AddSingleton<DPVreony.WebsiteBuilder.Services.StartupHealthCheck>();
+            services.AddHostedService<DPVreony.WebsiteBuilder.Services.StartupBackgroundService>();
+
+            services.AddHealthChecks()
+                .AddCheck<DPVreony.WebsiteBuilder.Services.StartupHealthCheck>(
+                    "startup",
+                    failureStatus: Microsoft.Extensions.Diagnostics.HealthChecks.HealthStatus.Unhealthy,
+                    tags: new[] { "ready" });
 
             services.AddSingleton<IStaticResourcesInfoProvider>(
                 GetStaticResourcesInfoProvider(builder)
