@@ -47,6 +47,8 @@ namespace DPVreony.WebsiteBuilder
 
             services.AddRazorPages();
 
+            services.AddHealthChecks();
+
             services.AddSingleton<IStaticResourcesInfoProvider>(
                 GetStaticResourcesInfoProvider(builder)
                 );
@@ -131,6 +133,8 @@ namespace DPVreony.WebsiteBuilder
             app.UseAuthorization();
 
             app.MapRazorPages();
+
+            app.MapHealthChecks("/health");
 
 
             // Ignore SSL errors for loopback requests when running locally or in CI,
