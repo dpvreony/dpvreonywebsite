@@ -7,7 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="AspNetCore.SassCompiler" Version="1.98.0" />
+    <PackageReference Include="AspNetCore.SassCompiler" Version="1.99.0" />
     <PackageReference Include="AspNetStatic" Version="0.27.7" />
     <PackageReference Include="AspNetStaticContrib" Version="1.2.1" />
     <PackageReference Include="AspNetStaticContrib.Stekeblad" Version="1.0.0" />
