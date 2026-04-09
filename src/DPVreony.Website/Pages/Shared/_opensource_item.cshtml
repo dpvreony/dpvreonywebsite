@@ -6,14 +6,17 @@
     </div>
     <div style="margin-bottom: 2em;">
         <p>@Model.Description</p>
-        @if (@Model.GithubUri != null)
+        @if (@Model.GithubProject != null)
         {
-            <a href="@Model.GithubUri" class="btn btn-primary">Github</a>
+            <a href="@Model.GithubProject.Uri" class="btn btn-primary">@Model.GithubProject.Name</a>
         }
 
-        @if (@Model.ArticleUri != null)
+        @if (@Model.Articles != null && @Model.Articles.Length > 0)
         {
-            <a href="@Model.ArticleUri" class="btn btn-primary">Article</a>
+            @foreach (var article in @Model.Articles)
+            {
+                <a href="@article.Uri" class="btn btn-primary">@article.Title</a>
+            }
         }
     </div>
 </div>
