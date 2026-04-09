@@ -8,12 +8,12 @@ namespace DPVreony.Website.Features.OpenSource
             string title,
             string description,
             Uri? githubUri,
-            Uri? articleUri)
+            ArticleModel[]? articles)
         {
             Title = title;
             Description = description;
             GithubUri = githubUri;
-            ArticleUri = articleUri;
+            Articles = articles;
         }
 
         public string Title { get; }
@@ -22,6 +22,6 @@ namespace DPVreony.Website.Features.OpenSource
 
         public Uri? GithubUri { get; }
 
-        public Uri? ArticleUri { get; }
+        public ArticleModel[]? Articles { get; }
     }
 }

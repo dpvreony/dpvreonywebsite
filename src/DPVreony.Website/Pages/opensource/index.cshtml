@@ -17,7 +17,7 @@
         "Vetuviem",
         "Vetuviem is an extension for ReactiveUI to aid in producing re-usable View to ViewModel binding logic. It generates source code around control libraries to provide a DSL model that can be combined with helper methods to allow teams to have a standard codebase of common binding behaviors.",
         GetDPVreonyOrgGithubProject("vetuviem"),
-        GetArticle("designing-vetuviem"));
+        [new ArticleModel("Designing Vetuviem", GetArticle("designing-vetuviem"))]);
 
     var gripe = new InvolvementModel(
         "Gripe With Roslyn",
@@ -166,9 +166,12 @@
             {
                     <a href="@involvement.GithubUri">Github Project</a>
             }
-            @if (involvement.ArticleUri != null)
+            @if (involvement.Articles != null && involvement.Articles.Length > 0)
             {
-                    <a href="@involvement.ArticleUri">Related Article</a>
+                    @foreach (var article in involvement.Articles)
+                    {
+                        <a href="@article.Uri">@article.Title</a>
+                    }
             }
             </div>
         }
