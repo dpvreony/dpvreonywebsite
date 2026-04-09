@@ -7,12 +7,12 @@ namespace DPVreony.Website.Features.OpenSource
         public InvolvementModel(
             string title,
             string description,
-            Uri? githubUri,
+            GithubProjectModel? githubProject,
             ArticleModel[]? articles)
         {
             Title = title;
             Description = description;
-            GithubUri = githubUri;
+            GithubProject = githubProject;
             Articles = articles;
         }
 
@@ -20,7 +20,7 @@ namespace DPVreony.Website.Features.OpenSource
 
         public string Description { get; }
 
-        public Uri? GithubUri { get; }
+        public GithubProjectModel? GithubProject { get; }
 
         public ArticleModel[]? Articles { get; }
     }

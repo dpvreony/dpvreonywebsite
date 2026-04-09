@@ -148,6 +148,7 @@
 <main>
     <h1>Open Source</h1>
     <p>I'm the author of some small open source tools that are aimed at improving processes. I also contribute to the ReactiveUI project (primarily in Splat) to aid with the use of the MVVM pattern within the .NET ecosystem.</p>
+    <p>These projects are organized into tiers based on their purpose and impact to lower tiers. They are not ordered by dependency. For example, Whipstaff contains tools and libraries used for documentation generation.</p>
     
     @for (var i =0; i < tiers.Count; i++)
     {
@@ -156,30 +157,31 @@
         <p>@tier.Description</p>
 
         var items = tier.Items.OrderBy(x => x.Title).ToArray();
-        @for (var j = 0; j < items.Length; j++)
+        @foreach (var involvement in items)
         {
-            var involvement = items[j];
+            var githubProject = involvement.GithubProject;
 
             <div style="border: 2px solid #0066cc; border-radius: 8px; margin-bottom: 20px; overflow: hidden;">
-            <h3 style="background-color: #0066cc; color: white; margin: 0; padding: 15px;">@involvement.Title</h3>
-            <div style="padding: 15px;">
-            <p>@involvement.Description</p>
-            @if (involvement.GithubUri != null)
-            {
-                    <a href="@involvement.GithubUri">Github Project</a>
-            }
-            @if (involvement.Articles != null && involvement.Articles.Length > 0)
-            {
-                <h4>Articles</h4>
-                <ul>
+                <h3 style="background-color: #0066cc; color: white; margin: 0; padding: 15px;">@involvement.Title</h3>
+                <div style="padding-left: 15px; padding-right: 15px;">
+                    <p>@involvement.Description</p>
 
-                @foreach (var article in involvement.Articles)
-                {
-                    <li><a href="@article.Uri">@article.Title</a></li>
-                }
-                </ul>
-            }
-            </div>
+                    @if (githubProject != null)
+                    {
+                        <a href="@githubProject.Uri">@githubProject.Name</a>
+                    }
+                    @if (involvement.Articles != null && involvement.Articles.Length > 0)
+                    {
+                        <h4>Articles</h4>
+                        <ul>
+
+                            @foreach (var article in involvement.Articles)
+                            {
+                                <li><a href="@article.Uri">@article.Title</a></li>
+                            }
+                        </ul>
+                    }
+                </div>
             </div>
         }
     }
@@ -187,24 +189,26 @@
 </main>
 @functions
 {
-    public Uri GetDhgmsOrgGithubProject(string projectName)
+    public GithubProjectModel GetDhgmsOrgGithubProject(string projectName)
     {
         return GetGithubProject("dhgms-solutions", projectName);
     }
 
-    public Uri GetDPVreonyOrgGithubProject(string projectName)
+    public GithubProjectModel GetDPVreonyOrgGithubProject(string projectName)
     {
         return GetGithubProject("dpvreony", projectName);
     }
 
-    public Uri GetReactiveUiOrgGithubProject(string projectName)
+    public GithubProjectModel GetReactiveUiOrgGithubProject(string projectName)
     {
         return GetGithubProject("reactiveui", projectName);
     }
 
-    public Uri GetGithubProject(string organisationName, string projectName)
+    public GithubProjectModel GetGithubProject(string organisationName, string projectName)
     {
-        return new Uri($"https://www.github.com/{organisationName}/{projectName}");
+        var name = $"{organisationName}/{projectName}";
+        var uri = new Uri($"https://www.github.com/{name}");
+        return new GithubProjectModel(name, uri);
     }
 
     public Uri GetArticle(string articleNameSegment)
