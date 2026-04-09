@@ -79,6 +79,18 @@
         GetDPVreonyOrgGithubProject("lab-dotnet-spark"),
         null);
 
+    var reactiveUi = new InvolvementModel(
+        "ReactiveUI",
+        "ReactiveUI is an MVVM framework for .NET powered by Reactive Extensions.",
+        GetReactiveUiOrgGithubProject("reactiveui"),
+        null);
+
+    var splat = new InvolvementModel(
+        "Splat",
+        "Splat is a helper library for assisting in cross platform UI development on .NET that sits underneath ReactiveUI.",
+        GetReactiveUiOrgGithubProject("splat"),
+        [new ArticleModel("Designing APM in Splat", GetArticle("designing-apm-splat"))]);
+
     var tiers = new List<TierModel>
     {
         new(
@@ -104,7 +116,9 @@
             [
                 gripe,
                 vetuviem,
-                netTestRegimentation
+                netTestRegimentation,
+                splat,
+                reactiveUi
             ]),
 
         new(
@@ -130,19 +144,6 @@
                 aspireSpark
             ]),
     };
-
-    var reactiveUiProject = new InvolvementModel(
-        "ReactiveUI",
-        "ReactiveUI is an MVVM framework for .NET powered by Reactive Extensions.",
-        GetReactiveUiOrgGithubProject("reactiveui"),
-        null);
-
-    var splatProject = new InvolvementModel(
-        "Splat",
-        "Splat is a helper library for assisting in cross platform UI development on .NET that sits underneath ReactiveUI.",
-        GetReactiveUiOrgGithubProject("splat"),
-        null);
-
 }
 <main>
     <h1>Open Source</h1>
