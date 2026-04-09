@@ -75,7 +75,7 @@
 
     var aspireSpark = new InvolvementModel(
         "Aspire Spark Lab",
-        "A proof of concept lab for carrying out development against Apache Spark.",
+        "A proof of concept lab for carrying out development against Apache Spark using Aspire.dev as the emulator.",
         GetDPVreonyOrgGithubProject("lab-dotnet-spark"),
         null);
 
@@ -168,6 +168,7 @@
 
                     @if (githubProject != null)
                     {
+                        <i class="fa-brands fa-square-github"></i>
                         <a href="@githubProject.Uri">@githubProject.Name</a>
                     }
                     @if (involvement.Articles != null && involvement.Articles.Length > 0)
