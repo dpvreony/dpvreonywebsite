@@ -159,8 +159,9 @@
         {
             var involvement = items[j];
 
-            <div>
-            <h3>@involvement.Title</h3>
+            <div style="border: 2px solid #0066cc; border-radius: 8px; margin-bottom: 20px; overflow: hidden;">
+            <h3 style="background-color: #0066cc; color: white; margin: 0; padding: 15px;">@involvement.Title</h3>
+            <div style="padding: 15px;">
             <p>@involvement.Description</p>
             @if (involvement.GithubUri != null)
             {
@@ -177,6 +178,7 @@
                 }
                 </ul>
             }
+            </div>
             </div>
         }
     }
