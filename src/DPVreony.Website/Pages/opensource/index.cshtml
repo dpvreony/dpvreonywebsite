@@ -161,9 +161,9 @@
         {
             var githubProject = involvement.GithubProject;
 
-            <div style="border: 2px solid #0066cc; border-radius: 8px; margin-bottom: 20px; overflow: hidden;">
-                <h3 style="background-color: #0066cc; color: white; margin: 0; padding: 15px;">@involvement.Title</h3>
-                <div style="padding-left: 15px; padding-right: 15px;">
+            <div class="opensource-item">
+                <h3 class="opensource-item-header">@involvement.Title</h3>
+                <div class="opensource-item-content">
                     <p>@involvement.Description</p>
 
                     @if (githubProject != null)
