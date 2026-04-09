@@ -168,10 +168,14 @@
             }
             @if (involvement.Articles != null && involvement.Articles.Length > 0)
             {
-                    @foreach (var article in involvement.Articles)
-                    {
-                        <a href="@article.Uri">@article.Title</a>
-                    }
+                <h4>Articles</h4>
+                <ul>
+
+                @foreach (var article in involvement.Articles)
+                {
+                    <li><a href="@article.Uri">@article.Title</a></li>
+                }
+                </ul>
             }
             </div>
         }
