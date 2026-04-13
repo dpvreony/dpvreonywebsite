@@ -62,7 +62,7 @@ jobs:
         path: artifacts/binlog
         
     - name: store website
-      uses: actions/upload-pages-artifact@v4
+      uses: actions/upload-pages-artifact@v5
       with:
         path: src/dpvreony.website/wwwroot
 
