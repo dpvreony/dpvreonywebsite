@@ -10,9 +10,10 @@ namespace DPVreony.WebsiteBuilder
         {
             yield return new("/");
             yield return new("/opensource/");
-            yield return new("/resume/");
+            // yield return new("/resume/");
             yield return new("/privacy/");
             yield return new("/articles/");
+            yield return new("/articles/adr-to-swot/");
             yield return new("/articles/architecture-decision-records/");
             yield return new("/articles/configuring-android-with-exchange-alias/");
             yield return new("/articles/crawling-a-website-as-integration-test/");
@@ -22,6 +23,7 @@ namespace DPVreony.WebsiteBuilder
             yield return new("/articles/designing-whipstaff/");
             yield return new("/articles/docfx-as-a-downstream-repository/");
             yield return new("/articles/feature-usage-tracking/");
+            yield return new("/articles/gdpr-large-partner-count/");
             yield return new("/articles/knowledge-management-timeline/");
             yield return new("/articles/mermaid-with-statiq/");
             yield return new("/articles/mitigate-registration-page-email-abuse/");
@@ -31,13 +33,15 @@ namespace DPVreony.WebsiteBuilder
             yield return new("/articles/running-a-software-developer-interview-process/");
             yield return new("/articles/sky-using-own-modem-and-router/");
             yield return new("/articles/sourcegenerator-using-json/");
+            yield return new("/articles/tiering-projects/");
             yield return new("/articles/using-technical-steering/");
         }
 
         public static IEnumerable<BinResource> GetBinResources() =>
         [
+            new("/articles/architecture-decision-records/adr-flow.svg"),
             new("/articles/designing-vetuviem/diagram-class-viewtoviewmodel-relationship.svg"),
-            new("/articles/designing-vetuviem/diagram-controlbindingmodel-hierachy.svg"),
+            new("/articles/designing-vetuviem/diagram-controlbindingmodel-hierachy.svg")
         ];
     }
 }

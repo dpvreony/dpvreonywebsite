@@ -109,38 +109,7 @@
         <p>
             The following diagram illustrates the ADR lifecycle and how decisions evolve over time:
         </p>
-        <div class="mermaid">
-            stateDiagram-v2
-                [*] --> Proposed: Create ADR
-                Proposed --> Accepted: Approve decision
-                Proposed --> Rejected: Decline proposal
-                Accepted --> Deprecated: No longer recommended
-                Accepted --> Superseded: Replace with new ADR
-                Accepted --> Proposed: Evolve decision<br/>(create new ADR)
-                Superseded --> [*]
-                Rejected --> [*]
-                Deprecated --> Superseded: Formally replace
-
-                note right of Proposed
-                    Document decision<br/>
-                    while under review
-                end note
-
-                note right of Accepted
-                    Active decision<br/>
-                    in current use
-                end note
-
-                note right of Superseded
-                    Replaced by newer ADR<br/>
-                    Retained for history
-                end note
-
-                note right of Deprecated
-                    Avoid for new work<br/>
-                    May still exist in code
-                end note
-        </div>
+        <img src="adr-flow.svg" />
 
         <h3>Replacing and Retiring ADRs</h3>
         <p>

@@ -1,0 +1,12 @@
+﻿stateDiagram-v2
+    [*] --> Proposed: Create ADR
+    Proposed --> Accepted: Approve decision
+    Proposed --> Rejected: Decline proposal
+    Accepted --> Deprecated: No longer recommended
+    Accepted --> Superseded: Replace with new ADR
+    Accepted --> Proposed: Evolve decision (create new ADR)
+    Accepted --> Removed: Can not be used and no equivalent replacement
+    Superseded --> [*]
+    Rejected --> [*]
+    Deprecated --> Superseded: Formally replace
+    Deprecated --> Removed: Can not be used and no equivalent replacement
