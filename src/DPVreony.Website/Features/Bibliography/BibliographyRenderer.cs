@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace DPVreony.Website.Features.Bibliography
 {
@@ -17,17 +19,26 @@ namespace DPVreony.Website.Features.Bibliography
 
         private static string RenderJournalArticle(HarvardJournalArticle journalArticle)
         {
-            return journalArticle.ToString();
+            return $"{GetAuthorsString(journalArticle.Authors)} ({journalArticle.Year}). <i>{journalArticle.Title}</i>. <i>{journalArticle.Journal}</i>.";
         }
 
         private static string RenderBook(HarvardBook book)
         {
-            return book.ToString();
+            return $"{GetAuthorsString(book.Authors)} ({book.Year}). <i>{book.Title}</i>. {book.Publisher}.";
         }
 
         private static string RenderWebPage(HarvardWebPage webPage)
         {
-            return webPage.ToString();
+            // Construct the HTML string for the Harvard web page reference
+            var authorsString = GetAuthorsString(webPage.Authors);
+            return $"{authorsString} ({webPage.Year}). <a href=\"{webPage.Url}\" target=\"_blank\">{webPage.Title}</a>. Accessed on {webPage.Accessed:dd MMMM yyyy}.";
+        }
+
+        private static string GetAuthorsString(IEnumerable<HarvardAuthorModel> authors)
+        {
+            return string.Join(
+                ", ",
+                authors.Select(a => $"{a.FamilyName}, {a.GivenNames}"));
         }
     }
 }
