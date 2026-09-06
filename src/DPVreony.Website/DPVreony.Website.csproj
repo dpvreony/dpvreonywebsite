@@ -23,6 +23,8 @@
   <!-- these tasks remove the need for gulp, grunt, npm, etc. to be used for file copying -->
   <ItemGroup>
     <ArticleFilesToCopy Include="$(ProjectDir)Pages\articles\**\*.mmd" />
+    <ArticleFilesToCopy Include="$(ProjectDir)Pages\articles\**\*.png" />
+    <ArticleFilesToCopy Include="$(ProjectDir)Pages\articles\**\*.gif" />
     <FontFilesToCopy Include="$(ProjectDir)fonts\*.*" />
     <NpmBootStrapFilesToCopy Include="$(ProjectDir)node_modules\bootstrap\dist\**\*.*" />
     <NpmCookieConsentFilesToCopy Include="$(ProjectDir)node_modules\cookieconsent\build\*.*" />
