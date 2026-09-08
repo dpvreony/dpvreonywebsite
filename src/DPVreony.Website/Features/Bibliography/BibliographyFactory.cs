@@ -151,5 +151,181 @@ namespace DPVreony.Website.Features.Bibliography
                 5,
                 31);
         }
+
+        public static AbstractHarvardReferenceModel WhipstaffPlaywrightWebCrawler()
+        {
+            return new HarvardWebPage(
+                "14",
+                "Whipstaff Playwright Web Crawler",
+                new List<HarvardAuthorModel> { new("Vreony", "D. P.") },
+                new Uri("https://github.com/dpvreony/whipstaff-playwright-web-crawler"),
+                new DateOnly(2021, 05, 31),
+                null,
+                null,
+                null);
+        }
+
+        public static AbstractHarvardReferenceModel WhipstaffPlaywrightPageExtensions()
+        {
+            return new HarvardWebPage(
+                "15",
+                "Whipstaff Playwright Page Extensions",
+                new List<HarvardAuthorModel> { new("Vreony", "D. P.") },
+                new Uri("https://github.com/dpvreony/whipstaff-playwright-page-extensions"),
+                new DateOnly(2021, 05, 31),
+                null,
+                null,
+                null);
+        }
+
+        public static AbstractHarvardReferenceModel WhipstaffPlaywrightPlaywrightRendererBrowserInstance()
+        {
+            return new HarvardWebPage(
+                "16",
+                "Whipstaff Playwright Playwright Renderer Browser Instance",
+                new List<HarvardAuthorModel> { new("Vreony", "D. P.") },
+                new Uri("https://github.com/dpvreony/whipstaff-playwright-playwright-renderer-browser-instance"),
+                new DateOnly(2021, 05, 31),
+                null,
+                null,
+                null);
+        }
+
+        public static AbstractHarvardReferenceModel SolidlyStatedEdgeWindows10CantReachLocalhostSites()
+        {
+            return new HarvardWebPage(
+                "17",
+                "Solidly Stated Edge Windows 10 Can't Reach Localhost Sites",
+                new List<HarvardAuthorModel> { new("Vreony", "D. P.") },
+                new Uri("https://github.com/dpvreony/solidly-stated-edge-windows-10-cant-reach-localhost-sites"),
+                new DateOnly(2021, 01, 20),
+                null,
+                null,
+                null);
+        }
+
+        public static AbstractHarvardReferenceModel GithubMermaidCli()
+        {
+            return new HarvardWebPage(
+                "18",
+                "GitHub Mermaid CLI",
+                new List<HarvardAuthorModel> { new("Mermaid", "") },
+                new Uri("https://github.com/mermaid-js/mermaid-cli"),
+                new DateOnly(2021, 03, 27),
+                null,
+                null,
+                null);
+        }
+
+        public static AbstractHarvardReferenceModel MermaidFlowchartSample()
+        {
+            return new HarvardWebPage(
+                "19",
+                "Mermaid Flowchart Sample",
+                new List<HarvardAuthorModel> { new("Mermaid", "") },
+                new Uri("https://mermaid-js.github.io/mermaid/#/flowchart?id=flowcharts-basic-syntax"),
+                new DateOnly(2021, 03, 27),
+                null,
+                null,
+                null);
+        }
+
+        public static AbstractHarvardReferenceModel MartinBjorkstromPortedBlogToStatiq()
+        {
+            return new HarvardWebPage(
+                "20",
+                "I ported my blog to Statiq",
+                new List<HarvardAuthorModel> { new("Björkström", "M") },
+                new Uri("https://martinbjorkstrom.com/posts/2020-04-20-i-ported-my-blog-to-statiq"),
+                new DateOnly(2021, 03, 27),
+                2020,
+                4,
+                20);
+        }
+
+        public static AbstractHarvardReferenceModel DontPutAndroidInYourNamespaceInXamarinProjects()
+        {
+            return new HarvardWebPage(
+                "21",
+                "Don't Put Android in Your Namespace in Xamarin Projects",
+                new List<HarvardAuthorModel> { new("Montemagno", "James") },
+                new Uri("https://montemagno.com/dont-put-android-in-your-namespace-in-xamarin-apps/"),
+                new DateOnly(2020, 12, 01),
+                2020,
+                12,
+                01);
+        }
+
+        public static AbstractHarvardReferenceModel OpenWrtWikiNetgearWNDR3800()
+        {
+            return new HarvardWebPage(
+                "22",
+                "OpenWrt Wiki: Netgear WNDR3800",
+                new List<HarvardAuthorModel> { new("OpenWrt", "") },
+                new Uri("https://openwrt.org/toh/netgear/wndr3800"),
+                new DateOnly(2020, 08, 11),
+                null,
+                null,
+                null);
+        }
+
+        public static AbstractHarvardReferenceModel DrayTekSupportSkyFibreSetupGuide()
+        {
+            return new HarvardWebPage(
+                "23",
+                "DrayTek Support: Sky Fibre Setup Guide",
+                new List<HarvardAuthorModel> { new("DrayTek", "") },
+                new Uri("https://www.draytek.co.uk/support/guides/sky-fibre-setup-guide"),
+                new DateOnly(2021, 05, 31),
+                null,
+                null,
+                null);
+        }
+
+        public static AbstractHarvardReferenceModel ThoughtWorksTechnologyRadarArchitectureDecisionRecords()
+        {
+            return new HarvardWebPage(
+                "24",
+                "ThoughtWorks Technology Radar: Architecture Decision Records",
+                new List<HarvardAuthorModel> { new("ThoughtWorks", "") },
+                new Uri("https://www.thoughtworks.com/radar/architecture-decision-records"),
+                new DateOnly(2021, 05, 31),
+                null,
+                null,
+                null);
+        }
+
+        public static AbstractHarvardReferenceModel TheTacitDimension()
+        {
+            return new HarvardBook(
+                "25",
+                "The Tacit Dimension",
+                new List<HarvardAuthorModel> { new("Polanyi", "M") },
+                1965,
+                "University of Chicago Press");
+        }
+
+        public static AbstractHarvardReferenceModel TheKnowledgeCreatingCompany()
+        {
+            return new HarvardBook(
+                "26",
+                "The Knowledge-Creating Company: How Japanese Companies Create the Dynamics of Innovation",
+                new List<HarvardAuthorModel> { new("Nonaka", "I"), new("Takeuchi", "H") },
+                1995,
+                "Oxford University Press");
+        }
+
+        public static AbstractHarvardReferenceModel CodeAsDocumentation()
+        {
+            return new HarvardWebPage(
+                "27",
+                "Code As Documentation",
+                new List<HarvardAuthorModel> { new("Fowler", "M") },
+                new Uri("https://martinfowler.com/bliki/CodeAsDocumentation.html"),
+                new DateOnly(2021, 05, 31),
+                2005,
+                3,
+                22);
+        }
     }
 }

@@ -3,7 +3,16 @@
 @using NodaTime
 @using DPVreony.Website.Features.Bibliography
 @{
-    var citationEntries = new List<AbstractHarvardReferenceModel>();
+    var citationEntries = new List<AbstractHarvardReferenceModel>
+    {
+        BibliographyFactory.DocumentingArchitectureDecisions(),
+        BibliographyFactory.ThoughtWorksTechnologyRadarArchitectureDecisionRecords(),
+        BibliographyFactory.TheTacitDimension(),
+        BibliographyFactory.TheKnowledgeCreatingCompany(),
+        BibliographyFactory.ArchitecturalDecisionGuidanceAcrossProjects(),
+        BibliographyFactory.CodeAsDocumentation(),
+        BibliographyFactory.SoftwareArchitectureTheHardParts()
+    };
 
     var articleMetadata = new ArticleMetadataModel(
         ArticleStatus.Draft,
@@ -214,34 +223,6 @@
             Organisations that embrace technical steering as a knowledge management practice position themselves to scale more effectively, adapt more readily to change, and maintain continuity despite personnel transitions. In an era where knowledge represents competitive advantage, technical steering provides a systematic approach to developing and preserving this critical organisational asset.
         </p>
 
-        <h2>References</h2>
-        <ul>
-            <li>
-                Nygard, M. (2011). <em>Documenting Architecture Decisions</em>. 
-                <a href="https://cognitect.com/blog/2011/11/15/documenting-architecture-decisions" target="_blank">https://cognitect.com/blog/2011/11/15/documenting-architecture-decisions</a>
-            </li>
-            <li>
-                Thoughtworks Technology Radar. <em>Architecture Decision Records</em>. 
-                <a href="https://www.thoughtworks.com/radar/techniques/lightweight-architecture-decision-records" target="_blank">https://www.thoughtworks.com/radar/techniques/lightweight-architecture-decision-records</a>
-            </li>
-            <li>
-                Polanyi, M. (1966). <em>The Tacit Dimension</em>. University of Chicago Press.
-            </li>
-            <li>
-                Nonaka, I., & Takeuchi, H. (1995). <em>The Knowledge-Creating Company: How Japanese Companies Create the Dynamics of Innovation</em>. Oxford University Press.
-            </li>
-            <li>
-                Zimmermann, O. (2020). <em>Architectural Decision Guidance Across Projects</em>. 
-                <a href="https://www.ozimmer.ch/practices/2020/04/27/ArchitectureDecisionMaking.html" target="_blank">https://www.ozimmer.ch/practices/2020/04/27/ArchitectureDecisionMaking.html</a>
-            </li>
-            <li>
-                Fowler, M. (2006). <em>CodeAsDocumentation</em>. 
-                <a href="https://martinfowler.com/bliki/CodeAsDocumentation.html" target="_blank">https://martinfowler.com/bliki/CodeAsDocumentation.html</a>
-            </li>
-            <li>
-                Ford, N., Richards, M., Sadalage, P., & Dehghani, Z. (2021). <em>Software Architecture: The Hard Parts</em>. O'Reilly Media.
-            </li>
-        </ul>
         @await Html.PartialAsync("_article_citations", citationEntries)
     </div>
     <div class="col-md-4">

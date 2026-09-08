@@ -3,7 +3,10 @@
 @using DPVreony.Website.Features.Bibliography
 @using NodaTime
 @{
-    var citationEntries = new List<AbstractHarvardReferenceModel>();
+    var citationEntries = new List<AbstractHarvardReferenceModel>
+    {
+        BibliographyFactory.SolidlyStatedEdgeWindows10CantReachLocalhostSites()
+    };
 
     var articleMetadata = new ArticleMetadataModel(
         ArticleStatus.Draft,
@@ -122,10 +125,6 @@
                 ``
             </li>
         </ol>
-        <h2>References</h2>
-
-        Solidly Stated: Edge Windows 10 can't reach localhost sites (2017) https://solidlystated.com/software/edge-windows-10-cant-reach-localhost-sites/ (Accessed 2021-02-28)
-
         @await Html.PartialAsync("_article_citations", citationEntries)
     </div>
     <div class="col-md-4">

@@ -3,7 +3,10 @@
 @using DPVreony.Website.Features.Bibliography
 @using NodaTime
 @{
-    var citationEntries = new List<AbstractHarvardReferenceModel>();
+    var citationEntries = new List<AbstractHarvardReferenceModel>
+    {
+        BibliographyFactory.DontPutAndroidInYourNamespaceInXamarinProjects()
+    };
 
     var articleMetadata = new ArticleMetadataModel(
         ArticleStatus.Draft,
@@ -53,9 +56,6 @@
 
         TODO.
 
-        <h2>References</h2>
-
-        <a id="#1"></a>Montemagno, James (2020) Don't Put Android in Your Namespace in Xamarin Projects https://montemagno.com/dont-put-android-in-your-namespace-in-xamarin-apps/ (Accessed 2020-03-26)
         @await Html.PartialAsync("_article_citations", citationEntries)
     </div>
     <div class="col-md-4">
