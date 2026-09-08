@@ -1,14 +1,18 @@
 @page
 @using DPVreony.Website.Features.Articles
+@using DPVreony.Website.Features.Bibliography
 @using NodaTime
 @{
+    var citationEntries = new List<AbstractHarvardReferenceModel>();
+
     var articleMetadata = new ArticleMetadataModel(
-        ArticleStatus.Draft,
+        ArticleStatus.Released,
         new Version(0, 2),
         new LocalDate(2024, 08, 16),
         new LocalDate(2025, 06, 20),
         new LocalDate(2025, 06, 20),
-        new LocalDate(2025, 09, 20));
+        new LocalDate(2025, 09, 20),
+        citationEntries);
 }
 <div class="row">
     <div class="col-md-8">
@@ -59,6 +63,7 @@
         <p>
             For more information, see the <a href="https://owasp.org/www-community/attacks/Account_enumeration">OWASP Account Enumeration page</a>.
         </p>
+        @await Html.PartialAsync("_article_citations", citationEntries)
     </div>
 <div class="col-md-4">
     @await Html.PartialAsync("_article_metadatasummary", articleMetadata)

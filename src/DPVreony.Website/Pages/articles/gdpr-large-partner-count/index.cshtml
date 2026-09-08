@@ -1,14 +1,18 @@
 ﻿@page
 @using DPVreony.Website.Features.Articles
+@using DPVreony.Website.Features.Bibliography
 @using NodaTime
 @{
+    var citationEntries = new List<AbstractHarvardReferenceModel>();
+
     var articleMetadata = new ArticleMetadataModel(
         ArticleStatus.Released,
         new Version(1, 0),
         new LocalDate(2025, 08, 25),
         new LocalDate(2026, 03, 30),
         new LocalDate(2026, 03, 30),
-        new LocalDate(2026, 09, 30));
+        new LocalDate(2026, 09, 30),
+        citationEntries);
 }
 <div class="row">
     <div class="col-md-8">
@@ -895,6 +899,7 @@
                 Journal of Personality and Social Psychology, 79(6), 995-1006.
             </li>
         </ul>
+        @await Html.PartialAsync("_article_citations", citationEntries)
     </div>
     <div class="col-md-4">
         @await Html.PartialAsync("_article_metadatasummary", articleMetadata)

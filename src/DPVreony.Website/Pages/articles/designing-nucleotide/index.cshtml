@@ -1,20 +1,27 @@
 ﻿@page
 @using DPVreony.Website.Features.Articles
+@using DPVreony.Website.Features.Bibliography
 @using NodaTime
 @{
+    var citationEntries = new List<AbstractHarvardReferenceModel>
+    {
+        BibliographyFactory.SourceGeneratorsCookbook()
+    };
+
     var articleMetadata = new ArticleMetadataModel(
         ArticleStatus.Draft,
         new Version(0, 1),
         new LocalDate(2021, 05, 31),
         new LocalDate(2021, 05, 31),
         new LocalDate(2021, 05, 31),
-        new LocalDate(2021, 07, 01));
+        new LocalDate(2021, 07, 01),
+        citationEntries);
 }
 <div class="row">
     <div class="col-md-8">
         <h1>Designing Nucleotide.</h1>
         <div class="alert alert-info">
-            <strong>TLDR:</strong> Nucleotide is available at <a href="https://github.com/dpvreony/nucleotide/">the github project page</a>.
+            <strong>TLDR:</strong> Nucleotide is available at <a href="https://github.com/dpvreony/nucleotide/">the GitHub project page</a>.
         </div>
 
         <h2>Introduction</h2>
@@ -43,8 +50,7 @@
         <h2>Future options for Nucleotide</h2>
         <p>Some features within Nucleotide relate directly to other projects (i.e. MediatR, ReactiveUI, or even ASP .Net Core itself). That could be stripped from Nucleotide and fed into other projects. Vetuviem is an example of a source generation concept that belongs closer to the upstream project of ReactiveUI.</p>
 
-        <h2>References</h2>
-        <a href="https://github.com/dotnet/roslyn/blob/main/docs/features/source-generators.cookbook.md">Roslyn Source Generators Cookbook</a> Accessed: 2021-05-31.
+        @await Html.PartialAsync("_article_citations", citationEntries)
     </div>
     <div class="col-md-4">
         @await Html.PartialAsync("_article_metadatasummary", articleMetadata)

@@ -1,14 +1,18 @@
 ﻿@page
 @using DPVreony.Website.Features.Articles
+@using DPVreony.Website.Features.Bibliography
 @using NodaTime
 @{
+    var citationEntries = new List<AbstractHarvardReferenceModel>();
+
     var articleMetadata = new ArticleMetadataModel(
         ArticleStatus.Draft,
         new Version(0, 2),
         new LocalDate(2021, 01, 22),
         new LocalDate(2021, 03, 27),
         new LocalDate(2021, 03, 27),
-        new LocalDate(2021, 06, 27));
+        new LocalDate(2021, 06, 27),
+        citationEntries);
 }
 <div class="row">
     <div class="col-md-8">
@@ -295,6 +299,7 @@
 
         <h2>Releasing</h2>
         <p>TODO</p>
+        @await Html.PartialAsync("_article_citations", citationEntries)
     </div>
 <div class="col-md-4">
     @await Html.PartialAsync("_article_metadatasummary", articleMetadata)

@@ -1,14 +1,18 @@
 ﻿@page
 @using DPVreony.Website.Features.Articles
+@using DPVreony.Website.Features.Bibliography
 @using NodaTime
 @{
+    var citationEntries = new List<AbstractHarvardReferenceModel>();
+
     var articleMetadata = new ArticleMetadataModel(
         ArticleStatus.Draft,
         new Version(0, 1),
         new LocalDate(2023, 11, 06),
         new LocalDate(2026, 03, 31),
         new LocalDate(2026, 03, 31),
-        new LocalDate(2026, 10, 01));
+        new LocalDate(2026, 10, 01),
+        citationEntries);
 }
 <div class="row">
     <div class="col-md-8">
@@ -266,6 +270,7 @@
             build support and developer experience with a project's technical and strategic importance creates a coherent system
             that helps teams work effectively at scale.
         </p>
+        @await Html.PartialAsync("_article_citations", citationEntries)
     </div>
     <div class="col-md-4">
         @await Html.PartialAsync("_article_metadatasummary", articleMetadata)

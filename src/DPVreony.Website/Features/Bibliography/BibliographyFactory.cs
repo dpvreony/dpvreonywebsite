@@ -138,5 +138,18 @@ namespace DPVreony.Website.Features.Bibliography
                 2,
                 1);
         }
+
+        public static AbstractHarvardReferenceModel SourceGeneratorsCookbook()
+        {
+            return new HarvardWebPage(
+                "13",
+                "Roslyn Source Generators Cookbook",
+                new List<HarvardAuthorModel> { new("Microsoft", "Corp.") },
+                new Uri("https://github.com/dotnet/roslyn/blob/main/docs/features/source-generators.cookbook.md"),
+                new DateOnly(2021, 05, 31),
+                2021,
+                5,
+                31);
+        }
     }
 }
