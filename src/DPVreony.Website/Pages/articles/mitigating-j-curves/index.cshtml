@@ -1,14 +1,18 @@
 ﻿@page
 @using DPVreony.Website.Features.Articles
 @using NodaTime
+@using DPVreony.Website.Features.Bibliography
 @{
+    var citationEntries = new List<AbstractHarvardReferenceModel>();
+
     var articleMetadata = new ArticleMetadataModel(
         ArticleStatus.Released,
         new Version(1, 0),
         new LocalDate(2026, 01, 09),
         new LocalDate(2026, 01, 09),
         new LocalDate(2026, 01, 09),
-        new LocalDate(2021, 06, 01));
+        new LocalDate(2021, 06, 01),
+        citationEntries);
 }
 <div class="row">
     <div class="col-md-8">
@@ -62,6 +66,7 @@
         <p>J-curves should never be accepted as a default cost of transformation. They are diagnostic signals - pointing to gaps in understanding, preparation, governance, or execution. While not all disruption can be eliminated, most severe performance declines are preventable through disciplined planning, staged delivery, and commercial realism.</p>
 
         <p>The question is not whether transformation will be challenging. It is whether those challenges are addressed deliberately - or deferred until they surface as a J-curve that everyone claims was "inevitable".</p>
+        @await Html.PartialAsync("_article_citations", citationEntries)
     </div>
     <div class="col-md-4">
         @await Html.PartialAsync("_article_metadatasummary", articleMetadata)

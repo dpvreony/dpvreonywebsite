@@ -1,35 +1,15 @@
 ﻿using System;
+using System.Collections.Generic;
+using DPVreony.Website.Features.Bibliography;
 
 namespace DPVreony.Website.Features.Articles
 {
-    public sealed class ArticleMetadataModel
-    {
-        public ArticleMetadataModel(
-            ArticleStatus status,
-            Version version,
-            NodaTime.LocalDate firstRevision,
-            NodaTime.LocalDate lastRevision,
-            NodaTime.LocalDate lastReview,
-            NodaTime.LocalDate nextReview)
-        {
-            Status = status;
-            Version = version;
-            FirstRevision = firstRevision;
-            LastRevision = lastRevision;
-            LastReview = lastReview;
-            NextReview = nextReview;
-        }
-
-        public ArticleStatus Status { get; }
-
-        public Version Version { get; }
-
-        public NodaTime.LocalDate FirstRevision { get; }
-
-        public NodaTime.LocalDate LastRevision { get; }
-
-        public NodaTime.LocalDate LastReview { get; }
-
-        public NodaTime.LocalDate NextReview { get; }
-    }
+    public sealed record ArticleMetadataModel(
+        ArticleStatus Status,
+        Version Version,
+        NodaTime.LocalDate FirstRevision,
+        NodaTime.LocalDate LastRevision,
+        NodaTime.LocalDate LastReview,
+        NodaTime.LocalDate NextReview,
+        IList<AbstractHarvardReferenceModel> References);
 }

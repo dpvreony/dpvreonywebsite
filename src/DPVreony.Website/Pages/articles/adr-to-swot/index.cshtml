@@ -1,14 +1,27 @@
 ﻿@page
 @using DPVreony.Website.Features.Articles
+@using DPVreony.Website.Features.Bibliography
 @using NodaTime
 @{
+    var citationEntries = new List<AbstractHarvardReferenceModel>
+    {
+        BibliographyFactory.ArchitecturalDecisionGuidanceAcrossProjects(),
+        BibliographyFactory.BusinessPolicyTextAndCases(),
+        BibliographyFactory.DocumentingArchitectureDecisions(),
+        BibliographyFactory.DesignItFromProgrammerToSoftwareArchitect(),
+        BibliographyFactory.TheRiseAndFallOfStrategicPlanning(),
+        BibliographyFactory.SoftwareArchitectureTheHardParts(),
+        BibliographyFactory.TheBalancedScorecardTranslatingStrategyIntoAction()
+    };
+
     var articleMetadata = new ArticleMetadataModel(
         ArticleStatus.Draft,
         new Version(0, 1),
         new LocalDate(2021, 05, 31),
         new LocalDate(2021, 05, 31),
         new LocalDate(2021, 05, 31),
-        new LocalDate(2021, 07, 01));
+        new LocalDate(2021, 07, 01),
+        citationEntries);
 }
 <div class="row">
     <div class="col-md-8">
@@ -936,33 +949,7 @@
             making every documented decision an investment in organizational knowledge and strategic capability.
         </p>
 
-        <h2>References</h2>
-        <ul>
-            <li>
-                Nygard, M. (2011). <em>Documenting Architecture Decisions</em>. 
-                <a href="https://cognitect.com/blog/2011/11/15/documenting-architecture-decisions" target="_blank">https://cognitect.com/blog/2011/11/15/documenting-architecture-decisions</a>
-            </li>
-            <li>
-                Learned, E., Christensen, C., Andrews, K., & Guth, W. (1965). <em>Business Policy: Text and Cases</em>. Homewood, IL: Irwin.
-            </li>
-            <li>
-                Zimmermann, O. (2020). <em>Architectural Decision Guidance Across Projects</em>. 
-                <a href="https://www.ozimmer.ch/practices/2020/04/27/ArchitectureDecisionMaking.html" target="_blank">https://www.ozimmer.ch/practices/2020/04/27/ArchitectureDecisionMaking.html</a>
-            </li>
-            <li>
-                Keeling, M. (2017). <em>Design It! From Programmer to Software Architect</em>. Pragmatic Bookshelf.
-            </li>
-            <li>
-                Mintzberg, H. (1994). <em>The Rise and Fall of Strategic Planning</em>. Harvard Business Review Press.
-            </li>
-            <li>
-                Ford, N., Richards, M., Sadalage, P., & Dehghani, Z. (2021). <em>Software Architecture: The Hard Parts</em>. O'Reilly Media.
-            </li>
-            <li>
-                Kaplan, R. S., & Norton, D. P. (1996). <em>The Balanced Scorecard: Translating Strategy into Action</em>. Harvard Business School Press.
-            </li>
-        </ul>
-
+        @await Html.PartialAsync("_article_citations", citationEntries)
     </div>
     <div class="col-md-4">
         @await Html.PartialAsync("_article_metadatasummary", articleMetadata)

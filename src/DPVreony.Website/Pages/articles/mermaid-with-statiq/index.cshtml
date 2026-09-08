@@ -1,14 +1,23 @@
 ﻿@page
 @using DPVreony.Website.Features.Articles
+@using DPVreony.Website.Features.Bibliography
 @using NodaTime
 @{
+    var citationEntries = new List<AbstractHarvardReferenceModel>
+    {
+        BibliographyFactory.GithubMermaidCli(),
+        BibliographyFactory.MermaidFlowchartSample(),
+        BibliographyFactory.MartinBjorkstromPortedBlogToStatiq()
+    };
+
     var articleMetadata = new ArticleMetadataModel(
         ArticleStatus.Released,
         new Version(1, 2),
         new LocalDate(2021, 03, 27),
         new LocalDate(2021, 04, 18),
         new LocalDate(2021, 04, 18),
-        new LocalDate(2022, 04, 18));
+        new LocalDate(2022, 04, 18),
+        citationEntries);
 }
 
 <div class="row">
@@ -129,12 +138,7 @@ dotnet run --project StatiqMermaid.Website -- preview --port 30080
             <li>Using a shellexecute stage during your Statiq Console app build phase.</li>
             <li>Setting up a CI\CD flow to automate the build and deploy.</li>
         </ol>
-        <h2>References</h2>
-        <ul>
-            <li><a id="#1"></a>Github mermaid-cli https://github.com/mermaid-js/mermaid-cli</li>
-            <li><a id="#2"></a>Mermaid Flowchart Sameple https://mermaid-js.github.io/mermaid/#/flowchart?id=flowcharts-basic-syntax</li>
-            <li><a id="#3"></a>MARTIN BJÖRKSTRÖM: I ported my blog to Statiq https://martinbjorkstrom.com/posts/2020-04-20-i-ported-my-blog-to-statiq
-        </ul>
+        @await Html.PartialAsync("_article_citations", citationEntries)
     </div>
     <div class="col-md-4">
         @await Html.PartialAsync("_article_metadatasummary", articleMetadata)

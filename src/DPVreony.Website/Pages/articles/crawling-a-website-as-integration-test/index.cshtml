@@ -1,14 +1,23 @@
 ﻿@page
 @using DPVreony.Website.Features.Articles
+@using DPVreony.Website.Features.Bibliography
 @using NodaTime
 @{
+    var citationEntries = new List<AbstractHarvardReferenceModel>
+    {
+        BibliographyFactory.WhipstaffPlaywrightWebCrawler(),
+        BibliographyFactory.WhipstaffPlaywrightPageExtensions(),
+        BibliographyFactory.WhipstaffPlaywrightPlaywrightRendererBrowserInstance(),
+    };
+
     var articleMetadata = new ArticleMetadataModel(
         ArticleStatus.Released,
         new Version(1, 0),
         new LocalDate(2021, 05, 31),
         new LocalDate(2026, 03, 27),
         new LocalDate(2026, 03, 27),
-        new LocalDate(2026, 09, 27));
+        new LocalDate(2026, 09, 27),
+        citationEntries);
 }
 <div class="row">
     <div class="col-md-8">
@@ -213,30 +222,7 @@
             continuously validates your application's integrity as it evolves.
         </p>
 
-        <h2>References</h2>
-        <ul>
-            <li>
-                <a href="https://github.com/dpvreony/whipstaff/blob/main/src/Whipstaff.Playwright/Crawler/WebCrawler.cs" 
-                   target="_blank" rel="noopener noreferrer">
-                    Whipstaff WebCrawler Implementation
-                </a> - A reference implementation of a Playwright-based web crawler that captures console messages, 
-                page errors, and request failures.
-            </li>
-            <li>
-                <a href="https://github.com/dpvreony/whipstaff/blob/main/src/Whipstaff.Playwright/PageExtensions.cs" 
-                   target="_blank" rel="noopener noreferrer">
-                    Whipstaff Playwright PageExtensions
-                </a> - Extension methods for Playwright IPage that provide CSS class analysis, detecting undefined 
-                and unused classes in stylesheets.
-            </li>
-            <li>
-                <a href="https://github.com/dpvreony/whipstaff/blob/main/src/Whipstaff.Mermaid/Playwright/PlaywrightRendererBrowserInstance.cs" 
-                   target="_blank" rel="noopener noreferrer">
-                    Whipstaff PlaywrightRendererBrowserInstance
-                </a> - Example implementation showing how to intercept and route Playwright page requests through an 
-                in-memory test server using <code>page.RouteAsync()</code>.
-            </li>
-        </ul>
+        @await Html.PartialAsync("_article_citations", citationEntries)
     </div>
     <div class="col-md-4">
         @await Html.PartialAsync("_article_metadatasummary", articleMetadata)

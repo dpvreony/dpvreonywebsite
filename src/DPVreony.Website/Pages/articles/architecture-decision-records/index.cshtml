@@ -1,14 +1,25 @@
 ﻿@page
 @using DPVreony.Website.Features.Articles
+@using DPVreony.Website.Features.Bibliography
 @using NodaTime
 @{
+    var citationEntries = new List<AbstractHarvardReferenceModel>
+    {
+        BibliographyFactory.DocumentingArchitectureDecisions(),
+        BibliographyFactory.MadrMarkdownArchitecturalDecisionRecords(),
+        BibliographyFactory.ArchitectureDecisionMaking(),
+        BibliographyFactory.ArchitectureDecisionRecord(),
+        BibliographyFactory.ArchitectureDecisionRecordsGithubHomePage()
+    };
+
     var articleMetadata = new ArticleMetadataModel(
         ArticleStatus.Released,
         new Version(1, 0),
         new LocalDate(2021, 05, 31),
         new LocalDate(2026, 03, 27),
         new LocalDate(2026, 03, 27),
-        new LocalDate(2026, 09, 27));
+        new LocalDate(2026, 09, 27),
+        citationEntries);
 }
 <div class="row">
     <div class="col-md-8">
@@ -452,34 +463,7 @@
             an invaluable resource for your team.
         </p>
 
-        <h2>References</h2>
-        <ul>
-            <li>
-                <a href="https://cognitect.com/blog/2011/11/15/documenting-architecture-decisions" target="_blank">
-                    Michael Nygard - Documenting Architecture Decisions
-                </a>
-            </li>
-            <li>
-                <a href="https://adr.github.io/madr/" target="_blank">
-                    MADR - Markdown Architectural Decision Records
-                </a>
-            </li>
-            <li>
-                <a href="https://www.ozimmer.ch/practices/2020/04/27/ArchitectureDecisionMaking.html" target="_blank">
-                    Olaf Zimmermann - Architectural Decision Guidance Across Projects - Y-Statements
-                </a>
-            </li>
-            <li>
-                <a href="https://github.com/joelparkerhenderson/architecture-decision-record" target="_blank">
-                    Joel Parker Henderson - Architecture Decision Record (ADR) Examples and Templates
-                </a>
-            </li>
-            <li>
-                <a href="https://adr.github.io/" target="_blank">
-                    ADR GitHub Organization - Tools and Resources
-                </a>
-            </li>
-        </ul>
+        @await Html.PartialAsync("_article_citations", citationEntries)
     </div>
     <div class="col-md-4">
         @await Html.PartialAsync("_article_metadatasummary", articleMetadata)

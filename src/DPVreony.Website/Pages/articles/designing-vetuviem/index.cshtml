@@ -1,14 +1,21 @@
 ﻿@page
 @using DPVreony.Website.Features.Articles
+@using DPVreony.Website.Features.Bibliography
 @using NodaTime
 @{
+    var citationEntries = new List<AbstractHarvardReferenceModel>
+    {
+        BibliographyFactory.SourceGeneratorsCookbook()
+    };
+
     var articleMetadata = new ArticleMetadataModel(
         ArticleStatus.Released,
         new Version(1, 1),
         new LocalDate(2021, 05, 31),
         new LocalDate(2021, 06, 18),
         new LocalDate(2021, 10, 15),
-        new LocalDate(2021, 11, 15));
+        new LocalDate(2021, 11, 15),
+        citationEntries);
 }
 <div class="row">
     <div class="col-md-8">
@@ -17,7 +24,7 @@
         <h2>Introduction</h2>
         <p>Vetuviem is a Roslyn Source Generation toolkit on top of ReactiveUI aimed at empowering development teams by:</p>
         <ul>
-            <li>Giving a mechanism to reduce the amount of boiler plate code being produced, by allowing some of the ReactiveUI specific logic to be hidden away.</li>
+            <li>Giving a mechanism to reduce the amount of boilerplate code being produced, by allowing some of the ReactiveUI specific logic to be hidden away.</li>
             <li>Allow the developer to think along the lines of standard behavior for controls by offering a way to produce re-usable binding logic through a class and\or function design pattern.</li>
             <li>Allow the developer to focus on what matters on the ViewModel</li>
             <li>
@@ -31,7 +38,7 @@
         </ul>
 
         <h2>Where Vetuviem fits</h2>
-        <p>Vetuviem acts as glue between the View and ViewModel in the MVVM pattern when using Codebehind binding in your XAML, you can think of it as MV2VM. The name comes from "V to VM", and is become a play on Latin (ve tu vi iem) which if you put in a translation tool and split correctly comes out as "You've force that day on".</p>
+        <p>Vetuviem acts as glue between the View and ViewModel in the MVVM pattern when using Code-behind binding in your XAML, you can think of it as MV2VM. The name comes from "V to VM", and is become a play on Latin (ve tu vi iem) which if you put in a translation tool and split correctly comes out as "You've force that day on".</p>
         <p>The View Binding Models have a tipping point for being useful in terms of scalable of sustainable development. This can equate to:</p>
         <ul>
             <li>How many controls you have that conform to a standard behaviour.</li>
@@ -69,7 +76,7 @@
                 <ol>
                     <li>Command Bindings</li>
                     <li>One-way Property Bindings (where one side of the relationship only supports reading - the read only part is typically a property on the control such as a "HasItems" indicator on a control that represents a collection of items)</li>
-                    <li>Two-way Property Bindings (where there can be a bi-directional flow)</li>
+                    <li>Two-way Property Bindings (where there can be a bidirectional flow)</li>
                 </ol>
             </li>
         </ol>
@@ -105,11 +112,10 @@
         </ol>
         <p>The platform resolver is the piece that needs altering for control libraries. It contains a list of assemblies that need to be scanned. These same assembles need to be included in the C# project system as NuGet package references. In most scenarios the Binding Model Generator doesn't need any significant change as the base control and command for a platform should remain consistent.</p>
         <h3>Future options for Vetuviem and source generation</h3>
-        <p>Currently Vetuviem is a one step process where it generates binding logic for every property on a control. The apply binding logic does a null check on every property in the View Binding Model to then drive the actual binding. We could add a second step process that recognizes these bindings are fixed at compile time and removes the "not null then bind" check for properties that will never bind. In theory there is already enough knowledge from what exists in Vetuviem for the compiler \ IL merge tools to perform this on a build, but the source generator could also do this as a second step to make it completely clear during a build and the code would be visible. At this point this is an option but Vetuviem needs to prove its value first.</p>
+        <p>Currently, Vetuviem is a one-step process where it generates binding logic for every property on a control. The apply binding logic does a null check on every property in the View Binding Model to then drive the actual binding. We could add a second step process that recognizes these bindings are fixed at compile time and removes the "not null then bind" check for properties that will never bind. In theory there is already enough knowledge from what exists in Vetuviem for the compiler \ IL merge tools to perform this on a build, but the source generator could also do this as a second step to make it completely clear during a build and the code would be visible. At this point this is an option but Vetuviem needs to prove its value first.</p>
         <p>Another piece for consideration is the ability to co-exist with the ReactiveUI event binding that is offered by Pharmacist. Pharmacist is currently having other work done on a source generator level to make the event logic not be tied to specific ReactiveUI (and specific UI platform) versions. This interaction with Vetuviem was left out of scope to allow focused proof of value.</p>
 
-        <h2>References</h2>
-        <p><a href="https://github.com/dotnet/roslyn/blob/main/docs/features/source-generators.cookbook.md">GitHub Roslyn Project: Source Generators Cookbook</a>. Accessed 2021-05-20.</p>
+        @await Html.PartialAsync("_article_citations", citationEntries)
     </div>
     <div class="col-md-4">
         @await Html.PartialAsync("_article_metadatasummary", articleMetadata)
