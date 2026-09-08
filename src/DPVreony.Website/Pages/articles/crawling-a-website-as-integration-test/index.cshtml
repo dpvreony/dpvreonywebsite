@@ -1,5 +1,6 @@
 ﻿@page
 @using DPVreony.Website.Features.Articles
+@using DPVreony.Website.Features.Bibliography
 @using NodaTime
 @{
     var articleMetadata = new ArticleMetadataModel(
@@ -8,7 +9,8 @@
         new LocalDate(2021, 05, 31),
         new LocalDate(2026, 03, 27),
         new LocalDate(2026, 03, 27),
-        new LocalDate(2026, 09, 27));
+        new LocalDate(2026, 09, 27),
+        new List<AbstractHarvardReferenceModel>());
 }
 <div class="row">
     <div class="col-md-8">

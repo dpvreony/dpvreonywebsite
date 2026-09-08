@@ -125,5 +125,18 @@ namespace DPVreony.Website.Features.Bibliography
                 null,
                 null);
         }
+
+        public static AbstractHarvardReferenceModel ReactiveUiRfcs23()
+        {
+            return new HarvardWebPage(
+                "12",
+                "ReactiveUI RFC: Application Performance Monitoring Integration",
+                new List<HarvardAuthorModel> { new("Vreony", "D. P.") },
+                new Uri("https://github.com/reactiveui/rfcs/issues/23"),
+                new DateOnly(2021, 05, 31),
+                2019,
+                2,
+                1);
+        }
     }
 }

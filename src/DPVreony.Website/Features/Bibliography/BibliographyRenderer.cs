@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 
 namespace DPVreony.Website.Features.Bibliography
 {
@@ -31,7 +32,17 @@ namespace DPVreony.Website.Features.Bibliography
         {
             // Construct the HTML string for the Harvard web page reference
             var authorsString = GetAuthorsString(webPage.Authors);
-            return $"{authorsString} ({webPage.Year}). <a href=\"{webPage.Url}\" target=\"_blank\">{webPage.Title}</a>. Accessed on {webPage.Accessed:dd MMMM yyyy}.";
+            var stringBuilder = new StringBuilder();
+
+            stringBuilder.Append($"{authorsString}");
+
+            if (webPage.Year != null)
+            {
+                stringBuilder.Append($" ({webPage.Year})");
+            }
+            stringBuilder.Append($". <a href=\"{webPage.Url}\" target=\"_blank\" rel=\"noopener noreferrer\">{webPage.Title}</a>. Accessed on {webPage.Accessed:dd MMMM yyyy}.");
+
+            return stringBuilder.ToString();
         }
 
         private static string GetAuthorsString(IEnumerable<HarvardAuthorModel> authors)

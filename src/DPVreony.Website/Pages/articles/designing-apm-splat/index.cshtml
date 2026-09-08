@@ -1,14 +1,21 @@
 ﻿@page
 @using DPVreony.Website.Features.Articles
+@using DPVreony.Website.Features.Bibliography
 @using NodaTime
 @{
+    var citationEntries = new List<AbstractHarvardReferenceModel>
+    {
+        BibliographyFactory.ReactiveUiRfcs23()
+    };
+
     var articleMetadata = new ArticleMetadataModel(
         ArticleStatus.Draft,
         new Version(0, 1),
         new LocalDate(2021, 05, 31),
         new LocalDate(2021, 05, 31),
         new LocalDate(2021, 05, 31),
-        new LocalDate(2021, 07, 01));
+        new LocalDate(2021, 07, 01),
+        citationEntries);
 }
 <div class="row">
     <div class="col-md-8">
@@ -20,7 +27,7 @@
         <h2>Introduction</h2>
 
         <p>
-            Splat is library that sits underneath (but not exclusively for) ReactiveUI aimed at providing cross platform support for frequently used features such as image loading\saving, logging, service location and testing. Back in 2018 I set about trying to produce a reusable abstraction for Application Performance Monitoring (APM). Here I detail some of the design and through processes on placing APM in the library and options for getting the best out of it, and future options.
+            Splat is library that sits underneath (but not exclusively for) ReactiveUI aimed at providing cross platform support for frequently used features such as image loading\saving, logging, service location and testing. Back in 2018 I set about trying to produce a reusable abstraction for MediaTypeNames.Application Performance Monitoring (APM). Here I detail some of the design and through processes on placing APM in the library and options for getting the best out of it, and future options.
         </p>
 
         <h2>Benefits of APM</h2>
@@ -46,7 +53,8 @@
         <code>
 public interface IFeatureUsageTrackingSession&lt;out TReferenceType&gt; : IFeatureUsageTrackingSession
 {
-    TReferenceType FeatureReference { get; }
+    TReferenceType FeatureReference<>
+    { get; }
 
     TReferenceType ParentReference { get; }
 
@@ -77,14 +85,13 @@ public interface IEnableFeatureUsageTracking
             <li>Feature parity across APM providers</li>
         </ul>
         <p>While the Splat APM implementation is intended to be as simple as possible and give an abstraction for feature and sub-feature tracking the documentation and ReactiveUI samples need to be improved. There are also options to provide helper methods in ReactiveUI so the APM can hook directly into Views and Commands thus making it easier for developers to leverage the functionality.</p>
-        <p>One of the key headaches at the time the APM feature was being put together was the gaps in the feature sets and platform coverage for the different vendors. Open Telemetry has now taken shape and we're 2 years down the road since the original attempt so .NET core has had more adoption time. Blazor has also taken shape so some of the more web centric APM tools such as Application Insights now look like a better fit in Splat where ReactiveUI and Blazor can make use of them.</p>
+        <p>One of the key headaches at the time the APM feature was being put together was the gaps in the feature sets and platform coverage for the different vendors. Open Telemetry has now taken shape and we're 2 years down the road since the original attempt so .NET core has had more adoption time. Blazor has also taken shape so some of the more web centric APM tools such as MediaTypeNames.Application Insights now look like a better fit in Splat where ReactiveUI and Blazor can make use of them.</p>
         <p>There are still gaps in desktop\device functions for enterprise when compared to web hosted applications. Some of these are edge cases such as devices that can sit offline for periods. But others come under the lack of platform support for different libraries, or prohibitive per-node costings.</p>
 
         <h2>Future options for APM</h2>
         <p>In terms of sustainability it would be nice to engage with the different APM providers either direct, via the <a href="https://dotnetfoundation.org/">.NET Foundation</a> or via <a href="https://opentelemetry.io/">Open Telemetry</a> to see better platform and feature parity across providers and allow .NET developers to get better leverage out of the box to reduce development overhead.</p>
 
-        <h2>References</h2>
-        <a href="https://github.com/reactiveui/rfcs/issues/23">ReactiveUI RFC: Application Performance Monitoring Integration</a> Accessed: 2021-05-31.
+        @await Html.PartialAsync("_article_citations", citationEntries)
     </div>
     <div class="col-md-4">
         @await Html.PartialAsync("_article_metadatasummary", articleMetadata)
