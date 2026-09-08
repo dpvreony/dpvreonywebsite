@@ -14,13 +14,16 @@
         BibliographyFactory.TheBalancedScorecardTranslatingStrategyIntoAction()
     };
 
+    var lastReview = new LocalDate(2026, 9, 8);
+    var nextReview = lastReview.PlusMonths(12);
+
     var articleMetadata = new ArticleMetadataModel(
-        ArticleStatus.Draft,
-        new Version(0, 1),
+        ArticleStatus.Released,
+        new Version(1, 0),
         new LocalDate(2021, 05, 31),
-        new LocalDate(2021, 05, 31),
-        new LocalDate(2021, 05, 31),
-        new LocalDate(2021, 07, 01),
+        new LocalDate(2026, 9, 7),
+        lastReview,
+        nextReview,
         citationEntries);
 }
 <div class="row">

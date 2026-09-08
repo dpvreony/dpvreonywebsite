@@ -5,13 +5,16 @@
 @{
     var citationEntries = new List<AbstractHarvardReferenceModel>();
 
+    var lastReview = new LocalDate(2026, 9, 8);
+    var nextReview = lastReview.PlusMonths(12);
+
     var articleMetadata = new ArticleMetadataModel(
         ArticleStatus.Released,
         new Version(0, 2),
         new LocalDate(2024, 08, 16),
         new LocalDate(2025, 06, 20),
-        new LocalDate(2025, 06, 20),
-        new LocalDate(2025, 09, 20),
+        lastReview,
+        nextReview,
         citationEntries);
 }
 <div class="row">
