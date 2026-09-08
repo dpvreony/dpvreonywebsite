@@ -5,79 +5,13 @@
 @{
     var citationEntries = new List<AbstractHarvardReferenceModel>
     {
-        new HarvardWebPage(
-            "1",
-            "Documenting Architecture Decisions",
-            new List<HarvardAuthorModel>
-            {
-                new ("Nygard", "M")
-            },
-            new Uri("https://cognitect.com/blog/2011/11/15/documenting-architecture-decisions"),
-            new DateOnly(2026, 3, 27),
-            2011,
-            11,
-            15),
-
-        new HarvardWebPage(
-            "2",
-            "Architectural Decision Guidance Across Projects",
-            new List<HarvardAuthorModel>
-            {
-                new ("Zimmermann", "O")
-            },
-            new Uri("https://www.ozimmer.ch/practices/2020/04/27/ArchitectureDecisionMaking.html"),
-            new DateOnly(2026, 3, 27),
-            2020,
-            04,
-            27),
-
-        new HarvardBook(
-            "3",
-            "Business Policy: Text and Cases",
-            new List<HarvardAuthorModel>
-            {
-                new ("Learned", "E"),
-                new ("Christensen", "C"),
-                new ("Andrews", "K"),
-                new ("Guth", "W")
-            },
-            1965,
-            "Homewood, IL: Irwin."),
-
-        new HarvardBook("4",
-            "Design It! From Programmer to Software Architect",
-            [ new ("Keeling", "M")],
-            2017,
-            "Pragmatic Bookshelf"),
-
-        new HarvardBook(
-            "5",
-            "The Rise and Fall of Strategic Planning",
-            [new HarvardAuthorModel("Mintzberg", "H")],
-            1994,
-            "Harvard Business Review Press"),
-
-        new HarvardBook(
-            "6",
-            "Software Architecture: The Hard Parts",
-            [
-                new HarvardAuthorModel("Ford", "N"),
-                new HarvardAuthorModel("Richards", "M"),
-                new HarvardAuthorModel("Sadalage", "P"),
-                new HarvardAuthorModel("Dehghani", "Z"),
-            ],
-            2021,
-            "O'Reilly Media"),
-
-        new HarvardBook(
-            "7",
-            "The Balanced Scorecard: Translating Strategy into Action",
-            [
-                new HarvardAuthorModel("Kaplan", "R. S."),
-                new HarvardAuthorModel("Norton", "D. P."),
-            ],
-            1996,
-            "Harvard Business Review Press")
+        BibliographyFactory.ArchitecturalDecisionGuidanceAcrossProjects(),
+        BibliographyFactory.BusinessPolicyTextAndCases(),
+        BibliographyFactory.DocumentingArchitectureDecisions(),
+        BibliographyFactory.DesignItFromProgrammerToSoftwareArchitect(),
+        BibliographyFactory.TheRiseAndFallOfStrategicPlanning(),
+        BibliographyFactory.SoftwareArchitectureTheHardParts(),
+        BibliographyFactory.TheBalancedScorecardTranslatingStrategyIntoAction()
     };
 
     var articleMetadata = new ArticleMetadataModel(
