@@ -3,13 +3,16 @@
 @using DPVreony.Website.Features.Bibliography
 @using NodaTime
 @{
+    var lastReview = new LocalDate(2026, 9, 8);
+    var nextReview = lastReview.PlusMonths(12);
+
     var articleMetadata = new ArticleMetadataModel(
         ArticleStatus.Released,
         new Version(0, 1),
         new LocalDate(2018, 09, 18),
         new LocalDate(2021, 06, 21),
-        new LocalDate(2021, 06, 21),
-        new LocalDate(2022, 06, 21),
+        lastReview,
+        nextReview,
         new List<AbstractHarvardReferenceModel>());
 }
 <div class="row">

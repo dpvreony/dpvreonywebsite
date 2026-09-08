@@ -9,13 +9,16 @@
         BibliographyFactory.DrayTekSupportSkyFibreSetupGuide()
     };
 
+    var lastReview = new LocalDate(2026, 9, 8);
+    var nextReview = lastReview.PlusMonths(12);
+
     var articleMetadata = new ArticleMetadataModel(
-        ArticleStatus.Draft,
-        new Version(0, 2),
+        ArticleStatus.Released,
+        new Version(1, 0),
         new LocalDate(2020, 08, 09),
-        new LocalDate(2021, 02, 28),
-        new LocalDate(2021, 02, 28),
-        new LocalDate(2021, 05, 28),
+        new LocalDate(2026, 09, 08),
+        lastReview,
+        nextReview,
         citationEntries);
 }
 <div class="row">
