@@ -49,7 +49,7 @@ namespace DPVreony.Website.Features.Bibliography
         {
             return string.Join(
                 ", ",
-                authors.Select(a => $"{a.FamilyName}, {a.GivenNames}"));
+                authors.Select(a => string.IsNullOrWhiteSpace(a.GivenNames) ? a.FamilyName : $"{a.FamilyName}, {a.GivenNames}"));
         }
     }
 }
