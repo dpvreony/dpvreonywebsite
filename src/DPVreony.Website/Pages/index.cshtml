@@ -1,6 +1,7 @@
 @page
 @{
-    var whenStarted = new NodaTime.LocalDate(2001, 03,01);
+    ViewData["PageTitle"] = "About Me";
+    var whenStarted = new NodaTime.LocalDate(2001, 03, 01);
     var yearsExperience = NodaTime.Period.Between(whenStarted, NodaTime.LocalDate.FromDateTime(DateTime.Today)).Years;
 }
 <div id="about">

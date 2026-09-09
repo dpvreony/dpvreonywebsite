@@ -3,6 +3,7 @@
 @using DPVreony.Website.Features.Bibliography
 @using NodaTime
 @{
+    ViewData["PageTitle"] = "Crawling a website as an integration test.";
     var citationEntries = new List<AbstractHarvardReferenceModel>
     {
         BibliographyFactory.WhipstaffPlaywrightWebCrawler(),

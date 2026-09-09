@@ -3,6 +3,8 @@
 @using DPVreony.Website.Features.Bibliography
 @using NodaTime
 @{
+    ViewData["PageTitle"] = "Designing Nucleotide.";
+
     var citationEntries = new List<AbstractHarvardReferenceModel>
     {
         BibliographyFactory.SourceGeneratorsCookbook()

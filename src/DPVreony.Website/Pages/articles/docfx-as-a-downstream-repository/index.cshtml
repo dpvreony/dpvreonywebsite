@@ -3,6 +3,8 @@
 @using DPVreony.Website.Features.Bibliography
 @using NodaTime
 @{
+    ViewData["PageTitle"] = "Using DocFx as the Document Generation Toolset in a downstream repository.";
+
     var citationEntries = new List<AbstractHarvardReferenceModel>
     {
         BibliographyFactory.SolidlyStatedEdgeWindows10CantReachLocalhostSites()

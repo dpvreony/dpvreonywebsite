@@ -3,6 +3,8 @@
 @using DPVreony.Website.Features.Bibliography
 @using NodaTime
 @{
+    ViewData["PageTitle"] = "Using ADR to inform SWOT analysis.";
+
     var citationEntries = new List<AbstractHarvardReferenceModel>
     {
         BibliographyFactory.ArchitecturalDecisionGuidanceAcrossProjects(),
