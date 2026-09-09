@@ -9,6 +9,7 @@ namespace DPVreony.WebsiteBuilder
         public static IEnumerable<PageResource> GetCollection()
         {
             yield return new("/");
+            yield return new("/cookiepolicy/");
             yield return new("/opensource/");
             // yield return new("/resume/");
             yield return new("/privacy/");
