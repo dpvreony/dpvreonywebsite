@@ -4,10 +4,11 @@
     @if (ViewData.ContainsKey("Description"))
     {
         <meta name="description" content="@ViewData["Description"]">
+        <meta property="og:description" content="@ViewData["Description"]">
     }
     @if (ViewData.ContainsKey("Author"))
     {
-        <meta name="author" content="@ViewData["Author"]">
+        <meta name="author" content="DPVreony">
     }
 
     <title>@ViewData["PageTitle"] - DPVreony</title>
