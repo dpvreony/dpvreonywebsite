@@ -3,6 +3,8 @@
 @using DPVreony.Website.Features.Bibliography
 @using NodaTime
 @{
+    ViewData["PageTitle"] = "Devising a naming convention for .NET projects";
+
     var citationEntries = new List<AbstractHarvardReferenceModel>
     {
         BibliographyFactory.DontPutAndroidInYourNamespaceInXamarinProjects()

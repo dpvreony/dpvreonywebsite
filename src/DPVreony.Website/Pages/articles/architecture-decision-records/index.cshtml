@@ -3,6 +3,8 @@
 @using DPVreony.Website.Features.Bibliography
 @using NodaTime
 @{
+    ViewData["PageTitle"] = "Using Architecture Decision Records.";
+
     var citationEntries = new List<AbstractHarvardReferenceModel>
     {
         BibliographyFactory.DocumentingArchitectureDecisions(),
